@@ -1,80 +1,182 @@
-# Resume Querying & Job Matching Proof of Concept
+# Querying Resumes & Building a Job Description Matching System
 
-## 1. Querying Resumes in Azure Cosmos DB
+Based on your existing architecture where resume data is processed and stored in Azure Cosmos DB and Blob Storage, here's how to effectively query this data and build a resume-job matching system:
 
-- Use SQL-like queries to filter resumes by schema type, skills, or industry extensions.
-- Example queries:
+## Querying Your Resume Data
 
-```sql
--- All resumes
-SELECT * FROM c WHERE c.schemaType = 'Resume'
+Since your data is in Azure Cosmos DB (for structured data) and Azure Blob Storage (for original files), you have several powerful options:
 
--- Resumes with Python skill
-SELECT * FROM c WHERE c.schemaType = 'Resume' AND ARRAY_CONTAINS(c.skills, { "name": "Python" }, true)
+### 1. **Azure Cosmos DB Queries**
 
--- Healthcare professionals
-SELECT * FROM c WHERE c.schemaType = 'Resume' AND IS_DEFINED(c.healthcare_extension)
+```python
+# Basic query to get all resumes
+query = "SELECT * FROM c WHERE c.schemaType = 'Resume'"
+
+# Query for specific skills
+skills_query = """
+SELECT * FROM c 
+WHERE c.schemaType = 'Resume' 
+AND ARRAY_CONTAINS(c.skills, { "name": "Python", "proficiency": "Expert" }, true)
+"""
+
+# Query for healthcare professionals
+healthcare_query = """
+SELECT * FROM c 
+WHERE c.schemaType = 'Resume' 
+AND IS_DEFINED(c.healthcare_extension)
+AND ARRAY_CONTAINS(c.healthcare_extension.medical_specialties, 'Cardiology', true)
+"""
 ```
 
-- For more advanced search, index your Cosmos DB collection in Azure Cognitive Search for semantic and full-text queries.
+### 2. **Advanced Azure Cognitive Search**
 
-## 2. Building a Job Description to Resume Matching System
+For more powerful semantic search:
 
-### a. Vector-Based Semantic Matching
+1. Create an Azure Cognitive Search index from your Cosmos DB collection
+2. Configure semantic search capabilities
+3. Query using natural language:
 
-- Use Azure OpenAI to generate embeddings for both job descriptions and resumes.
-- Store resume embeddings in Cosmos DB.
-- For a new job description:
-  1. Generate its embedding.
-  2. Compute cosine similarity with all stored resume embeddings.
-  3. Return top N matches.
+```python
+# Using Azure Cognitive Search Python SDK
+search_client.search(
+    search_text="experienced healthcare professionals with EMR implementation",
+    select="id,personal_info,professional_summary",
+    semantic_configuration_name="resume-semantic-config"
+)
+```
 
-#### Example (Python pseudocode)
+## Building a Job-Resume Matching System
+
+For your proof of concept matching resumes to job descriptions, I recommend this approach:
+
+### 1. **Vector-Based Matching with Azure OpenAI Embeddings**
 
 ```python
 from openai import AzureOpenAI
 import numpy as np
 
+# Initialize Azure OpenAI client
+client = AzureOpenAI(
+    api_key="your-api-key",  
+    api_version="2023-05-15",
+    azure_endpoint="https://your-resource.openai.azure.com"
+)
+
 def create_embedding(text):
-    # Call Azure OpenAI embedding endpoint
-    ...
+    """Generate embeddings for text using Azure OpenAI."""
+    response = client.embeddings.create(
+        input=text,
+        model="text-embedding-ada-002"  # Or your deployed embedding model
+    )
+    return response.data[0].embedding
 
 def cosine_similarity(a, b):
+    """Calculate cosine similarity between two vectors."""
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
-# Precompute and store resume embeddings
-# For matching:
-job_emb = create_embedding(job_description)
-for resume in resumes:
-    score = cosine_similarity(job_emb, resume['embedding'])
-# Sort and select top N
+# Pre-compute and store embeddings for all resumes in your database
+# This could be a batch process that runs periodically
+
+def match_job_to_resumes(job_description, top_n=10):
+    """Match job description to resumes and return top matches."""
+    # Create embedding for job description
+    job_embedding = create_embedding(job_description)
+    
+    # Query your database for resume embeddings
+    # This assumes you've stored embeddings with your resume documents
+    resumes = query_resume_embeddings_from_cosmos()
+    
+    # Calculate similarity scores
+    matches = []
+    for resume in resumes:
+        resume_embedding = resume['embedding']
+        score = cosine_similarity(job_embedding, resume_embedding)
+        matches.append({
+            'resume_id': resume['id'],
+            'score': score,
+            'name': resume['personal_info']['first_name'] + ' ' + resume['personal_info']['last_name']
+        })
+    
+    # Return top N matches
+    top_matches = sorted(matches, key=lambda x: x['score'], reverse=True)[:top_n]
+    return top_matches
 ```
 
-### b. Hybrid Filtering + Semantic Search
+### 2. **Enhanced Hybrid Approach**
 
-- Extract hard requirements (skills, experience) from job description using Azure OpenAI.
-- Filter resumes in Cosmos DB for these requirements.
-- Then apply semantic similarity on the filtered set.
+For better results, combine vector search with keyword matching and filtered queries:
 
-### c. Using Azure Cognitive Search
+```python
+def enhanced_match_job_to_resumes(job_description, filters=None):
+    """Match job to resumes with filters for required skills/experience."""
+    # Extract key requirements from job description using Azure OpenAI
+    requirements = extract_job_requirements(job_description)
+    
+    # Build a filtered query for hard requirements
+    filter_conditions = []
+    if 'required_years_experience' in requirements:
+        min_years = requirements['required_years_experience']
+        # Filter for candidates with sufficient experience
+        filter_conditions.append(f"c.total_experience_years >= {min_years}")
+    
+    if 'required_skills' in requirements:
+        for skill in requirements['required_skills']:
+            # Filter for candidates with required skills
+            filter_conditions.append(f"ARRAY_CONTAINS(c.skills, {{name: '{skill}'}}, true)")
+    
+    # Combine filters
+    filter_query = " AND ".join(filter_conditions) if filter_conditions else None
+    
+    # Get candidates matching hard requirements
+    candidate_resumes = query_filtered_resumes(filter_query)
+    
+    # Then do semantic matching on this filtered set
+    return match_job_to_resumes_semantic(job_description, candidate_resumes)
+```
 
-- Index resumes in Azure Cognitive Search.
-- Use semantic search with the job description as the query.
-- Retrieve top matches with explanations.
+### 3. **Leveraging Azure AI Search (formerly Cognitive Search)**
 
-## 3. Next Steps
+```python
+from azure.search.documents import SearchClient
+from azure.core.credentials import AzureKeyCredential
 
-- Build an embedding pipeline for resumes.
-- Implement job description parsing for requirements.
-- Combine filtering and semantic scoring for best results.
-- Optionally, add a UI to display top matches and match explanations.
+# Initialize search client
+search_client = SearchClient(
+    endpoint="https://your-search-service.search.windows.net",
+    index_name="resumes",
+    credential=AzureKeyCredential("your-search-api-key")
+)
 
----
+def semantic_job_match(job_description):
+    """Use semantic search to find matching resumes."""
+    results = search_client.search(
+        search_text=job_description,
+        select="id,name,skills,experience,education",
+        semantic_configuration_name="resume-matching-config", 
+        top=10
+    )
+    
+    matches = []
+    for result in results:
+        matches.append({
+            'id': result['id'],
+            'name': result['name'],
+            'score': result['@search.score'],
+            # Additional fields
+        })
+    
+    return matches
+```
 
-**References:**
+## Next Steps for Your Proof of Concept
 
-- [Azure Cosmos DB SQL Queries](https://learn.microsoft.com/azure/cosmos-db/nosql/query/select)
-- [Azure Cognitive Search](https://learn.microsoft.com/azure/search/)
-- [Azure OpenAI Embeddings](https://learn.microsoft.com/azure/ai-services/openai/how-to/embeddings)
+1. **Create an embedding pipeline** to compute and store vectors for all resumes
+2. **Build a job parser** that extracts key requirements from job descriptions
+3. **Implement a scoring system** that balances:
+   - Skills match (required vs. nice-to-have)
+   - Experience relevance
+   - Education requirements
+   - Industry-specific qualifications (like healthcare credentials)
+4. **Add a simple UI** for job matching that displays top candidates with match reasoning
 
-This document summarizes the recommended approach for querying resumes and building a job-to-resume matching proof of concept in your Azure-based solution.
+Would you like me to elaborate on any specific aspect of this approach for your proof of concept?
