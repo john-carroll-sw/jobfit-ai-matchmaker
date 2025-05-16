@@ -1,0 +1,23 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Exclude all .http files
+
+*.exe
+*.msi
+*.log
+kaggle-resume-dataset/
+src/ContentProcessorWeb/something.md
+
+.DS_Store
+.vscode/settings.json
+src/ContentProcessorWeb/tryingtoDebug.sh
+TodoList.md
