@@ -108,7 +108,7 @@ param keyValues array = [
   }
   {
     key: 'APP_SEARCH_INDEX_NAME'
-    value: 'resume-vector-index'
+    value: 'vector-index'
   }
   {
     key: 'APP_AZURE_OPENAI_EMBEDDING_DEPLOYMENT'
