@@ -13,6 +13,9 @@ param embeddingModelName string
 param keyVaultId string
 param aiProjectConnectionString string
 param cosmosDbName string
+param searchServiceName string = ''
+param searchServiceEndpoint string = ''
+param searchServiceApiKey string = ''
 
 param keyValues array = [
   {
@@ -81,7 +84,7 @@ param keyValues array = [
   }
   {
     key: 'APP_PROCESS_STEPS'
-    value: 'extract,map,evaluate,save'
+    value: 'extract,map,evaluate,embed,index,save'
   }
   {
     key: 'APP_STORAGE_BLOB_URL'
@@ -94,6 +97,22 @@ param keyValues array = [
   {
     key: 'APP_AI_PROJECT_CONN_STR'
     value: aiProjectConnectionString
+  }
+  {
+    key: 'APP_SEARCH_SERVICE_NAME'
+    value: searchServiceName
+  }
+  {
+    key: 'APP_SEARCH_ENDPOINT'
+    value: searchServiceEndpoint
+  }
+  {
+    key: 'APP_SEARCH_INDEX_NAME'
+    value: 'resume-vector-index'
+  }
+  {
+    key: 'APP_AZURE_OPENAI_EMBEDDING_DEPLOYMENT'
+    value: 'text-embedding-3-large'
   }
 ]
 
@@ -137,6 +156,15 @@ resource cosmoDbKey 'Microsoft.AppConfiguration/configurationStores/keyValues@20
   name: 'APP_COSMOS_CONNSTR'
   properties: {
     value: cosmos.listConnectionStrings().connectionStrings[0].connectionString
+  }
+}
+
+// Store Search API key if it's provided
+resource searchApiKey 'Microsoft.AppConfiguration/configurationStores/keyValues@2024-05-01' = if (!empty(searchServiceApiKey)) {
+  parent: appConfig
+  name: 'APP_SEARCH_API_KEY'
+  properties: {
+    value: searchServiceApiKey
   }
 }
 

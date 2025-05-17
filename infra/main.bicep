@@ -212,6 +212,17 @@ module cosmosdb './deploy_cosmos_db.bicep' = {
   }
 }
 
+// ========== Azure AI Search ========== //
+module search 'deploy_search.bicep' = {
+  name: 'deploy_search'
+  params: {
+    searchName: '${abbrs.ai.aiSearch}${solutionPrefix}'
+    location: resourceGroupLocation
+    sku: 'standard' 
+    semanticSearchTier: 'standard'
+  }
+}
+
 // ========== App Configuration ========== //
 module appconfig 'deploy_app_config_service.bicep' = {
   name: 'deploy_app_config_service'
@@ -227,6 +238,9 @@ module appconfig 'deploy_app_config_service.bicep' = {
     keyVaultId: kvault.outputs.keyvaultId
     aiProjectConnectionString: aifoundry.outputs.aiProjectConnectionString
     cosmosDbName: cosmosdb.outputs.cosmosAccountName
+    searchServiceName: search.outputs.searchServiceName
+    searchServiceEndpoint: search.outputs.searchServiceEndpoint
+    searchServiceApiKey: search.outputs.searchServiceApiKey
   }
 }
 
