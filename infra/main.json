@@ -924,6 +924,15 @@
           "gptDeploymentCapacity": {
             "value": "[parameters('gptDeploymentCapacity')]"
           },
+          "embeddingModelName": {
+            "value": "[parameters('embeddingModelName')]"
+          },
+          "embeddingModelVersion": {
+            "value": "[parameters('embeddingModelVersion')]"
+          },
+          "embeddingModelCapacity": {
+            "value": "[parameters('embeddingModelCapacity')]"
+          },
           "managedIdentityObjectId": {
             "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, resourceGroup().name), 'Microsoft.Resources/deployments', 'deploy_managed_identity'), '2022-09-01').outputs.managedIdentityOutput.value.objectId]"
           },
@@ -967,6 +976,15 @@
               "type": "string"
             },
             "gptDeploymentCapacity": {
+              "type": "int"
+            },
+            "embeddingModelName": {
+              "type": "string"
+            },
+            "embeddingModelVersion": {
+              "type": "string"
+            },
+            "embeddingModelCapacity": {
               "type": "int"
             },
             "managedIdentityObjectId": {
@@ -1227,6 +1245,16 @@
                 "sku": {
                   "name": "[parameters('deploymentType')]",
                   "capacity": "[parameters('gptDeploymentCapacity')]"
+                },
+                "raiPolicyName": "Microsoft.Default"
+              },
+              {
+                "name": "[parameters('embeddingModelName')]",
+                "model": "[parameters('embeddingModelName')]",
+                "version": "[parameters('embeddingModelVersion')]",
+                "sku": {
+                  "name": "[parameters('deploymentType')]",
+                  "capacity": "[parameters('embeddingModelCapacity')]"
                 },
                 "raiPolicyName": "Microsoft.Default"
               }
@@ -2687,6 +2715,9 @@
           "gptModelName": {
             "value": "[parameters('gptModelName')]"
           },
+          "embeddingModelName": {
+            "value": "[parameters('embeddingModelName')]"
+          },
           "keyVaultId": {
             "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, resourceGroup().name), 'Microsoft.Resources/deployments', 'deploy_keyvault'), '2022-09-01').outputs.keyvaultId.value]"
           },
@@ -2734,6 +2765,9 @@
             "gptModelName": {
               "type": "string"
             },
+            "embeddingModelName": {
+              "type": "string"
+            },
             "keyVaultId": {
               "type": "string"
             },
@@ -2753,6 +2787,10 @@
                 {
                   "key": "APP_AZURE_OPENAI_MODEL",
                   "value": "[parameters('gptModelName')]"
+                },
+                {
+                  "key": "APP_AZURE_OPENAI_EMBEDDING_MODEL",
+                  "value": "[parameters('embeddingModelName')]"
                 },
                 {
                   "key": "APP_CONTENT_UNDERSTANDING_ENDPOINT",

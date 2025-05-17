@@ -60,6 +60,9 @@ param embeddingModelName string = 'text-embedding-3-large'
 
 @minLength(1)
 @description('Version of the embedding model to deploy:')
+@allowed([
+  '1'
+])
 param embeddingModelVersion string = '1'
 
 @minValue(1)
@@ -220,6 +223,7 @@ module appconfig 'deploy_app_config_service.bicep' = {
     openAIEndpoint: aifoundry.outputs.aiServicesTarget
     contentUnderstandingEndpoint: aifoundry.outputs.aiServicesCUEndpoint
     gptModelName: gptModelName
+    embeddingModelName: embeddingModelName
     keyVaultId: kvault.outputs.keyvaultId
     aiProjectConnectionString: aifoundry.outputs.aiProjectConnectionString
     cosmosDbName: cosmosdb.outputs.cosmosAccountName

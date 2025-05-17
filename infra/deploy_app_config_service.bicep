@@ -9,6 +9,7 @@ param storageQueueUrl string
 param openAIEndpoint string
 param contentUnderstandingEndpoint string
 param gptModelName string
+param embeddingModelName string
 param keyVaultId string
 param aiProjectConnectionString string
 param cosmosDbName string
@@ -21,6 +22,10 @@ param keyValues array = [
   {
     key: 'APP_AZURE_OPENAI_MODEL'
     value: gptModelName
+  }
+  {
+    key: 'APP_AZURE_OPENAI_EMBEDDING_MODEL'
+    value: embeddingModelName
   }
   {
     key: 'APP_CONTENT_UNDERSTANDING_ENDPOINT'
