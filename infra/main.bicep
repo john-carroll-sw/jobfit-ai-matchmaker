@@ -54,8 +54,18 @@ param gptModelVersion string = '2024-08-06'
 // https://learn.microsoft.com/en-us/azure/ai-services/openai/quotas-limits
 param gptDeploymentCapacity int = 100
 
+@minLength(1)
 @description('Name of the embedding model to deploy:')
-param embeddingModel string = 'text-embedding-3-large'
+param embeddingModelName string = 'text-embedding-3-large'
+
+@minLength(1)
+@description('Version of the embedding model to deploy:')
+param embeddingModelVersion string = '1'
+
+@minValue(1)
+@maxValue(1000000)
+@description('Capacity of the embedding model deployment:')
+param embeddingModelCapacity int = 300
 
 @description('Minimum number of replicas to be added for Container App')
 param minReplicaContainerApp int = 1
@@ -148,10 +158,12 @@ module aifoundry 'deploy_ai_foundry.bicep' = {
     gptModelName: gptModelName
     gptModelVersion: gptModelVersion
     gptDeploymentCapacity: gptDeploymentCapacity
+    embeddingModelName: embeddingModelName
+    embeddingModelVersion: embeddingModelVersion
+    embeddingModelCapacity: embeddingModelCapacity
     managedIdentityObjectId: managedIdentityModule.outputs.managedIdentityOutput.objectId
     containerRegistryId: containerRegistry.outputs.createdAcrId
     applicationInsightsId: applicationInsights.outputs.id
-    embeddingModel: embeddingModel
   }
   scope: resourceGroup(resourceGroup().name)
 }

@@ -131,6 +131,29 @@
       "metadata": {
         "description": "Set this flag to true only if you are deplpoying from Local"
       }
+    },
+    "embeddingModelName": {
+      "type": "string",
+      "defaultValue": "text-embedding-3-large",
+      "metadata": {
+        "description": "Name of the embedding model to deploy:"
+      }
+    },
+    "embeddingModelVersion": {
+      "type": "string",
+      "defaultValue": "1",
+      "metadata": {
+        "description": "Version of the embedding model to deploy:"
+      }
+    },
+    "embeddingModelCapacity": {
+      "type": "int",
+      "defaultValue": 300,
+      "minValue": 1,
+      "maxValue": 1000000,
+      "metadata": {
+        "description": "Capacity of the embedding model deployment:"
+      }
     }
   },
   "variables": {

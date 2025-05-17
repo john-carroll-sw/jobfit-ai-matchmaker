@@ -26,7 +26,8 @@ class AppConfiguration(ModelBaseSettings):
         app_cps_configuration (str): Folder CPS configuration name Blob Container.
         app_content_understanding_endpoint (str): The endpoint for content understanding Service.
         app_azure_openai_endpoint (str): The endpoint for Azure OpenAI.
-        app_azure_openai_model (str): The model for Azure OpenAI.
+        app_azure_openai_model (str): The model for Azure OpenAI (for completions/chat).
+        app_azure_openai_embedding_model (str): The embedding model for Azure OpenAI.
         app_cosmos_connstr (str): The connection string for Cosmos DB.
         app_cosmos_database (str): The name of the Cosmos DB database.
         app_cosmos_container_process (str): The name of the Cosmos DB container for process data.
@@ -46,6 +47,7 @@ class AppConfiguration(ModelBaseSettings):
     app_content_understanding_endpoint: str
     app_azure_openai_endpoint: str
     app_azure_openai_model: str
+    app_azure_openai_embedding_model: str
     app_cosmos_connstr: str
     app_cosmos_database: str
     app_cosmos_container_process: str

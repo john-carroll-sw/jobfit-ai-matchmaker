@@ -128,6 +128,9 @@ jobs:
                 gptModelName="gpt-4o" \
                 gptModelVersion="2024-08-06" \
                 gptDeploymentCapacity="30" \
+                embeddingModelName="text-embedding-3-large" \
+                embeddingModelVersion="1" \
+                gptDeploymentCapacity="300" \
                 minReplicaContainerApp="1" \
                 maxReplicaContainerApp="1" \
                 minReplicaContainerApi="1" \

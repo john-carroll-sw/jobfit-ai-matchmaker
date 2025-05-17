@@ -7,7 +7,9 @@ param deploymentType string
 param gptModelName string
 param gptModelVersion string
 param gptDeploymentCapacity int
-param embeddingModel string
+param embeddingModelName string
+param embeddingModelVersion string
+param embeddingModelCapacity int
 param managedIdentityObjectId string
 param applicationInsightsId string
 param containerRegistryId string
@@ -40,12 +42,12 @@ var aiModelDeployments = [
     raiPolicyName: 'Microsoft.Default'
   }
   {
-    name: embeddingModel
-    model: embeddingModel
-    version: '1'
+    name: embeddingModelName
+    model: embeddingModelName
+    version: embeddingModelVersion
     sku: {
-      name: 'Standard'
-      capacity: 300
+      name: deploymentType
+      capacity: embeddingModelCapacity
     }
     raiPolicyName: 'Microsoft.Default'
   }
