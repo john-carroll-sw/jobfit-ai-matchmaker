@@ -87,7 +87,7 @@ class AzureOpenAIEmbedder:
         self.api_key = config.get("api_key") or os.environ.get("AZURE_OPENAI_KEY")
         self.api_version = config.get("api_version") or "2023-05-15"
         self.azure_endpoint = config.get("azure_endpoint") or os.environ.get("AZURE_OPENAI_ENDPOINT")
-        self.embedding_model = config.get("embedding_model") or "text-embedding-ada-002"
+        self.embedding_model = config.get("embedding_model") or "atext-embedding-3-large"
         
         # Initialize Azure OpenAI client
         self.client = AzureOpenAI(
@@ -212,7 +212,7 @@ class AzureSearchIndexer:
                     name="embedding", 
                     type=SearchFieldDataType.Collection(SearchFieldDataType.Single), 
                     searchable=True, 
-                    vector_search_dimensions=1536,  # For text-embedding-ada-002 model
+                    vector_search_dimensions=1536,  # For atext-embedding-3-large model
                     vector_search_profile_name="resume-profile"
                 )
             ]
@@ -495,7 +495,7 @@ class AppConfiguration:
     # Azure OpenAI Configuration
     app_openai_key: str = os.environ.get("AZURE_OPENAI_KEY", "")
     app_openai_endpoint: str = os.environ.get("AZURE_OPENAI_ENDPOINT", "")
-    app_openai_embedding_deployment: str = os.environ.get("AZURE_OPENAI_EMBEDDING_DEPLOYMENT", "text-embedding-ada-002")
+    app_openai_embedding_deployment: str = os.environ.get("AZURE_OPENAI_EMBEDDING_DEPLOYMENT", "atext-embedding-3-large")
     app_openai_gpt_deployment: str = os.environ.get("AZURE_OPENAI_GPT_DEPLOYMENT", "gpt-35-turbo")
     
     # Azure Search Configuration

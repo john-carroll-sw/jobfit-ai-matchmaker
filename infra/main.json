@@ -1306,7 +1306,7 @@
               "kind": "StorageV2",
               "properties": {
                 "accessTier": "Hot",
-                "allowBlobPublicAccess": false,
+                "allowBlobPublicAccess": true,
                 "allowCrossTenantReplication": false,
                 "allowSharedKeyAccess": true,
                 "encryption": {

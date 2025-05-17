@@ -7,8 +7,7 @@ param deploymentType string
 param gptModelName string
 param gptModelVersion string
 param gptDeploymentCapacity int
-// param embeddingModel string
-// param embeddingDeploymentCapacity int
+param embeddingModel string
 param managedIdentityObjectId string
 param applicationInsightsId string
 param containerRegistryId string
@@ -40,15 +39,16 @@ var aiModelDeployments = [
     }
     raiPolicyName: 'Microsoft.Default'
   }
-  // {
-  //   name: embeddingModel
-  //   model: embeddingModel
-  //   sku: {
-  //     name: 'Standard'
-  //     capacity: embeddingDeploymentCapacity
-  //   }
-  //   raiPolicyName: 'Microsoft.Default'
-  // }
+  {
+    name: embeddingModel
+    model: embeddingModel
+    version: '1'
+    sku: {
+      name: 'Standard'
+      capacity: 300
+    }
+    raiPolicyName: 'Microsoft.Default'
+  }
 ]
 
 resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = {
@@ -109,10 +109,11 @@ resource aiServicesDeployments 'Microsoft.CognitiveServices/accounts/deployments
     }
     raiPolicyName: aiModeldeployment.raiPolicyName
   }
-  sku:{
+  sku: union({
     name: aiModeldeployment.sku.name
+  }, contains(aiModeldeployment.sku, 'capacity') ? {
     capacity: aiModeldeployment.sku.capacity
-  }
+  } : {})
 }]
 
 resource storage 'Microsoft.Storage/storageAccounts@2022-09-01' = {

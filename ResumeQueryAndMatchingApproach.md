@@ -66,7 +66,7 @@ def create_embedding(text):
     """Generate embeddings for text using Azure OpenAI."""
     response = client.embeddings.create(
         input=text,
-        model="text-embedding-ada-002"  # Or your deployed embedding model
+        model="text-embedding-3-large"  # Or your deployed embedding model
     )
     return response.data[0].embedding
 

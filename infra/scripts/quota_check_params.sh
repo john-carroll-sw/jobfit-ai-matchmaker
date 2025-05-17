@@ -164,7 +164,7 @@ for REGION in "${REGIONS[@]}"; do
         FOUND=false
         INSUFFICIENT_QUOTA=false
 
-        if [ "$MODEL_NAME" = "text-embedding-ada-002" ]; then
+        if [ "$MODEL_NAME" = "text-embedding-3-large" ]; then
             MODEL_TYPES=("openai.standard.$MODEL_NAME")
         else
             MODEL_TYPES=("openai.standard.$MODEL_NAME" "openai.globalstandard.$MODEL_NAME")
@@ -202,7 +202,7 @@ for REGION in "${REGIONS[@]}"; do
 
                 if [ "$AVAILABLE" -ge "$REQUIRED_CAPACITY" ]; then
                     FOUND=true
-                    if [ "$MODEL_NAME" = "text-embedding-ada-002" ]; then
+                    if [ "$MODEL_NAME" = "text-embedding-3-large" ]; then
                         TEXT_EMBEDDING_AVAILABLE=true
                     fi
                     AT_LEAST_ONE_MODEL_AVAILABLE=true
