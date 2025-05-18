@@ -1,0 +1,136 @@
+{
+  "full_name": null,
+  "contact_info": null,
+  "summary": "Successful administrative professional with 15 years of experience.",
+  "education": [
+    {
+      "institution": "Boise State University",
+      "degree": null,
+      "field_of_study": null,
+      "start_date": null,
+      "end_date": null,
+      "honors": null
+    },
+    {
+      "institution": "Kuna High School",
+      "degree": "High School Diploma",
+      "field_of_study": null,
+      "start_date": null,
+      "end_date": null,
+      "honors": "Graduated with Highest Honors 3.97 Received Ambassador Award in Business Professionals of America."
+    }
+  ],
+  "work_experience": [
+    {
+      "job_title": "Corporate Administrator",
+      "employer": "Company Name",
+      "start_date": "2009-01-01",
+      "end_date": "2017-01-01",
+      "location": "City, State",
+      "description": "Light accounting/bookkeeping, travel arrangements, meeting agendas and minutes, editing/proofreading, document processing, bidding administration, construction administration, coordinated with clients, contractors, subconsultants, and internal drafters.",
+      "industry": null
+    },
+    {
+      "job_title": "Customer Service Representative",
+      "employer": "Company Name",
+      "start_date": "2006-01-01",
+      "end_date": "2009-01-01",
+      "location": "City, State",
+      "description": "Provided full account servicing for the Sears Credit Cards Portfolio via incoming calls, including billing and payment inquiries and disputes, account maintenance, and lost/stolen cards.",
+      "industry": null
+    },
+    {
+      "job_title": "Administrative Assistant/Bookkeeper",
+      "employer": "Addus HealthCare",
+      "start_date": "2000-01-01",
+      "end_date": "2003-01-01",
+      "location": "City, State",
+      "description": "Completed monthly billing reports, billed over $500,000 monthly, reconciled billing, posted payments, prepared deposits, prepared and approved accounts payable bills, created documents, spreadsheets, and monthly newsletters, completed several processes of payroll, assisted in planning company functions, supervised part-time assistant.",
+      "industry": null
+    }
+  ],
+  "certifications": null,
+  "skills": [
+    {
+      "name": "Organized",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Detail oriented",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Efficient",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Prioritize multiple deadlines",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Work well independently",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Collaborate with others",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Microsoft Word",
+      "level": null,
+      "category": "Software"
+    },
+    {
+      "name": "Excel",
+      "level": null,
+      "category": "Software"
+    },
+    {
+      "name": "PowerPoint",
+      "level": null,
+      "category": "Software"
+    },
+    {
+      "name": "Outlook",
+      "level": null,
+      "category": "Software"
+    },
+    {
+      "name": "Adobe Acrobat",
+      "level": null,
+      "category": "Software"
+    },
+    {
+      "name": "Multiple project software websites",
+      "level": null,
+      "category": "Software"
+    },
+    {
+      "name": "General Clerical",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Type 75 WPM",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Multiline phones",
+      "level": null,
+      "category": null
+    }
+  ],
+  "languages": null,
+  "awards": null,
+  "publications": null,
+  "volunteer_experience": null,
+  "healthcare": null,
+  "industry_extensions": null
+}

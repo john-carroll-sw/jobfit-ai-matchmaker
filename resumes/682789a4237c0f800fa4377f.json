@@ -1,0 +1,188 @@
+{
+  "full_name": null,
+  "contact_info": null,
+  "summary": "Seeking a challenging position with a company where my skills would be fully utilized.",
+  "education": [
+    {
+      "institution": "Wake Tech Community College",
+      "degree": "Certificate in Administrative Assistant",
+      "field_of_study": null,
+      "start_date": null,
+      "end_date": "2016",
+      "honors": null
+    },
+    {
+      "institution": "Wake Tech Community College",
+      "degree": "Certificate",
+      "field_of_study": null,
+      "start_date": null,
+      "end_date": "2004",
+      "honors": null
+    },
+    {
+      "institution": "Continental Academy High School",
+      "degree": "High School Diploma",
+      "field_of_study": null,
+      "start_date": null,
+      "end_date": "2001",
+      "honors": null
+    }
+  ],
+  "work_experience": [
+    {
+      "job_title": "Teacher Assistant",
+      "employer": "Company Name",
+      "start_date": "2016-09",
+      "end_date": "Present",
+      "location": "City, State",
+      "description": "Help teacher prepare materials and assignments for instruction. Enforce school policies and rules. Perform clerical duties as assigned. Supervise students in and out of the classroom. Keep classroom neat and in order. Observe, and assess student's performance/progress. Be able to effectively communicate with students, teacher and in some cases parents. Provide individual assistance to students experiencing learning difficulty; explain errors answer questions, assist in research, clarify directions. Participate in meetings and in-service training programs as assigned. Assist students by providing general guidance.",
+      "industry": null
+    },
+    {
+      "job_title": "Office Assistant",
+      "employer": "Company Name",
+      "start_date": "2015-10",
+      "end_date": "2016-01",
+      "location": "City, State",
+      "description": "Answered phones and transferred to the appropriate staff member. Took and distribute accurate messages. Greeted clients and directed them to the correct staff member. Coordinated messenger and courier service. Received, sorted and distributed incoming mail. Monitored incoming emails and answer or forward as required. Prepared outgoing mail for distribution. Faxed, scanned and copied documents. Maintain office filing and storage systems. Retrieve information when requested. Update and maintain internal staff contact lists. Monitored and maintained office supplies. Ensured office equipment is properly maintained and serviced. Kept the office area clean and tidy.",
+      "industry": null
+    },
+    {
+      "job_title": "Special Education Teacher Assistant",
+      "employer": "Company Name",
+      "start_date": "2013-08",
+      "end_date": "2014-07",
+      "location": "City, State",
+      "description": "Provided extra assistance to students with special needs, such as non-English-speaking students or those with physical and mental disabilities. Tutored and assisted children individually or in small groups in order to help those master assignments and to reinforce learning concepts presented by the teachers. Supervised students in classrooms, halls, cafeterias, school yards, and gymnasiums, or on field trips. Present subject matter to students under the direction and guidance of teachers, using lectures, discussions, or supervised role-playing methods. Observe students' performance, and record relevant data to assess progress. Discuss assigned duties with classroom teachers in order to coordinate instructional efforts. Instruct and monitor students in the use and care of equipment and materials, in order to prevent injuries and damage. Enforce administration policies and rules governing students.",
+      "industry": null
+    },
+    {
+      "job_title": "Substitute Teacher",
+      "employer": "Company Name",
+      "start_date": "2011-08",
+      "end_date": "2014-06",
+      "location": "City, State",
+      "description": "Planned and directed activities associated with project. Taught students with emotional impairments. Assisted teaching staff in public Elementary, Middle and High School. Graded homework and test, using answer sheets and recorded results. Distributed teaching materials to students such as textbooks, workbooks, and paper and pencils. Maintained order within the school and on school grounds. Took attendance.",
+      "industry": null
+    },
+    {
+      "job_title": "Teacher Assistant",
+      "employer": "Company Name",
+      "start_date": "2010-09",
+      "end_date": "2011-06",
+      "location": "City, State",
+      "description": "Provided extra assistance to students with special needs, and students with physical and mental disabilities. Tutored and assisted children individually or in small groups in order to help those master assignments, and to reinforce learning concepts presented by the teachers. Supervised students in classrooms, halls, cafeterias, school yards, and gymnasiums, or on field trips. Present subject matter to the students under the direction and guidance of teachers, using lectures, discussions, or supervised role-playing methods. Observe students' performance, and record relevant data to assess progress. Discuss assigned duties with classroom teachers in order to coordinate instructional efforts. Instructed and monitored students in the use and care of equipment and materials, in order to prevent injuries and damage. Enforced administration policies and rules governing students.",
+      "industry": null
+    },
+    {
+      "job_title": "Office Assistant",
+      "employer": "Company Name",
+      "start_date": "2010-02",
+      "end_date": "2010-04",
+      "location": "City, State",
+      "description": "Checked to ensure that appropriate changes were made to resolve customers' concerns. Documented records of customer concerns and transactions. Recorded details of inquiries, concerns, comments. Responded to customers inquires and notified them of claim investigation results. Input interview information into computer. Collected deposits and prepared change of address records. Enabled significant improvements in their productivity. Reviewed billing questions, concerns, and forwarded as needed to departments for investigation.",
+      "industry": null
+    },
+    {
+      "job_title": "Healthcare Technician",
+      "employer": "Company Name",
+      "start_date": "2006-12",
+      "end_date": "2007-05",
+      "location": "City, State",
+      "description": "Answered signal lights, bells and intercom system to determine patients' needs. Performed duties in care of patients in nursing home under direction of nursing and medical staff. Served and collected food trays and fed patients requiring help. Transported patients, using wheelchair and wheeled cart and assisted patients to walk. Recorded temperature, blood pressure, pulse, respiration rates, food and fluid intake and output, as directed. Issued medications from dispensary and maintained records. Led prescribed individual and group therapy sessions as part of specific therapeutic procedures. Restrained, potentially violent, and suicidal patients with verbal and physical methods. Interviewed new patients to complete admission forms, to assess their mental health status and to obtain their mental health and treatment history. Encouraged patients to develop work skills and to participate in social, recreational, and other therapeutic activities that enhanced interpersonal skills and developed social relationships.",
+      "industry": null
+    },
+    {
+      "job_title": "Certified Nursing Assistant",
+      "employer": "Company Name",
+      "start_date": "2005-08",
+      "end_date": "2006-01",
+      "location": "City, State",
+      "description": "Recorded temperature, blood pressure, pulse, respiration rates, food, and fluid intake and output. Cleaned, sterilized, stored, prepared, and issued dressing packs.",
+      "industry": null
+    },
+    {
+      "job_title": "Certified Nursing Assistant",
+      "employer": "Company Name",
+      "start_date": "2005-04",
+      "end_date": "2005-05",
+      "location": "City, State",
+      "description": "Performed duties in care of patients in their home under direction of nursing and medical staff. Bathed, dressed, and undressed patients. Transported patients, using wheelchair wheeled cart and assisted patients to walk. Prepared meals, and assisted with activities of daily living. Changed bed linens, ran errands, directed visitors and answered telephone. Organized and labeled materials.",
+      "industry": null
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Nursing Assistant",
+      "issuer": null,
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    },
+    {
+      "name": "North Carolina Interventions",
+      "issuer": null,
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    }
+  ],
+  "skills": [
+    {
+      "name": "Organizational Skills",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Written Communications Skills",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Verbal Communication Skills",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Cultural Awareness",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Microsoft",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Typing Skills",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Ability to Focus",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Efficiency",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Self-Motivation",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Ethical",
+      "level": null,
+      "category": null
+    }
+  ],
+  "languages": null,
+  "awards": null,
+  "publications": null,
+  "volunteer_experience": null,
+  "healthcare": null,
+  "industry_extensions": null
+}

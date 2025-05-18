@@ -1,0 +1,148 @@
+{
+  "full_name": null,
+  "contact_info": null,
+  "summary": "Accomplished Information technology professional with 20 years of experience in the software development life cycle (SDLC) with focus on application analysis and design, application development, systems testing, and systems integration. Certified as a Project Management Professional (PMP). Accustomed to managing multiple projects and priorities in fast-paced environments.",
+  "education": [
+    {
+      "institution": "University of Georgia",
+      "degree": "MBA",
+      "field_of_study": "Finance",
+      "start_date": null,
+      "end_date": null,
+      "honors": null
+    },
+    {
+      "institution": "Spelman College",
+      "degree": "BS",
+      "field_of_study": "Computer Science",
+      "start_date": null,
+      "end_date": null,
+      "honors": null
+    }
+  ],
+  "work_experience": [
+    {
+      "job_title": "Project Manager",
+      "employer": "Company Name",
+      "start_date": "2013-07",
+      "end_date": "Present",
+      "location": "City, State",
+      "description": "Leads and supports complex projects or programs including the planning, management, and implementation of assigned projects and/or programs within the Consumer Private Wealth Management portfolio of the Enterprise Execution Services organization. Creates and is responsible for critical project management deliverables such as the Business Case, Project Plan, Stakeholder Communications Management Plan, and Risks/Issues Log. Manages projects in accordance with the defined SunTrust PMO project governance methodologies in completing project work, resolving issues, and supporting recommendations. Leads in the assessment of potential new opportunities, analyzing opportunity at a high-level and defining approach, and works with Business managers and Executive sponsors to agree on project scope and approach. Manages project financials and project resources Analyzes variances to the project schedule, scope, and budget. Directs changes to the project scope and cost and implements the appropriate change management processes to keep the project on track.",
+      "industry": null
+    },
+    {
+      "job_title": "Healthcare Product Manager",
+      "employer": "Company Name",
+      "start_date": "2009-07",
+      "end_date": "2013-05",
+      "location": "City, State",
+      "description": "Evaluated the systems needs of the Healthcare business and led a team of Business Analysts through the product lifecycle of new and existing systems. Collaborated with SCRUM team using Agile Methodology to define and deliver Healthcare systems strategy and roadmap. Supported an Agile Software Development process, working in conjunction with end users / stakeholders and technical delivery team. Facilitated Scrum ceremonies such as daily stand-ups, backlog grooming, sprint planning, reviews (demo) and retrospectives. Led daily scrums to communicate current day's goals, previous day's achievements, and any impediments or concerns in an Agile Scrum environment. Ensured that systems defects/enhancements were identified and tracked in JIRA, communicated to the development team, and resolved in a timely manner by prioritizing the product backlog to ensure correct sequencing and alignment with business value. Acted as the single point of contact between the business and the Healthcare development team to provide clear priorities for new feature functionality and field issues to the development team enabling efficient utilization of resources consistent with business priorities. Worked with stakeholders and product owner developing release plans Managed third-party implementations from concept development to operations. Translated business goals, feature concepts and customer needs into prioritized product requirements and use cases.",
+      "industry": null
+    },
+    {
+      "job_title": "Managing Consultant",
+      "employer": "Company Name",
+      "start_date": "2000-08",
+      "end_date": "2009-04",
+      "location": "City, State",
+      "description": "Designed and implemented supply chain transformation solutions for clients in the industrial sector to improve overall operational efficiencies and effectiveness. Managed boarding process for new customers of a global expense reporting solution tool. Supported workload management and scheduling system change control records, analyzed requirements for hosting- specific components of the global expense reporting solution, coordinated workload management and assignment for problem records, and managed problem records to successful resolution. Reduced overall problem records by 50%. Managed transformation and migration of servers from data centers and coordinated daily tasks of customer and IBM personnel in a matrixed team environment. Maintained project status in Project Tracker, along with creating and tracking change requests for service (RFS) in Service Center to resolve issues and escalate risks to project executives. Managed off-shore test team resources in India, estimated work effort and forecasted budget for future quality assurance projects. Managed and coordinated activities for Data Governance program to gain data consistency and improve data quality and integrity throughout a bank holding company. Developed overall integrated project plan consisting of three projects led by IBM along with two other vendors, reporting project status to IBM and client executives.",
+      "industry": null
+    },
+    {
+      "job_title": "Technical Analyst",
+      "employer": "Company Name",
+      "start_date": "1998-06",
+      "end_date": "2000-08",
+      "location": "City, State",
+      "description": "Implemented package integration solutions for the healthcare industry. Provided the analysis, design, development, and deployment for a healthcare client/server application, HSD Diamond 950 C/S by using SQL, PL/SQL, and ORACLE. Created and executed automated test scripts using WinRunner and TestDirector to adequately test the professional and institutional claims for the software application, HSD Diamond 950 C/S. Lead efforts for unit, product, system, and regression testing of a data loader application. Configured test data for reimbursement terms of ancillary providers and executed component and assembly tests for professional/ancillary pricing configuration of healthcare claims.",
+      "industry": null
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Project Management Professional (PMP)",
+      "issuer": "Project Management Institute (PMI)",
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    }
+  ],
+  "skills": [
+    {
+      "name": "Issue resolution",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Microsoft Office Suite",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "SQL and databases",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Data mapping",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Business artifacts documentation",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Test case scenarios",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Project finance",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Quality assurance",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Multi-tasking",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Testing plans",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Organized",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Bug tracking",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Project planning",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Report delivery",
+      "level": null,
+      "category": null
+    }
+  ],
+  "languages": null,
+  "awards": null,
+  "publications": null,
+  "volunteer_experience": null,
+  "healthcare": null,
+  "industry_extensions": null
+}

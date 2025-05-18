@@ -1,0 +1,116 @@
+{
+  "full_name": null,
+  "contact_info": null,
+  "summary": "To provide safe, efficient, and quality care to patients and their families while adhering to policies and procedures.",
+  "education": [
+    {
+      "institution": "Columbus Technical College",
+      "degree": "A.S",
+      "field_of_study": "Nursing",
+      "start_date": "2013-08",
+      "end_date": "2015-12",
+      "honors": null
+    },
+    {
+      "institution": "Bainbridge High School",
+      "degree": "Diploma",
+      "field_of_study": "General Studies",
+      "start_date": null,
+      "end_date": "2004-05",
+      "honors": null
+    }
+  ],
+  "work_experience": [
+    {
+      "job_title": "Registered Nurse",
+      "employer": "Company Name",
+      "start_date": "2016-06",
+      "end_date": null,
+      "location": "City, State",
+      "description": "Self-motivated leader with over 8 years of experience in emergency medicine and health care. Self-starter who is able to maneuver through tasks and make sure the job is done in a timely and proficient manner. Trainer and teacher who can effectively break down tasks so they can be understood and executed without flaws. Facilitator of group projects to help others understand the objective and how to produce an effective outcome of the job being presented. Creative mindset that can present an outcome in more than one way with many options being available. Able to communicate with other team members from diverse backgrounds and incorporate the needs of every individual to create a positive atmosphere. Able to recognize abnormalities and report them in a timely and efficient manner. Flexible by being able to quickly adapt to change at the last minute and complete the project without delays. Mentored those in the health care field to understand the emergency medical system and reporting standards, while having the knowledge to formulate and present reports to the next echelon of care. Knowledgeable of regulatory requirements in order to adhere to healthcare standards and protocols. Completion of over 120 clinical hours of Medical Surgical, Pediatric, and Psychiatric health services.",
+      "industry": "Healthcare"
+    },
+    {
+      "job_title": "Medical Technician/ Healthcare Specialist",
+      "employer": "Company Name",
+      "start_date": "2010-11",
+      "end_date": "2013-05",
+      "location": "City, State",
+      "description": "Supervisor: SSG Stover, Kenneth, Weekly Hrs. Worked: 60. HEALTH CARE STATISTICS / REPORTING: Extracted medical statistical reports from Composite Health Care System (CHCS) and Armed Forces health Longitudinal Technology Application (ALTHA) a Department of Defense (DOD) health information system. Tracked acute, routine, and wellness appointments to include, but not limited orthopedic injuries, colds, immunizations and physical exams, medical leave of absences and hospitalizations, on a weekly basis. Created visual aids such as charts and graphs using Microsoft PowerPoint for meeting presentations. Presented statistical information regarding to medical appointments, illnesses and injuries in weekly medical staff meetings to the hospital Medical Surgeon. Communicated with the clinical staff and the Medical Officer in charge to address any reporting discrepancies. TRAINING: Trained 2 Medical Technicians in medical administration and health care statistical reporting. Conducted hands-on training, demonstrated the functionality of DOD health information systems. Monitored the work performance of the Medical Technicians. Provided both verbal and written feedback, provided training resources for performance and professional development, on a quarterly basis. COLLABORATION: Attended weekly medical in-service training to discuss various health topics. Presented information monthly in weekly in-service to discuss medical and public health related trends and issues. Mentored other Medics in medical training exercises on a monthly basis. Provided guidance to Medical Technicians while performing medical continuous education units (CEU)s or patient care refresher training such as first responder protocol, triage care and other levels of medical care.",
+      "industry": "Healthcare"
+    },
+    {
+      "job_title": "Medical Technician",
+      "employer": "Company Name",
+      "start_date": "2008-08",
+      "end_date": "2010-11",
+      "location": "City, State",
+      "description": "City, State, Supervisor: SSG Ellis, Courtney, Weekly Hrs. Worked: 60 Extracted physician orders from a hospital database such as the Composite Health Care System (CHCS). Confirmed physician orders before administering immunizations. Identified patients by utilizing proper identification cards, verified patient demographics prior to performing ordered test. Obtained procedural consent forms. Maintained and secured patient information in accordance to Privacy Act of 1974 and Health Insurance Portability and Accountability Act (HIPAA) practices. IMMUNIZATIONS: Provided a safe and comfortable experience for patients. Prepared patients for the administration of immunizations through subcutaneous and intramuscular routes. Administered immunizations and updated the records of immunizations within health information systems. Adhered to and practiced Occupational Safety and Health Administration (OSHA) guidelines; wore personal protective equipment (PPE), no recapping of needles, disposed of syringes in designated sharp containers.",
+      "industry": "Healthcare"
+    },
+    {
+      "job_title": "Medical Technician",
+      "employer": "Company Name",
+      "start_date": "2006-01",
+      "end_date": "2008-08",
+      "location": "City, State",
+      "description": "City, State, Supervisor: SFC Goines., Weekly Hrs. Worked: 60. 08/2013-12/2015 , Student, ASN, Nursing, Columbus Technical College, Columbus, GA, GPA: 3.20. Studied the theoretical and practical aspects of coordinating patient care, educating patients and the public about various health conditions, and providing advice and emotional support to patients and their family members. Obtained the knowledge of medical terminology to better understand the proper terms in reference to human anatomy and basic patient care skills including communication, patient safety and medical asepsis and abilities to provide proper resuscitation skills to infants and adults. Delivered presentations utilizing Microsoft Word, Power Point and Excel. Conducted research utilizing EBSCO Host, LexisNexis, ERIC and other academic research databases. Reviewed descriptive and statistical reports and documents. Interpreted data and ensured that the data utilized to compile academic reports were authentic, correct and consistent. Wrote annotated bibliographies, abstracts, literature reviews and argumentative papers required per the professor's syllabi. Mentored fellow classmates regarding academic coursework. Collaborated and communicated with students on projects, study groups and academic research.",
+      "industry": "Healthcare"
+    }
+  ],
+  "certifications": null,
+  "skills": [
+    {
+      "name": "Microsoft Office",
+      "level": null,
+      "category": "Technical"
+    },
+    {
+      "name": "Word",
+      "level": null,
+      "category": "Technical"
+    },
+    {
+      "name": "Excel",
+      "level": null,
+      "category": "Technical"
+    },
+    {
+      "name": "PowerPoint",
+      "level": null,
+      "category": "Technical"
+    },
+    {
+      "name": "Outlook",
+      "level": null,
+      "category": "Technical"
+    }
+  ],
+  "languages": null,
+  "awards": [
+    "ARMY COMMENDATION MEDAL WITH VALOR",
+    "ARMY COMMENDATION MEDAL (4TH AWARD)",
+    "ARMY ACHIEVEMENT MEDAL",
+    "ARMY GOOD CONDUCT MEDAL (2ND AWARD)",
+    "NATIONAL DEFENSE SERVICE MEDAL",
+    "GLOBAL WAR ON TERRORISM SERVICE MEDAL",
+    "IRAQI CAMPAIGN MEDAL WITH CAMPAIGN STAR",
+    "NONCOMMISSIONED OFFICER PROFESSIONAL DEVELOPMENT RIBBON",
+    "ARMY SERVICE RIBBON",
+    "OVERSEAS SERVICE RIBBON",
+    "COMBAT MEDICAL BADGE"
+  ],
+  "publications": null,
+  "volunteer_experience": null,
+  "healthcare": {
+    "npi_number": null,
+    "license_state": null,
+    "license_number": null,
+    "specialties": null,
+    "board_certifications": null,
+    "emr_systems": null,
+    "clinical_experience_years": 8.0,
+    "patient_populations": null
+  },
+  "industry_extensions": null
+}

@@ -1,0 +1,128 @@
+{
+  "full_name": null,
+  "contact_info": {
+    "email": null,
+    "phone": null,
+    "address": null,
+    "linkedin": null,
+    "website": null
+  },
+  "summary": "Dedicated RN with over 20 years experience in nursing seeking career transition into a new clinical setting. Able to offer a solid foundation in occupational health, office management, triage, endoscopy, homecare, primary patient care and current healthcare advancements. Highly motivated, dedicated, flexible and compassionate with proven expertise in communication, organization and documentation skills. Valuable interpersonal skills, forging relationships and collaborating with interdisciplinary teams to develop outstanding care/support and to facilitate a friendly and caring environment. Dependable, responsible and autonomous; able to work independently or within a group.",
+  "education": [
+    {
+      "institution": "Gannon University",
+      "degree": "Bachelor of Arts",
+      "field_of_study": "Nursing",
+      "start_date": null,
+      "end_date": null,
+      "honors": "Lambda Sigma Society, GPA: 3.85"
+    }
+  ],
+  "work_experience": [
+    {
+      "job_title": "Occupational Health Nurse Coordinator",
+      "employer": "Company Name",
+      "start_date": "2011-09",
+      "end_date": "2012-05",
+      "location": "City, State",
+      "description": "Provided comprehensive occupational and environmental health services including occupational medicine, industrial hygiene, industrial safety and administrative tasks. Assessed injuries or illness, first aid, CPR, and emergency treatment to employees and guests. Educated about basic health care, monitored health condition of employees, dispensed medication(s); trained and supported other staff members and managed health risks within the facility. Developed and implemented \"Wellness program\" activities.",
+      "industry": null
+    },
+    {
+      "job_title": "Physician Liaison/Nurse Triage/GI Nurse",
+      "employer": "Company Name",
+      "start_date": "2000-12",
+      "end_date": "2011-10",
+      "location": "City, State",
+      "description": "Assisted physicians in all aspects of patient care. Assessed and prioritized patient telephone calls, advised on basic treatment or recommended immediate care in a local hospital, ER, or assisted with scheduling office visits. Additional responsibilities included diagnostic test results via email and phone, prescription refills, medication and diagnostic pre-certifications, scheduling, completing medical forms and various office duties.",
+      "industry": null
+    },
+    {
+      "job_title": "Home Healthcare Nurse",
+      "employer": "Company Name",
+      "start_date": "1990-05",
+      "end_date": "2000-07",
+      "location": "City, State",
+      "description": "Performed a comprehensive range of clinical functions in the home setting within the community. Assessed patients' developmental stages and conditions, administered medications, maintained patient charts/care plans and responded to medical emergencies. Coordinated all aspects of the patient's home care, interacting with other disciplines and agencies, as needed, while providing professional care to the patient as indicated by agency policies, State and Federal laws and regulations.",
+      "industry": null
+    }
+  ],
+  "certifications": [
+    {
+      "name": "BCLS, CPR, Trauma Certification",
+      "issuer": null,
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    }
+  ],
+  "skills": [
+    {
+      "name": "Patient Management",
+      "level": "Expert",
+      "category": null
+    },
+    {
+      "name": "Patient Assessment",
+      "level": "Expert",
+      "category": null
+    },
+    {
+      "name": "Homecare/Hospice Care",
+      "level": "Expert",
+      "category": null
+    },
+    {
+      "name": "Communication & Documentation",
+      "level": "Expert",
+      "category": null
+    },
+    {
+      "name": "Healthcare Education",
+      "level": "Expert",
+      "category": null
+    },
+    {
+      "name": "JCAHO Standards / Compliance",
+      "level": "Expert",
+      "category": null
+    },
+    {
+      "name": "Relations",
+      "level": "Expert",
+      "category": null
+    },
+    {
+      "name": "Homecare Skills/Oasis",
+      "level": "Expert",
+      "category": null
+    },
+    {
+      "name": "Quality Assurance / Quality Control",
+      "level": "Expert",
+      "category": null
+    },
+    {
+      "name": "Records Maintenance",
+      "level": "Expert",
+      "category": null
+    }
+  ],
+  "languages": null,
+  "awards": [
+    "Elected for nurse of the year in 1992"
+  ],
+  "publications": null,
+  "volunteer_experience": null,
+  "healthcare": {
+    "npi_number": null,
+    "license_state": null,
+    "license_number": null,
+    "specialties": null,
+    "board_certifications": null,
+    "emr_systems": null,
+    "clinical_experience_years": 20.0,
+    "patient_populations": null
+  },
+  "industry_extensions": null
+}

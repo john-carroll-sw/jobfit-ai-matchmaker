@@ -1,0 +1,186 @@
+{
+  "full_name": null,
+  "contact_info": null,
+  "summary": null,
+  "education": [
+    {
+      "institution": "UNIVERSITY OF DELAWARE",
+      "degree": "Ph.D.",
+      "field_of_study": "Analytical Chemistry",
+      "start_date": null,
+      "end_date": "1990",
+      "honors": null
+    },
+    {
+      "institution": "UNIVERSITY OF DELAWARE",
+      "degree": "M.S.",
+      "field_of_study": "Analytical Chemistry",
+      "start_date": null,
+      "end_date": "1987",
+      "honors": null
+    },
+    {
+      "institution": "FRANKLIN AND MARSHALL COLLEGE",
+      "degree": "B.A.",
+      "field_of_study": "Chemistry",
+      "start_date": null,
+      "end_date": null,
+      "honors": "American Chemical Society Certified"
+    }
+  ],
+  "work_experience": [
+    {
+      "job_title": "Director, New Product Research and R&D Liaison, Global Oral Healthcare R&D, Consumer Healthcare R&D",
+      "employer": "Company Name",
+      "start_date": "2011-01",
+      "end_date": "Present",
+      "location": "City, State",
+      "description": "Developing and implementing systems to drive scientific excellence world-wide. Reviewing all major scientific programs globally to ensure scientific excellence. Managing cross-category strategic programs. Leveraging scientific programs to develop and support novel claims. Coordinating scientific visualization and communication programs. Aligning R&D with commercial objectives. Developing and implementing metrics for scientific improvement. Planning and managing scientific engagement with external experts and organizations. Managing global data dissemination plans. Supervising strategic publication of scientifically relevant research. Developing and managing extensive networks of experts. Reviewing and developing talent within R&D.",
+      "industry": null
+    },
+    {
+      "job_title": "Associate Director/Category R&D Liaison, Oral Healthcare R&D, Consumer Healthcare R&D",
+      "employer": "Company Name",
+      "start_date": "1996-01",
+      "end_date": "2002-01",
+      "location": "City, State",
+      "description": "All oral healthcare innovation initiatives in North America. Liaising between R&D and Marketing, Legal, Manufacturing, and Business Development. Liaising with FDA, CHPA, CTFA, ADA, and other agencies. Creating and maintaining network of world-class consultants/collaborators. Supervision of senior scientists, scientists, and technicians. Evaluation and in-licensing of external technologies. Product development, patent, and claims generation. Project planning, tracking, and coordination (timing, manpower, budgeting).",
+      "industry": null
+    },
+    {
+      "job_title": "Scientist, Analytical Technology Group, Analytical R&D, CPR&D",
+      "employer": "Company Name",
+      "start_date": "1995-01",
+      "end_date": "1996-01",
+      "location": "City, State",
+      "description": "All investigational research relating to Oral Care (Listerine, CoolMint, etc.). Supervision of senior scientists, scientists, and technicians. Generation of novel technology platforms and products. Development of novel physico-chemical models and methods. Evaluation of external technologies. Leadership of numerous oral care items. Liaison between consultants, external laboratories, and Warner-Lambert. Product development, patent, and claims generation. Project planning, tracking, and coordination (timing, manpower, budgeting).",
+      "industry": null
+    },
+    {
+      "job_title": "Research Assistant, Hawaii Biosensor Laboratory",
+      "employer": "Company Name",
+      "start_date": "1989-01",
+      "end_date": "1990-01",
+      "location": "City, State",
+      "description": "Initial installation and configuration of instrumentation in new labs. Neuronal biosensor research. Microdiagnostic sensor development. Training of new graduate students in biosensor research.",
+      "industry": null
+    },
+    {
+      "job_title": "Teaching Assistant, Department of Chemistry and Biochemistry",
+      "employer": "Company Name",
+      "start_date": "1986-01",
+      "end_date": "1989-01",
+      "location": "City, State",
+      "description": "Development and study of intact chemoreceptor-based biosensors. Laboratory instruction for General Chemistry for majors. Laboratory instruction for Instrumental Analysis.",
+      "industry": null
+    },
+    {
+      "job_title": "Quality Control Analyst",
+      "employer": "Company Name",
+      "start_date": "1981-01",
+      "end_date": "1984-01",
+      "location": "City, State",
+      "description": "Analysis and release of finished pharmaceutical and consumer products. Analysis and release of raw materials. Manufacturing Investigations.",
+      "industry": null
+    }
+  ],
+  "certifications": [
+    {
+      "name": "B.A., Chemistry (American Chemical Society Certified)",
+      "issuer": "CTFA",
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    }
+  ],
+  "skills": [
+    {
+      "name": "Growth strategies/new opportunity identification and development",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Scientific strategy/best practice/scientific excellence implementation",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Strong technical expertise (research and product development)",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Cross-functional experience: regulatory affairs, marketing, licensing, legal, clinical, etc.",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Broad background in consumer healthcare (OTC's and medical devices)",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Proven record of new product development (representing $1B+ sales)",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Ability to conduct and interpret consumer tests and translate consumer needs to products",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Strong ideation, innovation, and claims generation skills",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Leadership of cross-functional, highly matrixed global teams",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Extensive expertise in identification and development of high growth opportunities",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Supervision of technical experts, formulators, and administrative staff of all levels",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Extensive experience in open innovation, licensing and outsourcing",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Comprehensive network of global opinion leaders and track record in leveraging consultants",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Strong negotiation skills",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "World-recognized expert in oral healthcare R&D",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Working relationship with FDA, Professional, Industry and Research Associations",
+      "level": null,
+      "category": null
+    }
+  ],
+  "languages": null,
+  "awards": null,
+  "publications": [
+    "Saliva Diagnostics: A new Industry\" in Saliva Diagnostics, Wong, DT, ed., der-Smith, '\", J. Dent. Res. 86 (Spec. Iss. A) 2097, 2007 Wiley-Blackwell, Baek, JH, Hammer-Wilson, MJ, Buch, RM, Lee, K, Ahn, Y, Than, S, Chen, Z, Wil Efficacy of Marketed Dentifrices Using an In Situ Caries Model Zero, D, Proskin, HM, Buch, RM, Bosma, ML, Smith, SR, Impact of Peroxide on Enamel Hardness Gambogi, R.J., Bosma, M.L., Buch, R.M., Schemehorn, B.R., Verification of Caries Inhibition by a Tartar Control Toothpaste Tanzer, J.M, Pelligrino, J., Thompson, A., Buch, R. M., ANovelPharmacologicalProbe Links the Amiloride-Insensitive NaCl, KCl,and NH4ClChorda TympaniTaste Responses DeSimone, J., Lyall, V., Heck, G., Phan, T., Alam, R., Feldman, G., Buch, R.M., Intact Chemoreceptor-Based Biosensors: Antennular Receptrodes Biosensor Design and Application, P.R. Mathewson, J.W. Finley, Intact Chemoreceptor-Based Biosensors Barker, T.Q., Buch, R.M., Rechnitz, G.A. Neuronal Biosensors Buch, R.M., Rechnitz, G.A."
+  ],
+  "volunteer_experience": null,
+  "healthcare": null,
+  "industry_extensions": null
+}

@@ -1,0 +1,170 @@
+{
+  "full_name": null,
+  "contact_info": null,
+  "summary": "Healthcare professional with more than ten years' experience seeking an opportunity where I can utilize my skills and knowledge in multiple healthcare settings to have a positive impact on patient outcomes. Looking for a work setting in health information management and technology where my previous training in HIPPA Privacy and Security, performance improvement and quality assurance will help position me for career advancement.",
+  "education": [
+    {
+      "institution": "Hannibal La-Grange University",
+      "degree": "Applied Associates Degree of Science",
+      "field_of_study": "Respiratory Therapy",
+      "start_date": null,
+      "end_date": "2000-05",
+      "honors": "Valedictorian of Respiratory Therapy Class, Winner of John Rodgers Memorial Scholarship"
+    },
+    {
+      "institution": "University of Wisconsin",
+      "degree": "Bachelor of Science",
+      "field_of_study": "Healthcare Information Management & Technology",
+      "start_date": "1999",
+      "end_date": "2017",
+      "honors": null
+    }
+  ],
+  "work_experience": [
+    {
+      "job_title": "Sleep Technologist, RPSGT",
+      "employer": "Company Name",
+      "start_date": "2015-12",
+      "end_date": "Present",
+      "location": "City, State",
+      "description": "Polysomnogram preparation and set up, diagnostic testing, PAP and oxygen titration studies, monitoring and scoring complete patient studies using AASM standards, Interscore Reliability Testing 92% average (expected 85%), CPR certified, data transfers, Windows OS, work diligently with minimal supervision in a 1:2 technologist to patient ratio.",
+      "industry": null
+    },
+    {
+      "job_title": "Neurophysiology Technician, RPSGT",
+      "employer": "Company Name",
+      "start_date": "2009-01",
+      "end_date": "2015-11",
+      "location": "City, State",
+      "description": "Performing EEG and LTM, measuring in 10-20, patient preparation and education, monitor and note abnormalities, sleep study preparation & set up, prepare & calibrate equipment prior to testing, following AASM protocol for MSLT, MWT, PAP and oxygen studies, assist with scoring sleep studies, fluent communication skills, sharp critical thinking skills, diligently work with minimal supervision, billing patients in outpatient sleep center.",
+      "industry": null
+    },
+    {
+      "job_title": "Healthcare Specialist, CRT",
+      "employer": "Company Name",
+      "start_date": "2005-09",
+      "end_date": "2008-12",
+      "location": "City, State",
+      "description": "Clinical patient evaluation in home setting, implement disease management programs, respiratory & sleep equipment set up and education, fluent communication skills, sharp critical thinking skills, diligently work with minimal supervision.",
+      "industry": null
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Registered Polysomnographic Technologist",
+      "issuer": null,
+      "issue_date": "2015-01",
+      "expiration_date": null,
+      "credential_id": null
+    },
+    {
+      "name": "CPR Certified",
+      "issuer": null,
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    }
+  ],
+  "skills": [
+    {
+      "name": "Billing",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Communication skills",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "CPR Certified",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Critical thinking",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Disease management",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "EHR experience",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Inventory control",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Medical terminology",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Windows OS",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Patient evaluation",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Patient preparation",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Problem solving",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Respiratory Therapy",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Strategic planning",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Supervision",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Therapy",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Troubleshooting",
+      "level": null,
+      "category": null
+    }
+  ],
+  "languages": null,
+  "awards": null,
+  "publications": null,
+  "volunteer_experience": null,
+  "healthcare": {
+    "npi_number": null,
+    "license_state": null,
+    "license_number": null,
+    "specialties": null,
+    "board_certifications": null,
+    "emr_systems": null,
+    "clinical_experience_years": 10.0,
+    "patient_populations": null
+  },
+  "industry_extensions": null
+}

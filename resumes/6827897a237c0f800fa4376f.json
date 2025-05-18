@@ -1,0 +1,114 @@
+{
+  "full_name": null,
+  "contact_info": null,
+  "summary": "Highly efficient, detail oriented HIM Specialist with extensive experience in all types of request relating to release of information and medical record management. Dedicated professional skilled in technical and clerical support with strong ability to clearly and professionally communicate with providers, patients, attorneys and insurance companies. Over 10 years Health Information experience. Skill profile *Enhanced knowledge of HIPAA and HITECH compliance; state and federal laws governing release of protected health information in both paper and electronic form. *Technologically advanced in utilizing release of information database with advanced proficiency in various EMR database such as Epic, Meditech, Medilink, Centricity, Docuware, 3M Encoder, and Medisoft; various MS Applications. * Reliable analyst to ensuring medical record readiness and completeness through management of ICR feature and audit. * Solid leadership in customer service, excellent interpersonal relations and problem solving and can effectively coordinate amongst diverse range of clients hence, promoting optimal outcome.",
+  "education": [
+    {
+      "institution": "Spokane Community College",
+      "degree": "Associate of Arts Degree",
+      "field_of_study": "Health Information Technology",
+      "start_date": null,
+      "end_date": "2009",
+      "honors": null
+    }
+  ],
+  "work_experience": [
+    {
+      "job_title": "Health Information Specialist",
+      "employer": "Company Name",
+      "start_date": "2016-01",
+      "end_date": "Present",
+      "location": "City, State",
+      "description": "Process release of protected health information to other health care facilities and providers for continuation of care; insurance carriers; attorneys; DDS; copy service organizations; employers; educational Institutions; as well as for patient's personal use in accordance with federal and state law as well SLRI policy and procedure. Validates and releases protected health information for legal proceedings including subpoenas and court orders; and also for the purpose of audits, regulatory requirements, research and reviews. Assembles and ensures patient chart completeness through ICR management. Performs most favorable guest relations interaction with diverse clients that reflects SLRI values and principles.",
+      "industry": "Healthcare"
+    },
+    {
+      "job_title": "Health Information Specialist",
+      "employer": "Company Name",
+      "start_date": "2013-04",
+      "end_date": "2016-01",
+      "location": "City, State",
+      "description": "Collaborated/coordinated with physicians and various coding/insurance companies to clarify queries regarding medical procedures, medical diagnosis codes and patient chart documentation to meet appropriate billing process. Key team member to ensuring adequate patient chart documentation and accurate medical diagnosis coding that meets billing requirement that then resulted to precise and timely reimbursement for the organization and physicians. Ensured timely completion/submission of billing; resolved issues with billing delays; analyzed underpayment/non-payment. Managed process to ensure that billing errors rate of resolutions remained under 10 days. Supported the revenue cycle process by reducing outstanding billing of $800K to under $400K. Coordinated with Department of Labor and Industries for patient paperwork completion and for proper reimbursement. Oriented and mentored new physicians to understanding procedures and essentials of proper patient chart documentation.",
+      "industry": "Healthcare"
+    },
+    {
+      "job_title": "Healthcare Record/Payroll Coordinator",
+      "employer": "Company Name",
+      "start_date": "2011-09",
+      "end_date": "2013-03",
+      "location": "City, State",
+      "description": "Managed healthcare records and billing for home health care facilities; audited files for quality, accuracy and completeness with focus on achieving high quality metrics; and released all types or ROI request. Maintained compliance with city, state and federal guidelines/regulations by promoting policies to ensure staff adherence to documentation handling/completeness guidelines as well as document confidentiality and security practices. Monitored and ensured physician license status is active and current; audited POC and physician orders accuracy. Recognized and awarded for timely/accurate payroll processing for 400 employees and billing process.",
+      "industry": "Healthcare"
+    },
+    {
+      "job_title": "Medical Records Lead",
+      "employer": "Company Name",
+      "start_date": "2009-07",
+      "end_date": "2010-10",
+      "location": "City, State",
+      "description": "Initiated and led as ROI Specialist managing all aspects of medical records storage and audits for three clinics representing 3K+ active charts; performed quality assurance audit to promote accurate records maintenance; and consistently verified adherence to state/federal patient privacy laws, HIPAA compliance and government regulations. Held direct accountability for 200 active charts; streamlined document availability through improved medical record organization; identified medical record inefficiency and resolved issues to eradicate future discrepancies which resulted to optimal audit readiness.",
+      "industry": "Healthcare"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Health Records Clerk certification",
+      "issuer": null,
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    },
+    {
+      "name": "RHIT",
+      "issuer": null,
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": "Pending"
+    }
+  ],
+  "skills": [
+    {
+      "name": "HIPAA and HITECH compliance",
+      "level": null,
+      "category": "Technical"
+    },
+    {
+      "name": "EMR database proficiency",
+      "level": "Advanced",
+      "category": "Technical"
+    },
+    {
+      "name": "Customer service",
+      "level": null,
+      "category": "Soft Skill"
+    },
+    {
+      "name": "Problem solving",
+      "level": null,
+      "category": "Soft Skill"
+    }
+  ],
+  "languages": null,
+  "awards": null,
+  "publications": null,
+  "volunteer_experience": null,
+  "healthcare": {
+    "npi_number": null,
+    "license_state": null,
+    "license_number": null,
+    "specialties": null,
+    "board_certifications": null,
+    "emr_systems": [
+      "Epic",
+      "Meditech",
+      "Medilink",
+      "Centricity",
+      "Docuware",
+      "3M Encoder",
+      "Medisoft"
+    ],
+    "clinical_experience_years": 10.0,
+    "patient_populations": null
+  },
+  "industry_extensions": null
+}

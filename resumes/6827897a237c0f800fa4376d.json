@@ -1,0 +1,239 @@
+{
+  "full_name": null,
+  "contact_info": null,
+  "summary": "Seventeen years of nursing experience from multiple different facilities and hospitals: Diverse background in nursing as a Registered Nurse.",
+  "education": [
+    {
+      "institution": "Syracuse University",
+      "degree": "Bachelor of Science",
+      "field_of_study": "Nursing",
+      "start_date": null,
+      "end_date": "1999",
+      "honors": null
+    },
+    {
+      "institution": "SUNY Syracuse",
+      "degree": "Master of Science",
+      "field_of_study": "Nursing",
+      "start_date": null,
+      "end_date": null,
+      "honors": "Post Master's teaching certificate completed, Nursing - completed 46 credits"
+    }
+  ],
+  "work_experience": [
+    {
+      "job_title": "Field Based Nurse Chart Reviewer - Healthcare Informatics",
+      "employer": "Company Name",
+      "start_date": "2010-07",
+      "end_date": "Present",
+      "location": "City, State",
+      "description": "Founder, CEO, Director of Nursing and Business Operations. Provide high quality nursing care to individual and corporate clients by integrating evidence-based practices for best nursing care. Services include electronic medical record implementation, workflow system analysis, and various nurse consultant services.",
+      "industry": "Healthcare"
+    },
+    {
+      "job_title": "Director of Nursing Services",
+      "employer": "Company Name",
+      "start_date": "2010-04",
+      "end_date": "2011-01",
+      "location": "City, State",
+      "description": "Admissions screener, ensured qualified employees and contractors provided patient care/safety, supervised 50 field staff, oversaw 130 clients, and individually case managed 35 clients.",
+      "industry": "Healthcare"
+    },
+    {
+      "job_title": "Assistant Director of Nursing",
+      "employer": "Company Name",
+      "start_date": "2007-07",
+      "end_date": "2008-01",
+      "location": "City, State",
+      "description": "Responsibilities included staffing, scheduling, supervising, and monitoring staff for the floors. Developed and reviewed policies and procedures appropriate to the needs of the units.",
+      "industry": "Healthcare"
+    },
+    {
+      "job_title": "Nurse Administrator/Registered Nurse/Day Charge Nurse/Day Nursing Supervisor/Orienter/Educator/Preceptor",
+      "employer": "Company Name",
+      "start_date": "2004-01",
+      "end_date": "2007-07",
+      "location": "City, State",
+      "description": "Provided nursing care and supervision in various roles including Nurse Administrator and Day Charge Nurse.",
+      "industry": "Healthcare"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "RN Registered Nurse",
+      "issuer": "American Association of Managed Care Nurses",
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    },
+    {
+      "name": "CAA CAT Registered Nurse Manager Registered Nurse/MDS Coordinator",
+      "issuer": null,
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    }
+  ],
+  "skills": [
+    {
+      "name": "Registered Nurse",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Healthcare",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Medicare",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Clients",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Quality Assurance",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Staffing",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Business Operations",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Contracts",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Operations",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "System Analysis",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Workflow",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Rn",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Secretary",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Assistant Director",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Infection Control",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Client Services",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Root Cause Analysis",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Medicaid",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Audits",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Cms",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Content Management System",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Federal Regulations",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Qa",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Budgets",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Payroll",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Scheduling",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Training",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Managed Care",
+      "level": null,
+      "category": "Clinical"
+    },
+    {
+      "name": "Teaching",
+      "level": null,
+      "category": "Clinical"
+    }
+  ],
+  "languages": null,
+  "awards": null,
+  "publications": null,
+  "volunteer_experience": null,
+  "healthcare": {
+    "npi_number": "1477790020",
+    "license_state": null,
+    "license_number": null,
+    "specialties": null,
+    "board_certifications": null,
+    "emr_systems": null,
+    "clinical_experience_years": 17.0,
+    "patient_populations": null
+  },
+  "industry_extensions": null
+}

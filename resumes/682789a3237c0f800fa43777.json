@@ -1,0 +1,234 @@
+{
+  "full_name": null,
+  "contact_info": {
+    "email": null,
+    "phone": null,
+    "address": null,
+    "linkedin": null,
+    "website": null
+  },
+  "summary": "A Healthcare Administration Professional combining higher education (B.A, M.H.A.) with a history of building strong alliances and partnerships with business professionals, patients, medical personnel (physicians, nurses, allied health), families, and community members to steer operational projects, meet long/short term healthcare/business objectives, architect process improvements, ensure regulatory/HIPAA compliance and position the healthcare operation as the provider of choice.",
+  "education": [
+    {
+      "institution": "The University of Phoenix",
+      "degree": "M.H.A. Masters",
+      "field_of_study": "Healthcare Administration",
+      "start_date": null,
+      "end_date": "2014",
+      "honors": null
+    },
+    {
+      "institution": "Dallas Baptist University",
+      "degree": "Bachelor of Science",
+      "field_of_study": "Business Administration",
+      "start_date": null,
+      "end_date": "2008",
+      "honors": null
+    }
+  ],
+  "work_experience": [
+    {
+      "job_title": "Medical Record Technician",
+      "employer": "Company Name",
+      "start_date": "2014-10",
+      "end_date": "Present",
+      "location": "City, State",
+      "description": "Healthcare Information Management Processes request for release of confidential information for all purposes. Analyzes complex data for completeness and accuracy. Performs specialized and diversified clerical duties associated with medical records procedures. Adheres to internal controls and reporting structure. Collect, Analyze and report data related to the quality of health information including its adequacy completeness and accuracy. Analyzes, interprets and investigates complex documentation compliance issues. Distributes and release information in an efficient manner of time in order to improve health outcomes and quality of service Maintain Regulatory compliance such as (HIPPA) and monitors quality of releasing Health Information Ensures customer service satisfaction and builds high level of leadership for business operations.",
+      "industry": "Healthcare"
+    },
+    {
+      "job_title": "Healthcare Unit Coordinator",
+      "employer": "Company Name",
+      "start_date": "2012-06",
+      "end_date": "2014-03",
+      "location": "City, State",
+      "description": "Oversaw inventory and office supply purchases. Reduced overhead by taking on more responsibility with creative and administrative projects. Managed executive calendar and coordinated weekly project team meetings. Led the planning and achievement of goals and objectives consistent with the agency mission and philosophy. Strategically planned methods to achieve operational goals and targets. Continually maintained and improved the company's reputation and positive image in the markets served. Facilitated an on-going assessment of patient/family needs and implementation of interdisciplinary team care plan. Introduced, negotiated and implemented new projects to expand scope of engagement. Investigated and reported issues relating to patient care or conditions that might hinder patient well-being. Cooperated and communicated effectively with physicians to ensure client satisfaction and compliance with set standards. Identified process improvements in the day-to-day functioning of the department. Closely collaborated with management team to make necessary improvements and satisfy resident needs. Continually improved knowledge, skills and performance based on feedback and self-identified professional developmental needs. Participated in facility surveys and inspections made by authorized governmental agencies. Confirmed accurate completion of forms/reports for the admission, transfer and/or discharge of each resident. Analyzed patient and family feedback to identify opportunities for staff recognition as well as areas for improvement. Maintained good communication between department heads, medical staff and governing boards by attending board meetings and synchronizing interdepartmental functions. Created and maintained computerized record management systems to record and process data and generate reports.",
+      "industry": "Healthcare"
+    },
+    {
+      "job_title": "Volunteer Floor Host",
+      "employer": "Company Name",
+      "start_date": "2010-01",
+      "end_date": "2012-01",
+      "location": "City, State",
+      "description": "Demonstrated compassion, respect, leadership, expertise, and dignity while interacting with patients, families, physicians, and colleagues of diverse cultural/socio-economic backgrounds and beliefs; aggregated and organized patient data with sensitivity and confidentiality, distributed patient mail, communicated healthcare standards and organizational protocols, and resolved roadblocks. Implement quality improvement activities to increase patient satisfaction. Creates, manages and analyzes complex databases. Ensure quality and timely execution of project deliverables effectively within the organization. Establishes practices that meet or exceed customer expectations and fosters a \"customer focused\" environment. Maintained Accurate Documentation/Records in compliance with organizational/government guidelines. Upheld the Philosophies/Objectives of Patient Care while both participating in department process improvement activities and accelerating professional knowledge/development.",
+      "industry": "Healthcare"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "CPR Certified",
+      "issuer": null,
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    },
+    {
+      "name": "First Aid Certified",
+      "issuer": null,
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    },
+    {
+      "name": "Six Sigma Certified-Black and Green Belt",
+      "issuer": "ExpertRating.com",
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    }
+  ],
+  "skills": [
+    {
+      "name": "business operations",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "clerical",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Interpersonal Skills",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "CPR Certified",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "customer service",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "databases",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Documentation",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "First Aid",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "government",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "leadership",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Access",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Excel",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "mail",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Microsoft Office",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Outlook",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "PowerPoint",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Word",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "monitors",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "organizational",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "process improvement",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Processes",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "protocols",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "quality",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "quality improvement",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "reporting",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Six Sigma",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Spreadsheet",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Word Processing",
+      "level": null,
+      "category": null
+    },
+    {
+      "name": "Written",
+      "level": null,
+      "category": null
+    }
+  ],
+  "languages": null,
+  "awards": null,
+  "publications": null,
+  "volunteer_experience": null,
+  "healthcare": null,
+  "industry_extensions": null
+}
