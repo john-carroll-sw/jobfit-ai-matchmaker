@@ -1,6 +1,7 @@
 # Technical Approach
 
 ## Overview
+
 ![image](./images/readme/approach.png)
 At the application level, when a file is processed a number of steps take place to ingest, extract, and transform the contents of the file into the selected schema. The diagram above shows a step-by-step overview of the approach for processing.
 
@@ -18,7 +19,6 @@ At the application level, when a file is processed a number of steps take place 
 
 ![image](./images/readme/processing-pipeline.png)
 
-
 1. **Extract Pipeline** – Text Extraction via Azure Content Understanding.
 
     Uses Azure AI Content Understanding Service to detect and extract text from images and PDFs. This service also retrieves the coordinates of each piece of text, along with confidence scores, by leveraging built-in (pretrained) models.
@@ -29,7 +29,7 @@ At the application level, when a file is processed a number of steps take place 
 
 3. **Evaluate Pipeline** – Merging and Evaluating Extraction Results
 
-    Combines confidence scores from both the Extract pipeline (Azure AI Content Understanding) and the Map pipeline (GPT-4o). It then calculates an overall confidence level by merging and comparing these scores, ensuring accuracy and consistency in the final extracted data. 
+    Combines confidence scores from both the Extract pipeline (Azure AI Content Understanding) and the Map pipeline (GPT-4o). It then calculates an overall confidence level by merging and comparing these scores, ensuring accuracy and consistency in the final extracted data.
 
 4. **Save Pipeline** – Storing Results in Azure Blob Storage and Azure Cosmos DB
 

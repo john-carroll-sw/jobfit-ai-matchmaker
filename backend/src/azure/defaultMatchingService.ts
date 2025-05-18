@@ -1,0 +1,247 @@
+import { AzureOpenAIClient, parseReasoningResponse } from "./azureOpenAIClient";
+import { SearchClient, AzureKeyCredential } from "@azure/search-documents"; 
+import { BaseMatchingService } from "./matchingService";
+import { MatchingOptions, ResumeMatchingResponseSchema, ResumeEvaluationCriteriaSchema } from "./matchingTypes";
+import { zodTextFormat } from "openai/helpers/zod";
+import fs from "fs/promises";
+import path from "path";
+
+/**
+ * Default implementation of the resume matching service
+ * This service can be used for general job matching across industries
+ */
+export class DefaultMatchingService extends BaseMatchingService {
+  private azureOpenAIClient: typeof AzureOpenAIClient;
+  
+  constructor() {
+    super();
+    // Use the existing OpenAI client
+    this.azureOpenAIClient = AzureOpenAIClient;
+  }
+  
+  /**
+   * Generate embeddings for text using Azure OpenAI
+   * @param text The text to generate embeddings for
+   * @returns A vector of embeddings
+   */
+  protected async generateEmbedding(text: string): Promise<number[]> {
+    const embeddingDeployment = process.env.AZURE_OPENAI_EMBEDDING_DEPLOYMENT;
+    
+    if (!embeddingDeployment) {
+      throw new Error("AZURE_OPENAI_EMBEDDING_DEPLOYMENT is required");
+    }
+    
+    const response = await this.azureOpenAIClient.embeddings.create({
+      model: embeddingDeployment,
+      input: text
+    });
+    
+    return response.data[0].embedding;
+  }
+  
+  /**
+   * Perform vector search for resumes
+   * @param queryEmbedding Embedding vector to search with
+   * @param topK Number of top results to return
+   * @returns Search results
+   */
+  protected async performVectorSearch(queryEmbedding: number[], topK: number = 5): Promise<any[]> {
+    try {
+      // Execute the search with vector query using vectorSearchOptions pattern from the JavaScript example
+      const searchResults = await this.searchClient.search(
+        "",
+        {
+          vectorSearchOptions: {
+            queries: [
+              { 
+                kind: "vector",
+                vector: queryEmbedding, 
+                fields: ["embedding"], 
+                kNearestNeighborsCount: topK 
+              }
+            ]
+          },
+          select: ["id", "name", "summary", "skills", "experience", "education"],
+          filter: "document_type eq 'resume'",  // Filter to only show resumes
+          top: topK
+        }
+      );
+      
+      // Process results
+      const results: any[] = [];
+      for await (const result of searchResults.results) {
+        results.push({
+          id: result.document.id,
+          name: result.document.name || "Unknown Candidate",
+          summary: result.document.summary || "",
+          skills: result.document.skills || [],
+          experience: result.document.experience || "",
+          education: result.document.education || "",
+          score: result.score,
+          document: result.document
+        });
+      }
+      
+      return results;
+    } catch (error) {
+      console.error("Error performing vector search:", error);
+      throw new Error(`Failed to perform vector search: ${error}`);
+    }
+  }
+  
+  /**
+   * Perform hybrid search (vector + keyword) for resumes
+   * @param queryText Text query
+   * @param queryEmbedding Embedding vector
+   * @param topK Number of top results to return
+   * @returns Search results
+   */
+  protected async performHybridSearch(queryText: string, queryEmbedding: number[], topK: number = 5): Promise<any[]> {
+    try {
+      // Execute the search with both text and vector components using vectorSearchOptions
+      const searchResults = await this.searchClient.search(
+        queryText,
+        {
+          queryType: "semantic",
+          semanticSearchOptions: {
+            configurationName: "semanticConfig"
+          },
+          vectorSearchOptions: {
+            queries: [
+              {
+                kind: "vector",
+                vector: queryEmbedding,
+                fields: ["embedding"],
+                kNearestNeighborsCount: topK
+              }
+            ]
+          },
+          select: ["id", "name", "summary", "skills", "experience", "education"],
+          filter: "document_type eq 'resume'",  // Filter to only show resumes
+          top: topK
+        }
+      );
+      
+      // Process results
+      const results: any[] = [];
+      for await (const result of searchResults.results) {
+        results.push({
+          id: result.document.id,
+          name: result.document.name || "Unknown Candidate",
+          summary: result.document.summary || "",
+          skills: result.document.skills || [],
+          experience: result.document.experience || "",
+          education: result.document.education || "",
+          score: result.score,
+          semanticScore: result.rerankerScore, // Semantic score if available
+          document: result.document
+        });
+      }
+      
+      return results;
+    } catch (error) {
+      console.error("Error performing hybrid search:", error);
+      throw new Error(`Failed to perform hybrid search: ${error}`);
+    }
+  }
+  
+  /**
+   * Analyze a job description to extract key requirements
+   * @param jobDescription The job description to analyze
+   * @returns Analysis of job requirements
+   */
+  public async analyzeJobDescription(jobDescription: string): Promise<any> {
+    try {
+      // Load the job analyzer system prompt
+      const systemPromptPath = path.join(__dirname, '../../prompts/industry_job_analyzer.system.txt');
+      const systemPrompt = await fs.readFile(systemPromptPath, 'utf-8');
+      
+      // Use Azure OpenAI to analyze the job
+      const response = await parseReasoningResponse(systemPrompt, jobDescription);
+      
+      return response;
+    } catch (error) {
+      console.error("Error analyzing job description:", error);
+      throw new Error(`Failed to analyze job description: ${error}`);
+    }
+  }
+  
+  /**
+   * Match resumes to a job description
+   * @param jobDescription The job description to match resumes against
+   * @param options Matching options including weights for various factors
+   * @returns A list of resume matches with scores and explanations
+   */
+  public async matchResumes(jobDescription: string, options?: MatchingOptions): Promise<any[]> {
+    try {
+      const useHybridSearch = options?.useHybridSearch ?? true;
+      const topK = options?.topResults ?? 5;
+      const industryType = options?.industryType ?? 'general';
+      
+      // Generate embedding for the job description
+      const jobEmbedding = await this.generateEmbedding(jobDescription);
+      
+      // Perform search using the chosen method
+      let searchResults;
+      if (useHybridSearch) {
+        searchResults = await this.performHybridSearch(jobDescription, jobEmbedding, topK);
+      } else {
+        searchResults = await this.performVectorSearch(jobEmbedding, topK);
+      }
+      
+      if (!searchResults || searchResults.length === 0) {
+        return [];
+      }
+      
+      // Load the resume matcher system prompt
+      const systemPromptPath = path.join(__dirname, '../../prompts/industry_resume_matcher.system.txt');
+      const systemPrompt = await fs.readFile(systemPromptPath, 'utf-8');
+      
+      // Create customized weights based on industry type or specified weights
+      const weights = {
+        experience: options?.customWeights?.["experience"] ?? 0.3,
+        technicalSkills: options?.customWeights?.["technicalSkills"] ?? 0.3,
+        certifications: options?.customWeights?.["certifications"] ?? 0.2,
+        education: options?.customWeights?.["education"] ?? 0.2
+      };
+      
+      // For each result, use Azure OpenAI to provide a detailed match analysis
+      const matchPromises = searchResults.map(async (result) => {
+        const resume = result.document;
+        
+        // Format prompt for detailed matching
+        const userMessageContent = JSON.stringify({
+          jobDescription,
+          resume,
+          options: {
+            weights,
+            industryType
+          }
+        });
+        
+        // Get detailed match analysis
+        const matchAnalysis = await parseReasoningResponse(systemPrompt, userMessageContent);
+        
+        return {
+          resumeId: resume.id,
+          candidateName: resume.name || "Anonymous Candidate",
+          searchScore: result.score,
+          matchAnalysis
+        };
+      });
+      
+      const detailedMatches = await Promise.all(matchPromises);
+      
+      // Sort by overall match score
+      return detailedMatches.sort((a, b) => {
+        if (a.matchAnalysis && b.matchAnalysis) {
+          return b.matchAnalysis.overallMatch - a.matchAnalysis.overallMatch;
+        }
+        return b.searchScore - a.searchScore;
+      });
+    } catch (error) {
+      console.error("Error matching resumes:", error);
+      throw new Error(`Failed to match resumes: ${error}`);
+    }
+  }
+}

@@ -483,7 +483,7 @@ async def match_job_to_resumes(
     }
 ```
 
-### 6. Update AppConfiguration to Support New Features 
+### 6. Update AppConfiguration to Support New Features
 
 ```python
 # Add these fields to your AppConfiguration class
