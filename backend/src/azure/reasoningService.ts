@@ -1,14 +1,14 @@
 import { parseReasoningResponse as retrieveReasoningResponse } from "./azureOpenAIClient";
 import fs from "fs/promises";
 
-export async function reasonAboutDisruption(input: { state: any; disruptions: any[]; optimizationPriority?: string }) {
+export async function performReasoning(input: { state: any; disruptions: any[]; optimizationPriority?: string }) {
   // Load prompts
   let systemMessage = await fs.readFile(
-    __dirname + "/../../prompts/reason_about_disruption.system.txt",
+    __dirname + "/../../prompts/jobfit_ai_matchmaker.system.txt",
     "utf-8"
   );
   const userMessage = await fs.readFile(
-    __dirname + "/../../prompts/reason_about_disruption.user.txt",
+    __dirname + "/../../prompts/jobfit_ai_matchmaker.user.txt",
     "utf-8"
   );
   // Inject optimization priority if provided

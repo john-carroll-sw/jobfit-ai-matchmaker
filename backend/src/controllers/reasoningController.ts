@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { reasonAboutDisruption } from '../azure/reasoningService';
+import { performReasoning } from '../azure/reasoningService';
 import { detectDisruptions, currentSupplyChain, closedBridges } from './supplyChainController';
 
 /**
@@ -18,7 +18,7 @@ export const postReasonAboutDisruption = async (req: Request, res: Response): Pr
     const disruptions = detectDisruptions(currentState, closedBridges);
 
     // Call Azure OpenAI to reason about the current state and disruptions
-    const result = await reasonAboutDisruption({ state: currentState, disruptions, optimizationPriority });
+    const result = await performReasoning({ state: currentState, disruptions, optimizationPriority });
 
     // Only return the parsed reasoning output (reasoning + recommendations)
     const parsed = result?.output_parsed || result;

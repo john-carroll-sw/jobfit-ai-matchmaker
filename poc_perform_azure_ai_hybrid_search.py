@@ -93,6 +93,8 @@ def main():
         print(f"\nResult id: {res['id'] if res.get('id') else 'No ID'}")
         print(f"Name: {res.get('name', 'Unnamed')}")
         print(f"Score: {res.get('@search.score', 0)}")
+        print(f"Semantic Score: {res.get('@search.reranker_score', 0)}")
+        # print(f"Reranker Score: {res['@search.reranker_score'] if '@search.reranker_score' in res else 'N/A'}")
         print(f"Summary: {res.get('summary', '')[:100]}...")
         print(f"Skills: {', '.join(res.get('skills', []))}")
         print(f"Experience: {res.get('experience', '')[:150]}...")
