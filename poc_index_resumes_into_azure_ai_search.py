@@ -104,7 +104,8 @@ def extract_resume_text(resume_data):
     
     return "\n\n".join(parts)
 
-def main():
+def create_or_update_index():
+    """Create or update the Azure Search index with the specified schema"""
     # Ensure the Azure Search index exists and matches the schema
     index_schema = SearchIndex(
         name=index_name,
@@ -180,6 +181,8 @@ def main():
     index_client.create_or_update_index(index=index_schema)
     print(f"Created or updated index: {index_name}")
     
+def index_sample_resume():
+    """Index a sample resume into Azure AI Search"""
     # Load the sample resume JSON
     sample_path = "sample_resume.json"
     if not os.path.exists(sample_path):
@@ -232,6 +235,13 @@ def main():
     print("Uploading document to Azure AI Search...")
     result = search_client.upload_documents([search_doc])
     print(f"Upload result: {result[0].succeeded}")
+    
+def main():
+    # Ensure the Azure Search index exists and matches the schema
+    create_or_update_index()
 
+    # Index a sample resume
+    index_sample_resume()
+    
 if __name__ == "__main__":
     main()
