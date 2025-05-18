@@ -92,6 +92,18 @@ const options: swaggerJsdoc.Options = {
             },
           },
         },
+        // Job Analysis Request
+        JobAnalysisRequest: {
+          type: 'object',
+          required: ['jobDescription'],
+          properties: {
+            jobDescription: {
+              type: 'string',
+              description: 'The job description to analyze',
+              minLength: 50,
+            }
+          }
+        },
         // Job Analysis Response
         JobAnalysisResponse: {
           type: 'object',

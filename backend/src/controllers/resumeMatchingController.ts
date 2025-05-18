@@ -25,7 +25,7 @@ const matchingService: IMatchingService = new DefaultMatchingService();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/ResumeMatchingRequest'
+ *             $ref: '#/components/schemas/JobAnalysisRequest'
  *     responses:
  *       200:
  *         description: Successful analysis of job description
