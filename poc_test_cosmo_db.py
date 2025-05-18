@@ -25,9 +25,9 @@ mongo_client = pymongo.MongoClient(connection_string, tlsCAFile=certifi.where())
 database = mongo_client[database_name]
 collection = database[container_name]
 
-def query_all_resumes():
-    """Query all documents with target_schema.ClassName = 'Resume' using MongoDB API"""
-    cursor = collection.find({"target_schema.ClassName": "Resume"})
+def query_all_documents():
+    """Query all documents using MongoDB API"""
+    cursor = collection.find({})
     return list(cursor)
 
 def debug_collection():
@@ -48,23 +48,12 @@ def main():
 
         # debug_collection()  # Debugging: show collections and sample docs
 
-        print("\nAll resumes:")
-        resumes = query_all_resumes()
-        if resumes:
-            for r in resumes:
-                full_name = r.get('result', {}).get('full_name', '')
-                print(f"MongoDB _id: {r.get('_id')}, Full Name: {full_name}")
-                skills = (r.get('result', {}).get('skills', []))
-                skill_names = []
-                for s in skills:
-                    name = s.get('name', '')
-                    if isinstance(name, dict):
-                        name = name.get('value', '')
-                    skill_names.append(name)
-                print(f"Skills: {', '.join(skill_names)}")
-                print("-" * 50)
-        else:
-            print("No resumes found.")
+        print("\nAll documents:")
+        documents = query_all_documents()
+        if documents:
+            os.makedirs('documents', exist_ok=True)
+            for doc in documents:
+                print(f"MongoDB _id: {doc.get('_id')}")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
 
