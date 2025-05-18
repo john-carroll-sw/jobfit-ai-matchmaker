@@ -1,25 +1,20 @@
-import express from 'express';
-import { ResumeMatchingController } from '../controllers/resumeMatchingController';
+import { Router } from 'express';
+import { analyzeJob, matchResumes } from '../controllers/resumeMatchingController';
 
-const router = express.Router();
-const resumeMatchingController = new ResumeMatchingController();
+const router = Router();
 
 /**
  * @route POST /api/resume-matching/analyze-job
  * @desc Analyze a job description
  * @access Public
  */
-router.post('/analyze-job', async (req, res) => {
-  await resumeMatchingController.analyzeJob(req, res);
-});
+router.post('/analyze-job', analyzeJob);
 
 /**
  * @route POST /api/resume-matching/match-resumes
  * @desc Match resumes to a job description
  * @access Public
  */
-router.post('/match-resumes', async (req, res) => {
-  await resumeMatchingController.matchResumes(req, res);
-});
+router.post('/match-resumes', matchResumes);
 
 export default router;
