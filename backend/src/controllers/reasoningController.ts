@@ -3,8 +3,41 @@ import { performReasoning } from '../azure/reasoningService';
 import { detectDisruptions, currentSupplyChain, closedBridges } from './supplyChainController';
 
 /**
- * POST /api/reason
- * Generate reasoning and recommendations for the current supply chain state
+ * @swagger
+ * /api/reason:
+ *   post:
+ *     summary: Generate reasoning about supply chain disruptions
+ *     description: Analyzes the current supply chain state and provides recommendations
+ *     tags: [Reasoning]
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               optimizationPriority:
+ *                 type: string
+ *                 description: Priority for optimization (e.g., cost, time, reliability)
+ *     responses:
+ *       200:
+ *         description: Successful reasoning
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: ok
+ *                 data:
+ *                   type: object
+ *                   description: Reasoning output and recommendations
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 export const postReasonAboutDisruption = async (req: Request, res: Response): Promise<void> => {
   try {

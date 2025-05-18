@@ -14,6 +14,40 @@ const ResumeMatchingRequestSchema = z.object({
 const matchingService: IMatchingService = new DefaultMatchingService();
 
 /**
+ * @swagger
+ * /api/resume-matching/analyze-job:
+ *   post:
+ *     summary: Analyze a job description
+ *     description: Extracts key requirements, skills, and criteria from a job description
+ *     tags: [Resume Matching]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ResumeMatchingRequest'
+ *     responses:
+ *       200:
+ *         description: Successful analysis of job description
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/JobAnalysisResponse'
+ *       400:
+ *         description: Invalid request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+
+/**
  * Analyze a job description
  * @param req Express request with job description in the body
  * @param res Express response
@@ -44,6 +78,40 @@ export const analyzeJob = async (req: Request, res: Response): Promise<void> => 
     res.status(500).json({ error: error.message || "Failed to analyze job description" });
   }
 };
+
+/**
+ * @swagger
+ * /api/resume-matching/match-resumes:
+ *   post:
+ *     summary: Match resumes to a job description
+ *     description: Finds and ranks resumes that best match the given job description
+ *     tags: [Resume Matching]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ResumeMatchingRequest'
+ *     responses:
+ *       200:
+ *         description: Successful matching of resumes
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResumeMatchResponse'
+ *       400:
+ *         description: Invalid request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
 
 /**
  * Match resumes to a job description

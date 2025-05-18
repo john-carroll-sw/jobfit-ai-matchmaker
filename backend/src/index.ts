@@ -1,9 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import swaggerUi from 'swagger-ui-express';
 import healthRouter from './routes/health';
 import reasoningRouter from './routes/reasoning';
 import resumeMatchingRouter from './routes/resumeMatchingRoutes';
+import { specs } from './swagger';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -22,6 +24,9 @@ app.use('/api/reason', reasoningRouter);
 
 // Resume Matching routes (industry-agnostic interface)
 app.use('/api/resume-matching', resumeMatchingRouter);
+
+// Swagger API Documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
 
 // Log startup information
 console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
