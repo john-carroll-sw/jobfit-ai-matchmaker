@@ -181,67 +181,66 @@ def create_or_update_index():
     index_client.create_or_update_index(index=index_schema)
     print(f"Created or updated index: {index_name}")
     
-def index_sample_resume():
-    """Index a sample resume into Azure AI Search"""
-    # Load the sample resume JSON
-    sample_path = "sample_resume.json"
-    if not os.path.exists(sample_path):
-        print(f"Error: {sample_path} not found")
+def index_all_resumes():
+    """Index all resumes from the 'resumes' folder into Azure AI Search"""
+    resumes_dir = "resumes"
+    if not os.path.exists(resumes_dir):
+        print(f"Error: {resumes_dir} folder not found")
         return
-    
-    with open(sample_path, "r") as f:
-        doc = json.load(f)
-    
-    # Extract resume information
-    resume_text = extract_resume_text(doc)
-    resume_name = doc.get("full_name", "Anonymous Candidate")
-    
-    # Extract skills as a list of strings
-    skills = [skill["name"] for skill in doc.get("skills", []) if skill.get("name")]
-    
-    # Format work experience
-    work_exp_entries = []
-    for exp in doc.get("work_experience", []):
-        exp_text = f"{exp.get('job_title', '')} at {exp.get('employer', '')}"
-        if exp.get('description'):
-            exp_text += f": {exp['description']}"
-        work_exp_entries.append(exp_text)
-    work_experience_text = " | ".join(work_exp_entries)
-    
-    # Format education
-    edu_entries = []
-    for edu in doc.get("education", []):
-        edu_text = f"{edu.get('degree', '')} from {edu.get('institution', '')}"
-        edu_entries.append(edu_text)
-    education_text = " | ".join(edu_entries)
-    
-    # Generate embedding for the resume
-    print("Generating embedding for resume...")
-    embedding = generate_embedding(resume_text)
-    
-    # Prepare document for Azure Search with document_type field
-    search_doc = {
-        "id": "resume_" + str(hash(resume_text) % 10000),  # Generate a unique ID
-        "document_type": "resume",  # Tag indicating this is a resume
-        "name": resume_name,
-        "summary": doc.get("summary", ""),
-        "skills": skills,
-        "experience": work_experience_text,
-        "education": education_text,
-        "embedding": embedding
-    }
-    
-    # Upload to Azure Search
-    print("Uploading document to Azure AI Search...")
-    result = search_client.upload_documents([search_doc])
-    print(f"Upload result: {result[0].succeeded}")
-    
+    files = [f for f in os.listdir(resumes_dir) if f.endswith('.json')]
+    if not files:
+        print(f"No JSON files found in {resumes_dir}")
+        return
+    docs_to_upload = []
+    for file_name in files:
+        file_path = os.path.join(resumes_dir, file_name)
+        with open(file_path, "r") as f:
+            doc = json.load(f)
+        # Extract resume information
+        resume_text = extract_resume_text(doc)
+        resume_name = doc.get("full_name", "Anonymous Candidate")
+        # Extract skills as a list of strings
+        skills = [skill["name"] if isinstance(skill["name"], str) else skill["name"].get("value", "") for skill in doc.get("skills", []) if skill.get("name")]
+        # Format work experience
+        work_exp_entries = []
+        for exp in doc.get("work_experience", []):
+            exp_text = f"{exp.get('job_title', '')} at {exp.get('employer', '')}"
+            if exp.get('description'):
+                exp_text += f": {exp['description']}"
+            work_exp_entries.append(exp_text)
+        work_experience_text = " | ".join(work_exp_entries)
+        # Format education
+        edu_entries = []
+        for edu in doc.get("education", []):
+            edu_text = f"{edu.get('degree', '')} from {edu.get('institution', '')}"
+            edu_entries.append(edu_text)
+        education_text = " | ".join(edu_entries)
+        # Generate embedding for the resume
+        print(f"Generating embedding for {file_name}...")
+        embedding = generate_embedding(resume_text)
+        # Prepare document for Azure Search with document_type field
+        search_doc = {
+            "id": file_name.replace('.json', ''),
+            "document_type": "resume",
+            "name": resume_name,
+            "summary": doc.get("summary", ""),
+            "skills": skills,
+            "experience": work_experience_text,
+            "education": education_text,
+            "embedding": embedding
+        }
+        docs_to_upload.append(search_doc)
+    # Upload all documents in batches (Azure Search supports up to 1000 per batch)
+    print(f"Uploading {len(docs_to_upload)} documents to Azure AI Search...")
+    result = search_client.upload_documents(docs_to_upload)
+    print(f"Upload results: {[r.succeeded for r in result]}")
+
 def main():
     # Ensure the Azure Search index exists and matches the schema
     create_or_update_index()
 
-    # Index a sample resume
-    index_sample_resume()
+    # Index all resumes from the resumes folder
+    index_all_resumes()
     
 if __name__ == "__main__":
     main()
