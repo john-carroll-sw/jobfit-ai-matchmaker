@@ -1,4 +1,8 @@
 // API client for JobFit AI Matchmaker backend resume-matching endpoints
+import type {
+  JobAnalysisResponse,
+  ResumeMatch
+} from '../types/resumeMatchmaker';
 
 export interface ResumeMatchingRequest {
   jobDescription: string;
@@ -13,25 +17,6 @@ export interface ResumeMatchingRequest {
       education?: number;
     };
   };
-}
-
-export interface JobAnalysisResponse {
-  jobTitle: string;
-  requiredSkills: string[];
-  experienceLevel: { minYears: number; preferredYears: number };
-  education: { minimumLevel: string; preferredFields: string[] };
-  certifications: { required: string[]; preferred: string[] };
-  industryKnowledge: string[];
-  softSkills: string[];
-  keyResponsibilities: string[];
-  preferredQualifications: string[];
-}
-
-export interface ResumeMatch {
-  resumeId: string;
-  candidateName: string;
-  searchScore: number;
-  matchAnalysis: any; // You can type this more strictly if you want
 }
 
 const API_BASE = 'http://localhost:4000/api/resume-matching';
