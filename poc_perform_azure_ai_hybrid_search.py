@@ -90,9 +90,9 @@ def main():
     
     print("\nSearch results:")
     for res in results:
-        print(f"\nResult: {res['name'] if res.get('name') else 'Unnamed'}")
+        print(f"\nResult id: {res['id'] if res.get('id') else 'No ID'}")
+        print(f"Name: {res.get('name', 'Unnamed')}")
         print(f"Score: {res.get('@search.score', 0)}")
-        print(f"Semantic Re-ranker Score: {res.get('@search.rerankerScore', 0)}")
         print(f"Summary: {res.get('summary', '')[:100]}...")
         print(f"Skills: {', '.join(res.get('skills', []))}")
         print(f"Experience: {res.get('experience', '')[:150]}...")
