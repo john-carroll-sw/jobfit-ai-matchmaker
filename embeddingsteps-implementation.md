@@ -185,6 +185,7 @@ def index_resume_in_search(resume_data):
 Once resumes are indexed, you can perform various types of searches:
 
 ### 1. Keyword Search
+
 ```python
 def keyword_search(query_text, top_k=5):
     """Perform keyword-based search"""
@@ -197,6 +198,7 @@ def keyword_search(query_text, top_k=5):
 ```
 
 ### 2. Vector Search
+
 ```python
 def vector_search(query_text, top_k=5):
     """Perform vector search using embeddings"""
@@ -225,6 +227,7 @@ def vector_search(query_text, top_k=5):
 ```
 
 ### 3. Hybrid Search
+
 ```python
 def hybrid_search(query_text, skills_filter=None, top_k=5):
     """Perform hybrid search (keywords + vectors)"""

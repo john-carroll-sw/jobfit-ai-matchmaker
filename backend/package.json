@@ -13,7 +13,9 @@
   "license": "ISC",
   "dependencies": {
     "@azure-rest/ai-inference": "^1.0.0-beta.6",
+    "@azure/identity": "^4.10.0",
     "@azure/openai": "^2.0.0",
+    "@azure/search-documents": "^12.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
