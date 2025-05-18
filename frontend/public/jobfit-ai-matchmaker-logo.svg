@@ -1,0 +1,11 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="120" rx="24" fill="#2B50EC"/>
+  <g>
+    <circle cx="60" cy="60" r="32" fill="#fff" opacity="0.9"/>
+    <path d="M60 38a22 22 0 1 1 0 44 22 22 0 0 1 0-44zm0 6a16 16 0 1 0 0 32 16 16 0 0 0 0-32z" fill="#2B50EC"/>
+    <path d="M60 52a8 8 0 1 1 0 16 8 8 0 0 1 0-16z" fill="#2B50EC" opacity="0.7"/>
+    <rect x="48" y="80" width="24" height="8" rx="4" fill="#2B50EC" opacity="0.7"/>
+    <rect x="56" y="32" width="8" height="8" rx="4" fill="#2B50EC" opacity="0.7"/>
+  </g>
+  <text x="60" y="112" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#fff" font-weight="bold">Jobfit AI</text>
+</svg>

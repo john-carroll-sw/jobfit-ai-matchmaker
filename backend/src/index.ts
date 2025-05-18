@@ -3,7 +3,6 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 import healthRouter from './routes/health';
-import reasoningRouter from './routes/reasoning';
 import resumeMatchingRouter from './routes/resumeMatchingRoutes';
 import { specs } from './swagger';
 
@@ -18,9 +17,6 @@ app.use(express.json({ limit: '10mb' })); // Increased payload limit for resume 
 
 // Health check route
 app.use('/api/health', healthRouter);
-
-// Reasoning AI routes
-app.use('/api/reason', reasoningRouter);
 
 // Resume Matching routes (industry-agnostic interface)
 app.use('/api/resume-matching', resumeMatchingRouter);
