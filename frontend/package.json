@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@jobfit-ai/shared": "file:../shared",
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
     "azure-maps-control": "^3.6.1",

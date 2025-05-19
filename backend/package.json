@@ -16,6 +16,7 @@
     "@azure/identity": "^4.10.0",
     "@azure/openai": "^2.0.0",
     "@azure/search-documents": "^12.1.0",
+    "@jobfit-ai/shared": "file:../shared",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",

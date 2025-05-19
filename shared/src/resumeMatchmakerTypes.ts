@@ -1,8 +1,19 @@
-// Types for JobFit AI Matchmaker resume matching API
-
+// Shared types for JobFit AI Matchmaker
 
 export interface JobAnalysisRequest {
   jobDescription: string;
+}
+
+export interface JobAnalysisResponse {
+  jobTitle: string;
+  requiredSkills: string[];
+  experienceLevel: { minYears: number; preferredYears: number };
+  education: { minimumLevel: string; preferredFields: string[] };
+  certifications: { required: string[]; preferred: string[] };
+  industryKnowledge: string[];
+  softSkills: string[];
+  keyResponsibilities: string[];
+  preferredQualifications: string[];
 }
 
 export interface ResumeMatchingRequest {
@@ -27,18 +38,6 @@ export interface ResumeMatchingResponse {
     processingTimeMs?: number;
     searchStrategy?: string;
   };
-}
-
-export interface JobAnalysisResponse {
-  jobTitle: string;
-  requiredSkills: string[];
-  experienceLevel: { minYears: number; preferredYears: number };
-  education: { minimumLevel: string; preferredFields: string[] };
-  certifications: { required: string[]; preferred: string[] };
-  industryKnowledge: string[];
-  softSkills: string[];
-  keyResponsibilities: string[];
-  preferredQualifications: string[];
 }
 
 export interface MatchDimension {

@@ -4,7 +4,7 @@ import type {
   JobAnalysisResponse,
   ResumeMatchingRequest,
   ResumeMatchingResponse
-} from '../types/resumeMatchmaker';
+} from '@jobfit-ai/shared/src/resumeMatchmakerTypes';
 
 const API_BASE = 'http://localhost:4000/api/resume-matching';
 
