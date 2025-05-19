@@ -829,6 +829,7 @@
                   "ipRules": [],
                   "defaultAction": "Allow"
                 },
+                "publicNetworkAccess": "Enabled",
                 "supportsHttpsTrafficOnly": true,
                 "encryption": {
                   "services": {

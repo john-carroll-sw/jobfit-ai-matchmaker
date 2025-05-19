@@ -44,6 +44,8 @@ resource cosmos 'Microsoft.DocumentDB/databaseAccounts@2024-12-01-preview' = {
     capabilities: kind == 'MongoDB' ? [{ name: 'EnableMongo' }] : [{ name: 'EnableServerless' }]
     capacityMode: 'Serverless'
     enableFreeTier: false
+    publicNetworkAccess: 'Enabled'
+    networkAclBypass: 'AzureServices'
   }
 }
 

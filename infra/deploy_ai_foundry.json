@@ -445,6 +445,7 @@
           "bypass": "AzureServices",
           "defaultAction": "Allow"
         },
+        "publicNetworkAccess": "Enabled",
         "supportsHttpsTrafficOnly": true
       }
     },
