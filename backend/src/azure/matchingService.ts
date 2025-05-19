@@ -1,10 +1,8 @@
 import { BaseMatchingService } from "./baseMatchingService";
-import { MatchingOptions } from "@jobfit-ai/shared";
-import { z } from "zod";
 import { zodTextFormat } from "openai/helpers/zod";
 import fs from "fs/promises";
 import path from "path";
-import { JobAnalysisResponseSchema } from '@jobfit-ai/shared';
+import { MatchingOptions, ResumeMatchSchema, JobAnalysisResponseSchema } from '@jobfit-ai/shared';
 
 /**
  * Default implementation of the resume matching service
@@ -132,7 +130,7 @@ export class MatchingService extends BaseMatchingService {
   public async analyzeJobDescription(jobDescription: string): Promise<any> {
     try {
       // Load the job analyzer system prompt
-      const systemPromptPath = path.join(__dirname, '../../prompts/industry_job_analyzer.system.txt');
+      const systemPromptPath = path.join(__dirname, '../prompts/industry_job_analyzer.system.txt');
       const systemPrompt = await fs.readFile(systemPromptPath, 'utf-8');
       
       const format = zodTextFormat(JobAnalysisResponseSchema, "job_analysis");
@@ -157,8 +155,13 @@ export class MatchingService extends BaseMatchingService {
   public async matchResumes(jobDescription: string, options?: MatchingOptions): Promise<any[]> {
     try {
       const useHybridSearch = options?.useHybridSearch ?? true;
-      const topK = options?.topResults ?? 5;
+      const topK = options?.topResults ?? 10;
       const industryType = options?.industryType ?? 'general';
+      
+      // First, analyze the job description
+      const jobAnalysis = await this.analyzeJobDescription(jobDescription);
+      const parsedjobAnalysis = jobAnalysis?.output_parsed || jobAnalysis;
+
       
       // Generate embedding for the job description
       const jobEmbedding = await this.azureOpenAIClientWrapper.generateEmbedding(jobDescription);
@@ -178,6 +181,7 @@ export class MatchingService extends BaseMatchingService {
       // Load the resume matcher system prompt
       const systemPromptPath = path.join(__dirname, '../prompts/industry_resume_matcher.system.txt');
       const systemPrompt = await fs.readFile(systemPromptPath, 'utf-8');
+      const format = zodTextFormat(ResumeMatchSchema, "resume_match");
       
       // Create customized weights based on industry type or specified weights
       const weights = {
@@ -193,7 +197,9 @@ export class MatchingService extends BaseMatchingService {
         
         // Format prompt for detailed matching
         const userMessageContent = JSON.stringify({
+          description: "This object contains the original job description, a structured analysis of the job requirements, the candidate's resume, and the matching options used for evaluation.",
           jobDescription,
+          jobAnalysis: parsedjobAnalysis,
           resume,
           options: {
             weights,
@@ -202,13 +208,14 @@ export class MatchingService extends BaseMatchingService {
         });
         
         // Get detailed match analysis
-        const matchAnalysis = await this.azureOpenAIClientWrapper.performReasoning(systemPrompt, userMessageContent);
+        const matchAnalysis = await this.azureOpenAIClientWrapper.performReasoning(systemPrompt, userMessageContent, format);
+        const parsedMatchAnalysis = matchAnalysis?.output_parsed || matchAnalysis;
         
         return {
           resumeId: resume.id,
           candidateName: resume.name || "Anonymous Candidate",
           searchScore: result.score,
-          matchAnalysis
+          matchAnalysis: parsedMatchAnalysis,
         };
       });
       
