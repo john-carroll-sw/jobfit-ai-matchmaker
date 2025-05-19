@@ -3,6 +3,7 @@ import { zodTextFormat } from "openai/helpers/zod";
 import fs from "fs/promises";
 import path from "path";
 import { MatchingOptions, ResumeMatchSchema, JobAnalysisResponseSchema } from '@jobfit-ai/shared';
+import { ResumeMatchingResponse } from '@jobfit-ai/shared/src/resumeMatchmakerTypes';
 
 /**
  * Default implementation of the resume matching service
@@ -147,13 +148,86 @@ export class MatchingService extends BaseMatchingService {
   }
   
   /**
+   * Get the total number of candidate resumes in the database
+   * @returns Total number of candidates
+   */
+  private async getTotalCandidateCount(): Promise<number> {
+    try {
+      // Using countDocuments instead of count
+      const results = await this.searchClient.search("*", {
+        filter: "document_type eq 'resume'",
+        top: 0, // We just want count, not actual results
+        includeTotalCount: true
+      });
+      
+      return results.count || 0;
+    } catch (error) {
+      console.error("Error counting candidates:", error);
+      return 0; // Return 0 if count fails
+    }
+  }
+  
+  /**
+   * Generate a recommendation explaining why the top candidate is the best match
+   * @param topCandidates Top ranked candidates
+   * @param jobDescription The original job description
+   * @param jobAnalysis Analyzed job requirements
+   * @returns Recommendation text
+   */
+  private async generateBestMatchRecommendation(
+    topCandidates: any[],
+    jobDescription: string,
+    jobAnalysis: any
+  ): Promise<string> {
+    if (!topCandidates.length) return "";
+    
+    try {
+      // Load the best match explainer system prompt
+      const systemPromptPath = path.join(__dirname, '../prompts/best_match_explainer.system.txt');
+      let systemPrompt = await fs.readFile(systemPromptPath, 'utf-8').catch(() => {
+        // If file doesn't exist, use a default prompt
+        return `You are an AI talent matching expert. Your task is to explain why the top candidate is the best match for the job, or if multiple candidates are strong contenders, explain the similarities and differences. Focus on key strengths, critical qualifications, and what sets the top candidate(s) apart.`;
+      });
+      
+      const userMessageContent = JSON.stringify({
+        description: "This object contains the top candidates, their match analyses, the job description, and job requirements analysis.",
+        jobDescription,
+        jobAnalysis,
+        topCandidates: topCandidates.map(c => ({
+          candidateName: c.candidateName,
+          overallScore: c.matchAnalysis.overallMatch,
+          strengths: {
+            technicalSkills: c.matchAnalysis.technicalSkillsMatch?.strengths || [],
+            experience: c.matchAnalysis.experienceMatch?.strengths || [],
+            education: c.matchAnalysis.educationMatch?.strengths || []
+          },
+          summary: c.matchAnalysis.summary
+        }))
+      });
+      
+      // Get recommendation from LLM
+      const response = await this.azureOpenAIClientWrapper.performReasoning(
+        systemPrompt,
+        userMessageContent
+      );
+      
+      return response?.text || response?.output_parsed?.text || response || "";
+      
+    } catch (error) {
+      console.error("Error generating best match recommendation:", error);
+      return `The top candidate has an overall match score of ${topCandidates[0]?.matchAnalysis?.overallMatch || 'N/A'}.`;
+    }
+  }
+  
+  /**
    * Match resumes to a job description
    * @param jobDescription The job description to match resumes against
    * @param options Matching options including weights for various factors
-   * @returns A list of resume matches with scores and explanations
+   * @returns A structured response with matches, best match recommendation, and metadata
    */
-  public async matchResumes(jobDescription: string, options?: MatchingOptions): Promise<any[]> {
+  public async matchResumes(jobDescription: string, options?: MatchingOptions): Promise<ResumeMatchingResponse> {
     try {
+      const startTime = Date.now();
       const useHybridSearch = options?.useHybridSearch ?? true;
       const topK = options?.topResults ?? 10;
       const industryType = options?.industryType ?? 'general';
@@ -161,7 +235,6 @@ export class MatchingService extends BaseMatchingService {
       // First, analyze the job description
       const jobAnalysis = await this.analyzeJobDescription(jobDescription);
       const parsedjobAnalysis = jobAnalysis?.output_parsed || jobAnalysis;
-
       
       // Generate embedding for the job description
       const jobEmbedding = await this.azureOpenAIClientWrapper.generateEmbedding(jobDescription);
@@ -175,13 +248,20 @@ export class MatchingService extends BaseMatchingService {
       }
       
       if (!searchResults || searchResults.length === 0) {
-        return [];
+        return {
+          matches: [],
+          metadata: {
+            totalCandidatesScanned: 0,
+            processingTimeMs: Date.now() - startTime,
+            searchStrategy: useHybridSearch ? 'hybrid' : 'vector'
+          }
+        };
       }
       
       // Load the resume matcher system prompt
       const systemPromptPath = path.join(__dirname, '../prompts/industry_resume_matcher.system.txt');
       const systemPrompt = await fs.readFile(systemPromptPath, 'utf-8');
-      const format = zodTextFormat(ResumeMatchSchema, "resume_match");
+      const resumeMatcherFormat = zodTextFormat(ResumeMatchSchema, "resume_match");
       
       // Create customized weights based on industry type or specified weights
       const weights = {
@@ -208,26 +288,65 @@ export class MatchingService extends BaseMatchingService {
         });
         
         // Get detailed match analysis
-        const matchAnalysis = await this.azureOpenAIClientWrapper.performReasoning(systemPrompt, userMessageContent, format);
+        const matchAnalysis = await this.azureOpenAIClientWrapper.performReasoning(systemPrompt, userMessageContent, resumeMatcherFormat);
         const parsedMatchAnalysis = matchAnalysis?.output_parsed || matchAnalysis;
+        
+        // Remove redundant fields if present
+        if (parsedMatchAnalysis && typeof parsedMatchAnalysis === 'object') {
+          delete parsedMatchAnalysis.resumeId;
+          delete parsedMatchAnalysis.candidateName;
+          delete parsedMatchAnalysis.searchScore;
+        }
         
         return {
           resumeId: resume.id,
           candidateName: resume.name || "Anonymous Candidate",
           searchScore: result.score,
-          matchAnalysis: parsedMatchAnalysis,
+          matchAnalysis: parsedMatchAnalysis.matchAnalysis || parsedMatchAnalysis,
         };
       });
       
       const detailedMatches = await Promise.all(matchPromises);
       
       // Sort by overall match score
-      return detailedMatches.sort((a, b) => {
+      const sortedMatches = detailedMatches.sort((a, b) => {
         if (a.matchAnalysis && b.matchAnalysis) {
           return b.matchAnalysis.overallMatch - a.matchAnalysis.overallMatch;
         }
         return b.searchScore - a.searchScore;
       });
+      
+      // Generate best match recommendation if we have matches
+      let bestMatch = undefined;
+      if (sortedMatches.length > 0) {
+        // Only look at top 3 (or fewer) candidates for best match analysis
+        const topCandidates = sortedMatches.slice(0, Math.min(3, sortedMatches.length));
+        const recommendation = await this.generateBestMatchRecommendation(
+          topCandidates,
+          jobDescription,
+          parsedjobAnalysis
+        );
+        
+        bestMatch = {
+          candidateId: sortedMatches[0].resumeId,
+          candidateName: sortedMatches[0].candidateName,
+          recommendation
+        };
+      }
+      
+      // Get total candidate count for metadata
+      const totalCandidates = await this.getTotalCandidateCount();
+      
+      // Prepare complete response
+      return {
+        matches: sortedMatches,
+        bestMatch,
+        metadata: {
+          totalCandidatesScanned: totalCandidates,
+          processingTimeMs: Date.now() - startTime,
+          searchStrategy: useHybridSearch ? 'hybrid' : 'vector'
+        }
+      };
     } catch (error) {
       console.error("Error matching resumes:", error);
       throw new Error(`Failed to match resumes: ${error}`);

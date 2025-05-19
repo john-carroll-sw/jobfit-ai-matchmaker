@@ -33,6 +33,11 @@ export interface ResumeMatchingRequest {
 
 export interface ResumeMatchingResponse {
   matches: ResumeMatch[];
+  bestMatch?: {
+    candidateId: string;
+    candidateName: string;
+    recommendation: string;
+  };
   metadata?: {
     totalCandidatesScanned?: number;
     processingTimeMs?: number;

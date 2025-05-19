@@ -49,8 +49,15 @@ export const ResumeMatchSchema = z.object({
   matchAnalysis: MatchAnalysisSchema
 });
 
+export const BestMatchRecommendationSchema = z.object({
+  candidateId: z.string(),
+  candidateName: z.string(),
+  recommendation: z.string()
+});
+
 export const ResumeMatchingResponseSchema = z.object({
   matches: z.array(ResumeMatchSchema),
+  bestMatch: BestMatchRecommendationSchema.optional(),
   metadata: z.object({
     totalCandidatesScanned: z.number().optional(),
     processingTimeMs: z.number().optional(),
@@ -67,3 +74,4 @@ export const MatchingOptionsSchema = z.object({
 });
 
 export type MatchingOptions = z.infer<typeof MatchingOptionsSchema>;
+export type ResumeMatchingResponse = z.infer<typeof ResumeMatchingResponseSchema>;

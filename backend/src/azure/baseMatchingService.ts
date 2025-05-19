@@ -1,7 +1,7 @@
 import { AzureOpenAIClientWrapper } from "./azureOpenAIClientWrapper";
 import { AzureKeyCredential, SearchClient } from "@azure/search-documents";
 import { DefaultAzureCredential } from "@azure/identity";
-import { MatchingOptions } from "@jobfit-ai/shared/src/zodSchemas";
+import { MatchingOptions, ResumeMatchingResponse } from "@jobfit-ai/shared";
 
 /**
  * Industry-agnostic interface for resume matching services
@@ -18,9 +18,9 @@ export interface IMatchingService {
    * Matches resumes to a job description based on specified options
    * @param jobDescription The job description to match resumes against
    * @param options Matching configuration options
-   * @returns A list of ranked resume matches with scores and explanations
+   * @returns A structured response with matches, best match recommendation, and metadata
    */
-  matchResumes(jobDescription: string, options?: MatchingOptions): Promise<any[]>;
+  matchResumes(jobDescription: string, options?: MatchingOptions): Promise<ResumeMatchingResponse>;
 }
 
 /**
@@ -86,5 +86,5 @@ export abstract class BaseMatchingService implements IMatchingService {
   /**
    * Match resumes to a job description - abstract method to be implemented by industry-specific services
    */
-  public abstract matchResumes(jobDescription: string, options?: MatchingOptions): Promise<any[]>;
+  public abstract matchResumes(jobDescription: string, options?: MatchingOptions): Promise<ResumeMatchingResponse>;
 }
