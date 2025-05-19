@@ -1,0 +1,274 @@
+{
+  "bestMatch": {
+    "candidateId": "6827897a237c0f800fa4376d",
+    "candidateName": "Anonymous Candidate",
+    "overallScore": 67,
+    "recommendation": "The algorithm selected Candidate 1 (overall score 67) as the best match for this Medical/Surgical RN role. While no candidate is a perfect plug-and-play, Candidate 1’s combination of advanced education, extensive acute-care leadership and regulatory expertise, and demonstrated quality-and-safety focus give them an edge over the others.\n\n1. Key Strengths and Qualifications  \n • Education: Holds both a BSN and an MSN—exceeds the preferred BSN requirement, signaling advanced clinical knowledge and a commitment to professional development.  \n • Clinical-Operational Experience: 17 years in varied nursing roles, including floor-staff supervision, case management, infection control and EMR workflow optimization. This breadth shows deep familiarity with hospital processes, quality assurance and patient-safety standards.  \n • Regulatory & Quality Expertise: Proven track record in root-cause analysis, compliance audits and policy implementation—critical for maintaining standards in a busy Med/Surg unit.  \n • Leadership & Communication: Supervisory roles and training responsibilities indicate strong teamwork, mentoring ability and clear communication—essential for interdisciplinary collaboration and patient/family education.\n\n2. Alignment With Critical Job Requirements  \n • Acute Care Experience: Extensive work in acute-care environments, though some roles are administrative, suggests a strong foundation in patient assessment, monitoring and care planning.  \n • BSN Preferred & RN License: Meets and exceeds educational preferences; likely holds a current RN license.  \n • Soft Skills: Attention to detail, critical thinking and leadership directly map to the responsibilities of medication/treatment administration, documentation, and complex care coordination.\n\n3. Unique Differentiators  \n • Master’s-level perspective on quality and safety drives continuous improvement, which can elevate unit performance and patient outcomes.  \n • Infection control mastery is a high‐value skill in today’s regulatory climate—an area not as strongly represented in Candidates 2 or 3.  \n • Broad EMR implementation experience, even if not specifically Epic, means fewer ramp-up challenges when learning new systems.\n\n4. Comparison to Other Top Candidates  \n • Candidate 2 (score 60) has solid acute and emergency bedside skills but holds only an ADN, lacks a BSN, and does not list BLS/ACLS or Epic-type EHR experience.  \n • Candidate 3 (score 52) brings strong home-care and compliance know-how but has no documented Med/Surg or telemetry unit practice, and their degree is not nursing-specific.\n\n5. Remaining Gaps & Recommended Next Steps  \n • Certifications: Confirm current BLS and ACLS; encourage CMSRN pursuit.  \n • Bedside Med/Surg Detail: Probe recent hands-on Med/Surg and any telemetry floor time.  \n • EHR Proficiency: Evaluate transferable EMR skills and plan for Epic-system training.  \n\nRecommendation  \nProceed with Candidate 1 for a behavioral and technical interview to verify bedside Med/Surg experience, licensure/certifications and EHR capabilities. Their advanced education, deep acute-care and regulatory background, and leadership skills make them the strongest overall match for this RN opening."
+  },
+  "matches": [
+    {
+      "resumeId": "6827897a237c0f800fa4376d",
+      "candidateName": "Anonymous Candidate",
+      "searchScore": 0.02844163402915001,
+      "matchAnalysis": {
+        "overallMatch": 67,
+        "summary": "The candidate offers extensive nursing experience, strong leadership and regulatory knowledge, and advanced education, making them a solid match for the RN role. Key gaps include undocumented BLS/ACLS certifications, lack of explicit Med/Surg bedside practice and telemetry experience, and no demonstration of specific Epic EHR proficiency.",
+        "recommendedNextSteps": [
+          "Verify BLS and ACLS certifications and consider obtaining CMSRN",
+          "Clarify recent hands-on Med/Surg floor and telemetry nursing experience",
+          "Assess proficiency with Epic or similar EHR systems",
+          "Conduct a behavioral interview to evaluate compassion, patient education, and teamwork skills"
+        ],
+        "technicalSkillsMatch": {
+          "score": 6,
+          "strengths": [
+            "Electronic health record implementation and workflow analysis",
+            "Quality assurance and compliance-related skills",
+            "Infection control and root cause analysis"
+          ],
+          "gaps": [
+            "No explicit mention of medication administration",
+            "Lacks direct Epic EHR proficiency",
+            "No documented hands-on patient assessment and care planning"
+          ],
+          "explanation": "The candidate demonstrates relevant technical skills in EMR implementation, quality assurance, and infection control, but the resume lacks direct references to core bedside RN tasks such as medication administration, hands-on patient assessment, and specific Epic EHR experience."
+        },
+        "experienceMatch": {
+          "score": 8,
+          "strengths": [
+            "17 years in various nursing roles including leadership positions",
+            "Experience supervising floor staff and case managing clients",
+            "Multiple roles demonstrating direct patient care responsibilities"
+          ],
+          "gaps": [
+            "Limited explicit mention of recent Med/Surg unit bedside experience",
+            "Current roles appear more administrative/consulting rather than direct acute care"
+          ],
+          "explanation": "Extensive nursing tenure with supervisory and case management roles aligns with experience requirement, though recent focus seems administrative rather than direct Med/Surg floor care."
+        },
+        "educationMatch": {
+          "score": 10,
+          "strengths": [
+            "Holds Bachelor of Science in Nursing and Master of Science"
+          ],
+          "gaps": [],
+          "explanation": "Candidate exceeds the preferred BSN requirement with an MSN and BSN."
+        },
+        "certificationsMatch": {
+          "score": 2,
+          "strengths": [
+            "Likely holds standard nursing certifications"
+          ],
+          "gaps": [
+            "No explicit BLS or ACLS certification listed",
+            "No preferred CMSRN certification mentioned"
+          ],
+          "explanation": "Required certifications (BLS, ACLS) and preferred CMSRN are not documented on the resume, representing a key compliance gap."
+        },
+        "industryKnowledgeMatch": {
+          "score": 7,
+          "strengths": [
+            "Extensive acute care nursing and regulatory compliance experience",
+            "Knowledge of infection control and federal healthcare regulations"
+          ],
+          "gaps": [
+            "No mention of telemetry nursing",
+            "Limited detail on hospital policy compliance in active nursing context"
+          ],
+          "explanation": "Strong background in acute care and regulatory standards, but telemetry-specific experience and current policy compliance practices are not detailed."
+        },
+        "softSkillsMatch": {
+          "score": 7,
+          "strengths": [
+            "Leadership, training, and communication demonstrated in supervisory roles",
+            "Attention to detail via quality assurance and audit responsibilities",
+            "Critical thinking evidenced by root cause analysis"
+          ],
+          "gaps": [
+            "Compassion and patient education skills not explicitly detailed",
+            "Team collaboration specifics not highlighted"
+          ],
+          "explanation": "Resume emphasizes leadership and analytical skills; however, direct references to compassion, patient teaching, and teamwork are not prominent."
+        }
+      }
+    },
+    {
+      "resumeId": "6827897a237c0f800fa4376b",
+      "candidateName": "Anonymous Candidate",
+      "searchScore": 0.02916666865348816,
+      "matchAnalysis": {
+        "overallMatch": 60,
+        "summary": "The candidate brings extensive acute care and emergency medicine experience, solid clinical and soft skills, and meets minimum education requirements but lacks critical RN certifications and explicit Epic EHR and telemetry unit experience. A BSN is also preferred but not held.",
+        "recommendedNextSteps": [
+          "Verify BLS and ACLS certifications or schedule immediate training",
+          "Assess candidate’s plan for Epic EHR proficiency and provide training if needed",
+          "Discuss potential for telemetry experience or identify training pathways",
+          "Consider support for BSN completion or advanced certification planning"
+        ],
+        "technicalSkillsMatch": {
+          "score": 7,
+          "strengths": [
+            "Medication administration and immunizations",
+            "Patient assessment and care planning",
+            "Experience with EHR systems (CHCS, ALTHA)"
+          ],
+          "gaps": [
+            "Proficiency with Epic or similar EHR not demonstrated",
+            "Technical skills section lists generic software rather than RN-specific tools"
+          ],
+          "explanation": "The candidate demonstrates solid clinical technical skills including medication administration, patient assessment, and use of Department of Defense EHR systems, but lacks explicit experience with Epic or similar hospital EHR platforms and does not detail specific RN technical tools in the skills section."
+        },
+        "experienceMatch": {
+          "score": 9,
+          "strengths": [
+            "Over 8 years of acute care and emergency medicine experience",
+            "Leadership and mentoring roles in high-pressure healthcare settings"
+          ],
+          "gaps": [
+            "Primary experience in emergency medicine rather than dedicated Med/Surg units"
+          ],
+          "explanation": "With more than eight years in acute and emergency care, the candidate exceeds the minimum experience requirement; however, direct Med/Surg unit experience is not explicitly detailed."
+        },
+        "educationMatch": {
+          "score": 6,
+          "strengths": [
+            "Associate Degree in Nursing (ADN) meets the minimum educational requirement"
+          ],
+          "gaps": [
+            "Bachelor of Science in Nursing (BSN) preferred but not obtained"
+          ],
+          "explanation": "The candidate holds an ADN which fulfills the role’s minimum education requirement, but does not have the preferred BSN degree."
+        },
+        "certificationsMatch": {
+          "score": 2,
+          "strengths": [
+            "Demonstrates knowledge of healthcare regulatory practices (OSHA, HIPAA)"
+          ],
+          "gaps": [
+            "No Basic Life Support (BLS) certification listed",
+            "No Advanced Cardiovascular Life Support (ACLS) certification listed",
+            "No Certification in Medical-Surgical Nursing (CMSRN)"
+          ],
+          "explanation": "The resume lacks required BLS and ACLS certifications and does not include the preferred CMSRN credential."
+        },
+        "industryKnowledgeMatch": {
+          "score": 8,
+          "strengths": [
+            "Acute care nursing and Medical-Surgical clinical hours completed",
+            "Familiarity with hospital regulatory standards (HIPAA, OSHA)"
+          ],
+          "gaps": [
+            "No explicit experience in Telemetry unit settings"
+          ],
+          "explanation": "The candidate has relevant acute care and Med/Surg exposure along with regulatory compliance knowledge, but telemetry experience is not mentioned."
+        },
+        "softSkillsMatch": {
+          "score": 8,
+          "strengths": [
+            "Strong communication and training abilities",
+            "Proven teamwork, critical thinking, and adaptability"
+          ],
+          "gaps": [
+            "Compassion and patient education skills are implied but not explicitly detailed"
+          ],
+          "explanation": "The resume highlights communication, leadership, and teamwork skills, though explicit examples of patient education and compassionate care are limited."
+        }
+      }
+    },
+    {
+      "resumeId": "682789a4237c0f800fa4377b",
+      "candidateName": "Anonymous Candidate",
+      "searchScore": 0.030414745211601257,
+      "matchAnalysis": {
+        "overallMatch": 52,
+        "summary": "The candidate brings extensive nursing experience and strong soft skills, including patient assessment, education, documentation, and regulatory compliance. However, there are significant gaps in acute Med/Surg unit experience, hospital EHR proficiency, and required BLS/ACLS certifications. Education is not nursing-specific. Overall match is moderate at 52%.",
+        "recommendedNextSteps": [
+          "Conduct phone screen to verify acute Med/Surg and shift work experience",
+          "Request proof of RN license and inquire about BLS/ACLS certifications",
+          "Assess willingness to obtain missing certifications (BLS, ACLS, CMSRN)",
+          "Evaluate transferrable skills in a skills assessment or trial shift",
+          "Consider candidate for non-Med/Surg roles where homecare and occupational health experience is valuable"
+        ],
+        "technicalSkillsMatch": {
+          "score": 7,
+          "strengths": [
+            "Patient assessment and care planning",
+            "Patient education",
+            "Documentation in health records",
+            "Compliance with JCAHO and regulatory standards"
+          ],
+          "gaps": [
+            "Epic or similar EHR proficiency",
+            "Medication administration in acute care setting",
+            "12-hour shift experience including nights/weekends"
+          ],
+          "explanation": "The candidate demonstrates strong patient assessment, education, documentation, and compliance skills from homecare, occupational health, and GI nursing roles, but lacks explicit acute Med/Surg medication administration and Epic EHR experience."
+        },
+        "experienceMatch": {
+          "score": 5,
+          "strengths": [
+            "20+ years of nursing experience",
+            "Diverse clinical settings (homecare, occupational health, GI)",
+            "Interdisciplinary team collaboration"
+          ],
+          "gaps": [
+            "No documented acute care Med/Surg or telemetry unit experience",
+            "Limited evidence of working 12-hour hospital shifts"
+          ],
+          "explanation": "Extensive nursing background but primarily outside acute Med/Surg; needs proven hospital floor experience."
+        },
+        "educationMatch": {
+          "score": 4,
+          "strengths": [
+            "Completed a bachelor’s degree"
+          ],
+          "gaps": [
+            "Degree not in nursing (BSN)",
+            "No mention of Associate Degree in Nursing"
+          ],
+          "explanation": "While holding a BA, the candidate lacks a nursing-specific degree (BSN or ADN) preferred for clinical roles."
+        },
+        "certificationsMatch": {
+          "score": 2,
+          "strengths": [
+            "CPR certification experience implied"
+          ],
+          "gaps": [
+            "No explicit Basic Life Support (BLS) certification",
+            "No Advanced Cardiovascular Life Support (ACLS)",
+            "No CMSRN"
+          ],
+          "explanation": "Required BLS and ACLS are not documented; preferred CMSRN also missing."
+        },
+        "industryKnowledgeMatch": {
+          "score": 4,
+          "strengths": [
+            "Knowledge of compliance and quality assurance in healthcare",
+            "Experience with healthcare regulations (JCAHO, OASIS)"
+          ],
+          "gaps": [
+            "Lacks acute care/Med-Surg/Telemetry nursing experience",
+            "Limited hospital regulatory process details"
+          ],
+          "explanation": "Strong regulatory and homecare knowledge but limited acute hospital unit expertise."
+        },
+        "softSkillsMatch": {
+          "score": 9,
+          "strengths": [
+            "Effective communication and documentation",
+            "Interpersonal collaboration",
+            "Compassion and attention to detail",
+            "Critical thinking in triage scenarios"
+          ],
+          "gaps": [],
+          "explanation": "Demonstrates strong communication, teamwork, and critical thinking across multiple nursing roles."
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "totalCandidatesScanned": 30,
+    "processingTimeMs": 174579,
+    "searchStrategy": "hybrid"
+  }
+}
