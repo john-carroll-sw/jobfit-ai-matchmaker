@@ -25,17 +25,25 @@ export const ReasoningResponse = z.object({
   ),
 });
 
-export async function parseReasoningResponse(systemMessage: string, userMessage: string): Promise<any> {
-  const response = await AzureOpenAIClient.responses.parse({
+export async function performReasoning(
+  systemMessage: string, 
+  userMessage: string, 
+  format?: any
+): Promise<any> {
+  const options: any = {
     model: process.env.AZURE_OPENAI_DEPLOYMENT!,
     input: [
       { role: "system", content: systemMessage },
       { role: "user", content: userMessage },
-    ],
-    text: {
-      format: zodTextFormat(ReasoningResponse, "reasoning_response"),
-    }
-  });
+    ]
+  };
+  
+  // Only add text format if one is provided
+  if (format) {
+    options.text = { format };
+  }
+  
+  const response = await AzureOpenAIClient.responses.parse(options);
 
   if (response.error){
     console.error("Error in Azure OpenAI response:", response.error);

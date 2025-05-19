@@ -1,5 +1,34 @@
 // Types for JobFit AI Matchmaker resume matching API
 
+
+export interface JobAnalysisRequest {
+  jobDescription: string;
+}
+
+export interface ResumeMatchingRequest {
+  jobDescription: string;
+  matchingOptions?: {
+    useHybridSearch?: boolean;
+    topResults?: number;
+    industryType?: 'healthcare' | 'technology' | 'finance' | 'education' | 'general';
+    customWeights?: {
+      experience?: number;
+      technicalSkills?: number;
+      certifications?: number;
+      education?: number;
+    };
+  };
+}
+
+export interface ResumeMatchingResponse {
+  matches: ResumeMatch[];
+  metadata?: {
+    totalCandidatesScanned?: number;
+    processingTimeMs?: number;
+    searchStrategy?: string;
+  };
+}
+
 export interface JobAnalysisResponse {
   jobTitle: string;
   requiredSkills: string[];

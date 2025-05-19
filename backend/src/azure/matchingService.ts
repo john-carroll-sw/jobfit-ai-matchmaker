@@ -1,4 +1,4 @@
-import { AzureOpenAIClient, parseReasoningResponse } from "./azureOpenAIClient";
+import { AzureOpenAIClient, performReasoning } from "./azureOpenAIClient";
 import { AzureKeyCredential, SearchClient } from "@azure/search-documents";
 import { DefaultAzureCredential } from "@azure/identity";
 import fs from "fs/promises";

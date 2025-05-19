@@ -1,4 +1,4 @@
-import { AzureOpenAIClient, parseReasoningResponse } from "./azureOpenAIClient";
+import { AzureOpenAIClient, performReasoning } from "./azureOpenAIClient";
 import { SearchClient, AzureKeyCredential } from "@azure/search-documents"; 
 import { BaseMatchingService } from "./matchingService";
 import { MatchingOptions, ResumeMatchingResponseSchema, ResumeEvaluationCriteriaSchema } from "./matchingTypes";
@@ -157,9 +157,10 @@ export class DefaultMatchingService extends BaseMatchingService {
       const systemPrompt = await fs.readFile(systemPromptPath, 'utf-8');
       
       // Use Azure OpenAI to analyze the job
-      const response = await parseReasoningResponse(systemPrompt, jobDescription);
+      const response = await performReasoning(systemPrompt, jobDescription);
+      const parsed = response?.output_parsed || response;
       
-      return response;
+      return parsed;
     } catch (error) {
       console.error("Error analyzing job description:", error);
       throw new Error(`Failed to analyze job description: ${error}`);
@@ -220,7 +221,7 @@ export class DefaultMatchingService extends BaseMatchingService {
         });
         
         // Get detailed match analysis
-        const matchAnalysis = await parseReasoningResponse(systemPrompt, userMessageContent);
+        const matchAnalysis = await performReasoning(systemPrompt, userMessageContent);
         
         return {
           resumeId: resume.id,

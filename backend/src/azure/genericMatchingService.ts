@@ -1,4 +1,4 @@
-import { AzureOpenAIClient, parseReasoningResponse } from "./azureOpenAIClient";
+import { AzureOpenAIClient, performReasoning } from "./azureOpenAIClient";
 import { SearchClient, AzureKeyCredential } from "@azure/search-documents"; 
 import { DefaultAzureCredential } from "@azure/identity";
 import { IMatchingService } from "./matchingService";
@@ -156,7 +156,7 @@ export class GenericMatchingService implements IMatchingService {
       const systemPrompt = await fs.readFile(systemPromptPath, 'utf-8');
       
       // Use Azure OpenAI to analyze the job
-      const response = await parseReasoningResponse(systemPrompt, jobDescription);
+      const response = await performReasoning(systemPrompt, jobDescription);
       
       return response;
     } catch (error) {
@@ -219,7 +219,7 @@ export class GenericMatchingService implements IMatchingService {
         });
         
         // Get detailed match analysis
-        const matchAnalysis = await parseReasoningResponse(systemPrompt, userMessageContent);
+        const matchAnalysis = await performReasoning(systemPrompt, userMessageContent);
         
         return {
           resumeId: resume.id,
