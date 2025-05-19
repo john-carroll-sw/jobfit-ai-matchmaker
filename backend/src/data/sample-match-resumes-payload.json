@@ -1,0 +1,14 @@
+{
+    "jobDescription": "Job Title: Registered Nurse (RN) – Medical/Surgical Unit\n\nDescription: We are seeking a compassionate and detail-oriented Registered Nurse to join our Medical/Surgical team. The RN will provide direct patient care, coordinate with interdisciplinary teams, and ensure the highest standards of safety and quality.\n\nResponsibilities:\n\nAssess, plan, implement, and evaluate patient care plans\nAdminister medications and treatments as prescribed\nMonitor patient progress and document care in electronic health records\nCollaborate with physicians, therapists, and other healthcare professionals\nEducate patients and families on care plans and post-discharge instructions\nMaintain compliance with hospital policies and regulatory standards\nRequirements:\n\nCurrent RN license in the state of employment\nBachelor of Science in Nursing (BSN) preferred\nMinimum 2 years of acute care experience\nBLS and ACLS certifications required\nStrong communication and critical thinking skills\nAbility to work 12-hour shifts, including nights and weekends\nPreferred Qualifications:\n\nExperience with Med/Surg or Telemetry units\nCertification in Medical-Surgical Nursing (CMSRN)\nProficiency with Epic or similar EHR systems",
+  "matchingOptions": {
+    "useHybridSearch": true,
+    "topResults": 5,
+    "industryType": "general",
+    "customWeights": {
+      "experience": 1,
+      "technicalSkills": 1,
+      "certifications": 1,
+      "education": 1
+    }
+  }
+}

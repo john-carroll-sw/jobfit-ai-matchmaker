@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { DefaultMatchingService } from '../azure/defaultMatchingService';
-import { IMatchingService } from '../azure/matchingService';
+import { MatchingService } from '../azure/matchingService';
+import { IMatchingService } from '../azure/baseMatchingService';
 import { z } from 'zod';
-import { MatchingOptionsSchema } from '@jobfit-ai/shared/src/zodSchemas';
+import { MatchingOptionsSchema } from '@jobfit-ai/shared';
 
 // Input validation schema
 const ResumeMatchingRequestSchema = z.object({
@@ -11,7 +11,7 @@ const ResumeMatchingRequestSchema = z.object({
 });
 
 // Create a singleton instance of the matching service
-const matchingService: IMatchingService = new DefaultMatchingService();
+const matchingService: IMatchingService = new MatchingService();
 
 /**
  * @swagger
