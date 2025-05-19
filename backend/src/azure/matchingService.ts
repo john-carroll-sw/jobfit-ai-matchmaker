@@ -1,7 +1,6 @@
-import { AzureOpenAIClient, performReasoning } from "./azureOpenAIClient";
+import { AzureOpenAIClientWrapper } from "./azureOpenAIClientWrapper";
 import { AzureKeyCredential, SearchClient } from "@azure/search-documents";
 import { DefaultAzureCredential } from "@azure/identity";
-import fs from "fs/promises";
 import { MatchingOptions } from "@jobfit-ai/shared/src/zodSchemas";
 
 /**
@@ -29,6 +28,7 @@ export interface IMatchingService {
  */
 export abstract class BaseMatchingService implements IMatchingService {
   protected searchClient: SearchClient<any>;
+  protected azureOpenAIClientWrapper: AzureOpenAIClientWrapper;
   protected endpoint: string;
   protected apiKey?: string;
   protected indexName: string;
@@ -43,27 +43,14 @@ export abstract class BaseMatchingService implements IMatchingService {
       throw new Error("AZURE_SEARCH_ENDPOINT environment variable is required");
     }
     
-    // Use either API key or DefaultAzureCredential
-    const credential = this.apiKey 
-      ? new AzureKeyCredential(this.apiKey)
-      : new DefaultAzureCredential();
-      
     this.searchClient = new SearchClient(
       this.endpoint,
       this.indexName,
       this.apiKey ? new AzureKeyCredential(this.apiKey) : new DefaultAzureCredential()
     );
-  }
-
-  /**
-   * Generate text embeddings using Azure OpenAI
-   * @param text Text to generate embeddings for
-   * @returns Vector embedding
-   */
-  protected async generateEmbedding(text: string): Promise<number[]> {
-    // Implementation will depend on your Azure OpenAI setup
-    // This is a placeholder for the actual embedding generation
-    throw new Error("Method not implemented - should be overridden by subclass");
+    
+    // Initialize Azure OpenAI Client
+    this.azureOpenAIClientWrapper = new AzureOpenAIClientWrapper();
   }
   
   /**

@@ -1,5 +1,3 @@
-import { AzureOpenAIClient, performReasoning } from "./azureOpenAIClient";
-import { SearchClient, AzureKeyCredential } from "@azure/search-documents"; 
 import { BaseMatchingService } from "./matchingService";
 import { MatchingOptions } from "@jobfit-ai/shared/src/zodSchemas";
 import { z } from "zod";
@@ -13,32 +11,11 @@ import { JobAnalysisResponseSchema } from '@jobfit-ai/shared/src/zodSchemas';
  * This service can be used for general job matching across industries
  */
 export class DefaultMatchingService extends BaseMatchingService {
-  private azureOpenAIClient: typeof AzureOpenAIClient;
+  // No need to redeclare azureOpenAIClient as it's already in the base class
   
   constructor() {
     super();
-    // Use the existing OpenAI client
-    this.azureOpenAIClient = AzureOpenAIClient;
-  }
-  
-  /**
-   * Generate embeddings for text using Azure OpenAI
-   * @param text The text to generate embeddings for
-   * @returns A vector of embeddings
-   */
-  protected async generateEmbedding(text: string): Promise<number[]> {
-    const embeddingDeployment = process.env.AZURE_OPENAI_EMBEDDING_DEPLOYMENT;
-    
-    if (!embeddingDeployment) {
-      throw new Error("AZURE_OPENAI_EMBEDDING_DEPLOYMENT is required");
-    }
-    
-    const response = await this.azureOpenAIClient.embeddings.create({
-      model: embeddingDeployment,
-      input: text
-    });
-    
-    return response.data[0].embedding;
+    // Base class already initializes the OpenAI client
   }
   
   /**
@@ -161,7 +138,7 @@ export class DefaultMatchingService extends BaseMatchingService {
       const format = zodTextFormat(JobAnalysisResponseSchema, "job_analysis");
 
       // Use Azure OpenAI to analyze the job
-      const response = await performReasoning(systemPrompt, jobDescription, format);
+      const response = await this.azureOpenAIClientWrapper.performReasoning(systemPrompt, jobDescription, format);
       const parsed = response?.output_parsed || response;
       
       return parsed;
@@ -184,7 +161,7 @@ export class DefaultMatchingService extends BaseMatchingService {
       const industryType = options?.industryType ?? 'general';
       
       // Generate embedding for the job description
-      const jobEmbedding = await this.generateEmbedding(jobDescription);
+      const jobEmbedding = await this.azureOpenAIClientWrapper.generateEmbedding(jobDescription);
       
       // Perform search using the chosen method
       let searchResults;
@@ -225,7 +202,7 @@ export class DefaultMatchingService extends BaseMatchingService {
         });
         
         // Get detailed match analysis
-        const matchAnalysis = await performReasoning(systemPrompt, userMessageContent);
+        const matchAnalysis = await this.azureOpenAIClientWrapper.performReasoning(systemPrompt, userMessageContent);
         
         return {
           resumeId: resume.id,

@@ -1,4 +1,4 @@
-import { performReasoning as retrieveReasoningResponse } from "./azureOpenAIClient";
+import { performReasoning as retrieveReasoningResponse } from "./azureOpenAIClientWrapper";
 import fs from "fs/promises";
 
 export async function performReasoning(input: { state: any; disruptions: any[]; optimizationPriority?: string }) {
