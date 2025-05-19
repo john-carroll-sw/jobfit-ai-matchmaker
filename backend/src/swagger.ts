@@ -201,59 +201,141 @@ const options: swaggerJsdoc.Options = {
         },
         // Resume Match Response
         ResumeMatchResponse: {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              resumeId: {
-                type: 'string',
-                description: 'ID of the matched resume',
-              },
-              candidateName: {
-                type: 'string',
-                description: 'Name of the candidate',
-              },
-              searchScore: {
-                type: 'number',
-                description: 'Search relevance score',
-              },
-              matchAnalysis: {
+          type: 'object',
+          properties: {
+            bestMatch: {
+              type: 'object',
+              description: 'Details about the best matching candidate',
+              properties: {
+                candidateId: {
+                  type: 'string',
+                  description: 'ID of the best matching candidate'
+                },
+                candidateName: {
+                  type: 'string',
+                  description: 'Name of the best matching candidate'
+                },
+                overallScore: {
+                  type: 'number',
+                  description: 'Overall match score of the best candidate'
+                },
+                recommendation: {
+                  type: 'string',
+                  description: 'LLM-generated recommendation explaining why this candidate is the best match'
+                }
+              }
+            },
+            matches: {
+              type: 'array',
+              items: {
                 type: 'object',
                 properties: {
-                  technicalSkillsMatch: {
+                  resumeId: {
+                    type: 'string',
+                    description: 'ID of the matched resume',
+                  },
+                  candidateName: {
+                    type: 'string',
+                    description: 'Name of the candidate',
+                  },
+                  searchScore: {
+                    type: 'number',
+                    description: 'Search relevance score',
+                  },
+                  matchAnalysis: {
                     type: 'object',
                     properties: {
-                      score: { type: 'number' },
-                      strengths: { type: 'array', items: { type: 'string' } },
-                      gaps: { type: 'array', items: { type: 'string' } },
-                      explanation: { type: 'string' },
+                      overallMatch: { 
+                        type: 'number',
+                        description: 'Overall match score for ranking' 
+                      },
+                      summary: { 
+                        type: 'string',
+                        description: 'Summary of the match analysis' 
+                      },
+                      recommendedNextSteps: { 
+                        type: 'array', 
+                        items: { type: 'string' },
+                        description: 'Recommended next steps for this candidate' 
+                      },
+                      technicalSkillsMatch: {
+                        type: 'object',
+                        properties: {
+                          score: { type: 'number' },
+                          strengths: { type: 'array', items: { type: 'string' } },
+                          gaps: { type: 'array', items: { type: 'string' } },
+                          explanation: { type: 'string' },
+                        },
+                      },
+                      experienceMatch: {
+                        type: 'object',
+                        properties: {
+                          score: { type: 'number' },
+                          strengths: { type: 'array', items: { type: 'string' } },
+                          gaps: { type: 'array', items: { type: 'string' } },
+                          explanation: { type: 'string' },
+                        },
+                      },
+                      educationMatch: {
+                        type: 'object',
+                        properties: {
+                          score: { type: 'number' },
+                          strengths: { type: 'array', items: { type: 'string' } },
+                          gaps: { type: 'array', items: { type: 'string' } },
+                          explanation: { type: 'string' },
+                        },
+                      },
+                      certificationsMatch: {
+                        type: 'object',
+                        properties: {
+                          score: { type: 'number' },
+                          strengths: { type: 'array', items: { type: 'string' } },
+                          gaps: { type: 'array', items: { type: 'string' } },
+                          explanation: { type: 'string' },
+                        },
+                      },
+                      industryKnowledgeMatch: {
+                        type: 'object',
+                        properties: {
+                          score: { type: 'number' },
+                          strengths: { type: 'array', items: { type: 'string' } },
+                          gaps: { type: 'array', items: { type: 'string' } },
+                          explanation: { type: 'string' },
+                        },
+                      },
+                      softSkillsMatch: {
+                        type: 'object',
+                        properties: {
+                          score: { type: 'number' },
+                          strengths: { type: 'array', items: { type: 'string' } },
+                          gaps: { type: 'array', items: { type: 'string' } },
+                          explanation: { type: 'string' },
+                        },
+                      },
                     },
                   },
-                  experienceMatch: {
-                    type: 'object',
-                    properties: {
-                      score: { type: 'number' },
-                      strengths: { type: 'array', items: { type: 'string' } },
-                      gaps: { type: 'array', items: { type: 'string' } },
-                      explanation: { type: 'string' },
-                    },
-                  },
-                  educationMatch: {
-                    type: 'object',
-                    properties: {
-                      score: { type: 'number' },
-                      strengths: { type: 'array', items: { type: 'string' } },
-                      gaps: { type: 'array', items: { type: 'string' } },
-                      explanation: { type: 'string' },
-                    },
-                  },
-                  overallMatch: { type: 'number' },
-                  summary: { type: 'string' },
-                  recommendedNextSteps: { type: 'array', items: { type: 'string' } },
                 },
               },
             },
-          },
+            metadata: {
+              type: 'object',
+              description: 'Metadata about the matching process',
+              properties: {
+                totalCandidatesScanned: {
+                  type: 'number',
+                  description: 'Total number of candidates in the database'
+                },
+                processingTimeMs: {
+                  type: 'number',
+                  description: 'Processing time in milliseconds'
+                },
+                searchStrategy: {
+                  type: 'string',
+                  description: 'Search strategy used (hybrid or vector)'
+                }
+              }
+            }
+          }
         },
         ErrorResponse: {
           type: 'object',

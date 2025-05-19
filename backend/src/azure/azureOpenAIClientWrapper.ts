@@ -72,26 +72,22 @@ export class AzureOpenAIClientWrapper {
    * Perform reasoning with the LLM using system and user messages
    * @param systemMessage The system message/prompt
    * @param userMessage The user message/query
-   * @param format Optional format for structured output
+   * @param format Required format for structured output
    * @returns Parsed response
    */
   async performReasoning(
     systemMessage: string, 
     userMessage: string, 
-    format?: any
+    format: any
   ): Promise<any> {
     const options: any = {
       model: this.reasoningModelName,
       input: [
         { role: "system", content: systemMessage },
         { role: "user", content: userMessage },
-      ]
+      ],
+      text: { format }
     };
-    
-    // Only add text format if one is provided
-    if (format) {
-      options.text = { format };
-    }
     
     const response = await this.reasoningClient.responses.parse(options);
 

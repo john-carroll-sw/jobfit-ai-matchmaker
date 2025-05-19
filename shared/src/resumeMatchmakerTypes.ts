@@ -32,12 +32,13 @@ export interface ResumeMatchingRequest {
 }
 
 export interface ResumeMatchingResponse {
-  matches: ResumeMatch[];
   bestMatch?: {
     candidateId: string;
     candidateName: string;
+    overallScore: number;
     recommendation: string;
   };
+  matches: ResumeMatch[];
   metadata?: {
     totalCandidatesScanned?: number;
     processingTimeMs?: number;
@@ -53,15 +54,15 @@ export interface MatchDimension {
 }
 
 export interface MatchAnalysis {
+  overallMatch: number;
+  summary: string;
+  recommendedNextSteps: string[];
   technicalSkillsMatch: MatchDimension;
   experienceMatch: MatchDimension;
   educationMatch: MatchDimension;
   certificationsMatch?: MatchDimension;
   industryKnowledgeMatch?: MatchDimension;
   softSkillsMatch?: MatchDimension;
-  overallMatch: number;
-  summary: string;
-  recommendedNextSteps: string[];
 }
 
 export interface ResumeMatch {

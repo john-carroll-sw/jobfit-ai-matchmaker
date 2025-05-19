@@ -3,7 +3,31 @@ import { zodTextFormat } from "openai/helpers/zod";
 import fs from "fs/promises";
 import path from "path";
 import { MatchingOptions, ResumeMatchSchema, JobAnalysisResponseSchema } from '@jobfit-ai/shared';
-import { ResumeMatchingResponse } from '@jobfit-ai/shared/src/resumeMatchmakerTypes';
+import { ResumeMatchingResponse, MatchAnalysis } from '@jobfit-ai/shared/src/resumeMatchmakerTypes';
+
+/**
+ * Helper function to reorder matchAnalysis properties according to the schema
+ * this ensures that properties appear in the expected order in the JSON response
+ * @param matchAnalysis The match analysis object to reorder
+ * @returns A new object with properties reordered
+ */
+function reorderMatchAnalysisProperties(matchAnalysis: any): MatchAnalysis {
+  // Create a new object with properties in the desired order
+  // This explicit ordering ensures properties appear in this exact sequence in the JSON
+  const reordered = {
+    overallMatch: matchAnalysis.overallMatch,
+    summary: matchAnalysis.summary,
+    recommendedNextSteps: matchAnalysis.recommendedNextSteps,
+    technicalSkillsMatch: matchAnalysis.technicalSkillsMatch,
+    experienceMatch: matchAnalysis.experienceMatch,
+    educationMatch: matchAnalysis.educationMatch,
+    ...(matchAnalysis.certificationsMatch && { certificationsMatch: matchAnalysis.certificationsMatch }),
+    ...(matchAnalysis.industryKnowledgeMatch && { industryKnowledgeMatch: matchAnalysis.industryKnowledgeMatch }),
+    ...(matchAnalysis.softSkillsMatch && { softSkillsMatch: matchAnalysis.softSkillsMatch }),
+  };
+  
+  return reordered;
+}
 
 /**
  * Default implementation of the resume matching service
@@ -199,20 +223,37 @@ export class MatchingService extends BaseMatchingService {
           strengths: {
             technicalSkills: c.matchAnalysis.technicalSkillsMatch?.strengths || [],
             experience: c.matchAnalysis.experienceMatch?.strengths || [],
-            education: c.matchAnalysis.educationMatch?.strengths || []
+            education: c.matchAnalysis.educationMatch?.strengths || [],
+            certifications: c.matchAnalysis.certificationsMatch?.strengths || [],
+            industryKnowledge: c.matchAnalysis.industryKnowledgeMatch?.strengths || [],
+            softSkills: c.matchAnalysis.softSkillsMatch?.strengths || []
           },
+          gaps: {
+            technicalSkills: c.matchAnalysis.technicalSkillsMatch?.gaps || [],
+            experience: c.matchAnalysis.experienceMatch?.gaps || [],
+            education: c.matchAnalysis.educationMatch?.gaps || [],
+            certifications: c.matchAnalysis.certificationsMatch?.gaps || [],
+            industryKnowledge: c.matchAnalysis.industryKnowledgeMatch?.gaps || [],
+            softSkills: c.matchAnalysis.softSkillsMatch?.gaps || []
+          },
+          explanation: c.matchAnalysis.technicalSkillsMatch?.explanation || "",
+          recommendedNextSteps: c.matchAnalysis.recommendedNextSteps || [],
           summary: c.matchAnalysis.summary
         }))
       });
       
+      // Define format for the recommendation text
+      const textFormat = { type: "text" };
+      
       // Get recommendation from LLM
       const response = await this.azureOpenAIClientWrapper.performReasoning(
         systemPrompt,
-        userMessageContent
+        userMessageContent,
+        textFormat
       );
-      
-      return response?.text || response?.output_parsed?.text || response || "";
-      
+      const parsed = response?.output_parsed || response?.output_text;
+
+      return parsed;
     } catch (error) {
       console.error("Error generating best match recommendation:", error);
       return `The top candidate has an overall match score of ${topCandidates[0]?.matchAnalysis?.overallMatch || 'N/A'}.`;
@@ -234,7 +275,6 @@ export class MatchingService extends BaseMatchingService {
       
       // First, analyze the job description
       const jobAnalysis = await this.analyzeJobDescription(jobDescription);
-      const parsedjobAnalysis = jobAnalysis?.output_parsed || jobAnalysis;
       
       // Generate embedding for the job description
       const jobEmbedding = await this.azureOpenAIClientWrapper.generateEmbedding(jobDescription);
@@ -279,7 +319,7 @@ export class MatchingService extends BaseMatchingService {
         const userMessageContent = JSON.stringify({
           description: "This object contains the original job description, a structured analysis of the job requirements, the candidate's resume, and the matching options used for evaluation.",
           jobDescription,
-          jobAnalysis: parsedjobAnalysis,
+          jobAnalysis,
           resume,
           options: {
             weights,
@@ -288,21 +328,21 @@ export class MatchingService extends BaseMatchingService {
         });
         
         // Get detailed match analysis
-        const matchAnalysis = await this.azureOpenAIClientWrapper.performReasoning(systemPrompt, userMessageContent, resumeMatcherFormat);
+        const matchAnalysis = await this.azureOpenAIClientWrapper.performReasoning(
+          systemPrompt, 
+          userMessageContent, 
+          resumeMatcherFormat
+        );
         const parsedMatchAnalysis = matchAnalysis?.output_parsed || matchAnalysis;
         
-        // Remove redundant fields if present
-        if (parsedMatchAnalysis && typeof parsedMatchAnalysis === 'object') {
-          delete parsedMatchAnalysis.resumeId;
-          delete parsedMatchAnalysis.candidateName;
-          delete parsedMatchAnalysis.searchScore;
-        }
+        // Reorder matchAnalysis properties according to the schema
+        const reorderedMatchAnalysis = reorderMatchAnalysisProperties(parsedMatchAnalysis.matchAnalysis);
         
         return {
           resumeId: resume.id,
           candidateName: resume.name || "Anonymous Candidate",
           searchScore: result.score,
-          matchAnalysis: parsedMatchAnalysis.matchAnalysis || parsedMatchAnalysis,
+          matchAnalysis: reorderedMatchAnalysis,
         };
       });
       
@@ -324,12 +364,14 @@ export class MatchingService extends BaseMatchingService {
         const recommendation = await this.generateBestMatchRecommendation(
           topCandidates,
           jobDescription,
-          parsedjobAnalysis
+          jobAnalysis
         );
+        // TODO FIX best match recommendation
         
         bestMatch = {
           candidateId: sortedMatches[0].resumeId,
           candidateName: sortedMatches[0].candidateName,
+          overallScore: sortedMatches[0].matchAnalysis.overallMatch,
           recommendation
         };
       }
@@ -339,8 +381,8 @@ export class MatchingService extends BaseMatchingService {
       
       // Prepare complete response
       return {
-        matches: sortedMatches,
         bestMatch,
+        matches: sortedMatches,
         metadata: {
           totalCandidatesScanned: totalCandidates,
           processingTimeMs: Date.now() - startTime,

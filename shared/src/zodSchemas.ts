@@ -31,15 +31,15 @@ export const MatchDimensionSchema = z.object({
 });
 
 export const MatchAnalysisSchema = z.object({
+  overallMatch: z.number(),
+  summary: z.string(),
+  recommendedNextSteps: z.array(z.string()),
   technicalSkillsMatch: MatchDimensionSchema,
   experienceMatch: MatchDimensionSchema,
   educationMatch: MatchDimensionSchema,
   certificationsMatch: MatchDimensionSchema.optional(),
   industryKnowledgeMatch: MatchDimensionSchema.optional(),
   softSkillsMatch: MatchDimensionSchema.optional(),
-  overallMatch: z.number(),
-  summary: z.string(),
-  recommendedNextSteps: z.array(z.string())
 });
 
 export const ResumeMatchSchema = z.object({
@@ -52,12 +52,13 @@ export const ResumeMatchSchema = z.object({
 export const BestMatchRecommendationSchema = z.object({
   candidateId: z.string(),
   candidateName: z.string(),
+  overallScore: z.number(),
   recommendation: z.string()
 });
 
 export const ResumeMatchingResponseSchema = z.object({
-  matches: z.array(ResumeMatchSchema),
   bestMatch: BestMatchRecommendationSchema.optional(),
+  matches: z.array(ResumeMatchSchema),
   metadata: z.object({
     totalCandidatesScanned: z.number().optional(),
     processingTimeMs: z.number().optional(),
