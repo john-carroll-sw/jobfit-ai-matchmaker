@@ -1,12 +1,12 @@
 import { AzureOpenAIClient, performReasoning } from "./azureOpenAIClient";
 import { SearchClient, AzureKeyCredential } from "@azure/search-documents"; 
 import { BaseMatchingService } from "./matchingService";
-import { MatchingOptions, ResumeMatchingResponseSchema, ResumeEvaluationCriteriaSchema } from "./matchingTypes";
+import { MatchingOptions } from "@jobfit-ai/shared/src/zodSchemas";
 import { z } from "zod";
 import { zodTextFormat } from "openai/helpers/zod";
 import fs from "fs/promises";
-import path, { format } from "path";
-import { JobAnalysisResponse } from '@jobfit-ai/shared/src/resumeMatchmakerTypes';
+import path from "path";
+import { JobAnalysisResponseSchema } from '@jobfit-ai/shared/src/zodSchemas';
 
 /**
  * Default implementation of the resume matching service
@@ -158,10 +158,10 @@ export class DefaultMatchingService extends BaseMatchingService {
       const systemPromptPath = path.join(__dirname, '../../prompts/industry_job_analyzer.system.txt');
       const systemPrompt = await fs.readFile(systemPromptPath, 'utf-8');
       
-      const format = zodTextFormat(JobAnalysisResponse, "job_analysis");
+      const format = zodTextFormat(JobAnalysisResponseSchema, "job_analysis");
 
       // Use Azure OpenAI to analyze the job
-      const response = await performReasoning(systemPrompt, jobDescription, );
+      const response = await performReasoning(systemPrompt, jobDescription, format);
       const parsed = response?.output_parsed || response;
       
       return parsed;

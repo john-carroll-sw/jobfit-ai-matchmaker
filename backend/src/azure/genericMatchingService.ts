@@ -2,8 +2,7 @@ import { AzureOpenAIClient, performReasoning } from "./azureOpenAIClient";
 import { SearchClient, AzureKeyCredential } from "@azure/search-documents"; 
 import { DefaultAzureCredential } from "@azure/identity";
 import { IMatchingService } from "./matchingService";
-import { MatchingOptions, ResumeMatchingResponseSchema } from "./matchingTypes";
-import { zodTextFormat } from "openai/helpers/zod";
+import { MatchingOptions } from "@jobfit-ai/shared/src/zodSchemas";
 import fs from "fs/promises";
 import path from "path";
 

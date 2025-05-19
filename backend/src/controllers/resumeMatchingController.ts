@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { DefaultMatchingService } from '../azure/defaultMatchingService';
 import { IMatchingService } from '../azure/matchingService';
 import { z } from 'zod';
-import { MatchingOptionsSchema } from '../azure/matchingTypes';
+import { MatchingOptionsSchema } from '@jobfit-ai/shared/src/zodSchemas';
 
 // Input validation schema
 const ResumeMatchingRequestSchema = z.object({

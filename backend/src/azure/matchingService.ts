@@ -2,7 +2,7 @@ import { AzureOpenAIClient, performReasoning } from "./azureOpenAIClient";
 import { AzureKeyCredential, SearchClient } from "@azure/search-documents";
 import { DefaultAzureCredential } from "@azure/identity";
 import fs from "fs/promises";
-import { MatchingOptions } from "./matchingTypes";
+import { MatchingOptions } from "@jobfit-ai/shared/src/zodSchemas";
 
 /**
  * Industry-agnostic interface for resume matching services
