@@ -4,9 +4,11 @@
 
 **AI-powered proof of concept for matching resumes to job descriptions using Azure AI, OpenAI, and semantic search.**
 
-![Watch it in action](media/JobfitAIMatchMaker_Demo.gif)
+![Watch it in action](media/JobfitAIMatchMaker_UI.png)
 
-## 🔍 What is JobFit?
+![Watch it in action](media/ContentProcessingSolutionAccelerator_ResumesUI.png)
+
+## 🔍 What is JobFit AI Matchmaker?
 
 JobFit AI Matchmaker is a proof of concept that reimagines resume-to-job matching using advanced Azure AI services. It demonstrates how to:
 
