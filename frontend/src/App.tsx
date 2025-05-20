@@ -103,7 +103,9 @@ const App: React.FC = () => {
         sx={{
           minHeight: "100vh",
           width: "100vw",
-          background: "linear-gradient(120deg, #181A20 0%, #23262F 100%)",
+          background: theme => theme.palette.mode === 'dark' 
+            ? "linear-gradient(120deg, #181A20 0%, #23262F 100%)"
+            : "linear-gradient(120deg, #F8FAFD 0%, #FFFFFF 100%)",
           fontFamily: 'inherit',
         }}
       >
@@ -132,7 +134,7 @@ const App: React.FC = () => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                backgroundColor: 'rgba(35, 38, 47, 0.7)',
+                backgroundColor: theme => theme.palette.mode === 'dark' ? 'rgba(35, 38, 47, 0.7)' : 'background.paper',
                 borderRadius: 2,
                 overflow: 'hidden',
               }}
@@ -179,7 +181,7 @@ const App: React.FC = () => {
                 onChange={(e) => setJobDescription(e.target.value)}
                 sx={{
                   mb: 2,
-                  backgroundColor: 'rgba(24, 26, 32, 0.5)',
+                  backgroundColor: theme => theme.palette.mode === 'dark' ? 'rgba(24, 26, 32, 0.5)' : 'rgba(240, 242, 245, 0.6)',
                   borderRadius: 1,
                   flex: showAdvancedOptions ? 'none' : 1,
                   '& .MuiOutlinedInput-root': {
@@ -188,7 +190,7 @@ const App: React.FC = () => {
                       height: showAdvancedOptions ? 'auto' : '100% !important'
                     },
                     '& fieldset': {
-                      borderColor: 'rgba(255, 255, 255, 0.15)',
+                      borderColor: theme => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.1)',
                     },
                     '&:hover fieldset': {
                       borderColor: 'primary.main',
@@ -371,7 +373,7 @@ const App: React.FC = () => {
                 mr: 3,
                 display: 'flex',
                 flexDirection: 'column',
-                backgroundColor: 'rgba(35, 38, 47, 0.7)',
+                backgroundColor: theme => theme.palette.mode === 'dark' ? 'rgba(35, 38, 47, 0.7)' : 'background.paper',
                 borderRadius: 2,
                 overflow: 'hidden',
                 position: 'relative',
@@ -386,7 +388,7 @@ const App: React.FC = () => {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    bgcolor: 'rgba(24, 26, 32, 0.7)',
+                    bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(24, 26, 32, 0.7)' : 'rgba(237, 242, 247, 0.92)',
                     zIndex: 10,
                     display: 'flex',
                     flexDirection: 'column',
@@ -395,7 +397,16 @@ const App: React.FC = () => {
                   }}
                 >
                   <CircularProgress size={48} color="primary" thickness={5} />
-                  <Typography variant="body2" color="primary.contrastText" sx={{ mt: 2, fontWeight: 600, fontSize: '1.2rem', letterSpacing: 0.5 }}>
+                  <Typography 
+                    variant="body2" 
+                    sx={{ 
+                      mt: 2, 
+                      fontWeight: 600, 
+                      fontSize: '1.2rem', 
+                      letterSpacing: 0.5,
+                      color: theme => theme.palette.mode === 'dark' ? 'primary.contrastText' : 'primary.dark'
+                    }}
+                  >
                     Finding matching candidates... {
                       loadingTime >= 60
                         ? `${Math.floor(loadingTime / 60)}m ${loadingTime % 60}s`
@@ -489,7 +500,12 @@ const App: React.FC = () => {
                         <Backdrop
                           open={Boolean(selectedCandidate)}
                           onClick={() => setSelectedCandidate(null)}
-                          sx={{ zIndex: 1200, bgcolor: 'rgba(0,0,0,0.7)' }}
+                          sx={{ 
+                            zIndex: 1200, 
+                            bgcolor: theme => theme.palette.mode === 'dark'
+                              ? 'rgba(0,0,0,0.7)'
+                              : 'rgba(0,0,0,0.5)'
+                          }}
                         />
                         <Box
                           sx={{
@@ -511,7 +527,7 @@ const App: React.FC = () => {
                             <Typography variant="h6" color="primary.main">Candidate Details</Typography>
                             <Button onClick={() => setSelectedCandidate(null)} color="secondary" size="small">Close</Button>
                           </Box>
-                          <Typography variant="subtitle1" color="white" gutterBottom>
+                          <Typography variant="subtitle1" color="text.primary" gutterBottom>
                             Resume ID: {selectedCandidate.resumeId}
                           </Typography>
                           <Typography variant="body2" color="text.secondary" gutterBottom>
@@ -520,7 +536,7 @@ const App: React.FC = () => {
                           <Divider sx={{ my: 2 }} />
                           <Typography
                             variant="h6"
-                            color="white"
+                            color="text.primary"
                             sx={{
                               mb: 1,
                               fontWeight: 600
@@ -538,19 +554,19 @@ const App: React.FC = () => {
                                   px: 1,
                                   py: 1,
                                   fontWeight: 500,
-                                  color: 'white',
-                                  bgcolor: 'rgba(76, 175, 80, 0.15)',
+                                  color: theme => theme.palette.mode === 'dark' ? 'white' : '#2E7D32',
+                                  bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(76, 175, 80, 0.15)' : 'rgba(76, 175, 80, 0.08)',
                                   '&:hover': {
-                                    bgcolor: 'rgba(76, 175, 80, 0.25)',
+                                    bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(76, 175, 80, 0.25)' : 'rgba(76, 175, 80, 0.15)',
                                   },
-                                  border: '1px solid rgba(76, 175, 80, 0.5)',
+                                  border: theme => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(76, 175, 80, 0.5)' : 'rgba(76, 175, 80, 0.3)'}`,
                                 }}
                               />
                             ))}
                           </Box>
                           <Typography
                             variant="h6"
-                            color="white"
+                            color="text.primary"
                             sx={{
                               mb: 1,
                               fontWeight: 600
@@ -568,19 +584,19 @@ const App: React.FC = () => {
                                   px: 1,
                                   py: 1,
                                   fontWeight: 500,
-                                  color: 'white',
-                                  bgcolor: 'rgba(211, 47, 47, 0.15)',
+                                  color: theme => theme.palette.mode === 'dark' ? 'white' : '#C62828',
+                                  bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(211, 47, 47, 0.15)' : 'rgba(211, 47, 47, 0.08)',
                                   '&:hover': {
-                                    bgcolor: 'rgba(211, 47, 47, 0.25)',
+                                    bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(211, 47, 47, 0.25)' : 'rgba(211, 47, 47, 0.15)',
                                   },
-                                  border: '1px solid rgba(211, 47, 47, 0.5)',
+                                  border: theme => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(211, 47, 47, 0.5)' : 'rgba(211, 47, 47, 0.3)'}`,
                                 }}
                               />
                             ))}
                           </Box>
                           <Typography
                             variant="h6"
-                            color="white"
+                            color="text.primary"
                             sx={{
                               mb: 1,
                               fontWeight: 600
@@ -600,7 +616,7 @@ const App: React.FC = () => {
                                 component="li"
                                 key={idx}
                                 sx={{
-                                  color: '#e0e0e0',
+                                  color: theme => theme.palette.mode === 'dark' ? '#e0e0e0' : '#4B5563',
                                   fontSize: '1rem',
                                   mb: 1,
                                   lineHeight: 1.4,
@@ -615,7 +631,7 @@ const App: React.FC = () => {
                           </Box>
                           <Divider sx={{ my: 2 }} />
                           {/* Show all match dimensions */}
-                          <Typography variant="h6" color="white" sx={{ fontWeight: 600 }}>Match Dimensions</Typography>
+                          <Typography variant="h6" color="text.primary" sx={{ fontWeight: 600 }}>Match Dimensions</Typography>
                           {Object.entries(selectedCandidate.matchAnalysis).map(([key, value]) => {
                             // Only show dimensions with score (type guard)
                             if (typeof value === 'object' && value !== null && 'score' in value) {
@@ -627,7 +643,7 @@ const App: React.FC = () => {
                               };
                               return (
                                 <Box key={key} sx={{ mb: 2 }}>
-                                  <Typography variant="body2" color="white">
+                                  <Typography variant="body2" color="text.primary">
                                     {key.replace('Match', '')
                                       .replace(/([A-Z])/g, ' $1')
                                       .replace(/^./, str => str.toUpperCase())}
@@ -641,9 +657,9 @@ const App: React.FC = () => {
                                         label={s}
                                         size="small"
                                         sx={{
-                                          color: 'white',
-                                          bgcolor: 'rgba(76, 175, 80, 0.15)',
-                                          border: '1px solid rgba(76, 175, 80, 0.5)',
+                                          color: theme => theme.palette.mode === 'dark' ? 'white' : '#2E7D32',
+                                          bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(76, 175, 80, 0.15)' : 'rgba(76, 175, 80, 0.08)',
+                                          border: theme => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(76, 175, 80, 0.5)' : 'rgba(76, 175, 80, 0.3)'}`,
                                         }}
                                       />
                                     ))}
@@ -653,9 +669,9 @@ const App: React.FC = () => {
                                         label={g}
                                         size="small"
                                         sx={{
-                                          color: 'white',
-                                          bgcolor: 'rgba(211, 47, 47, 0.15)',
-                                          border: '1px solid rgba(211, 47, 47, 0.5)',
+                                          color: theme => theme.palette.mode === 'dark' ? 'white' : '#C62828',
+                                          bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(211, 47, 47, 0.15)' : 'rgba(211, 47, 47, 0.08)',
+                                          border: theme => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(211, 47, 47, 0.5)' : 'rgba(211, 47, 47, 0.3)'}`,
                                         }}
                                       />
                                     ))}
@@ -714,9 +730,25 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
       <Card
         onClick={onClick}
         sx={{
-          backgroundColor: isBestMatch ? 'rgba(76, 175, 80, 0.12)' : 'rgba(24, 26, 32, 0.7)',
+          backgroundColor: theme => {
+            if (isBestMatch) {
+              return theme.palette.mode === 'dark' 
+                ? 'rgba(76, 175, 80, 0.12)' 
+                : 'rgba(76, 175, 80, 0.08)';
+            } else {
+              return theme.palette.mode === 'dark' 
+                ? 'rgba(24, 26, 32, 0.7)' 
+                : '#FFFFFF';
+            }
+          },
           borderRadius: 2,
-          border: isBestMatch ? '2px solid #4caf50' : undefined,
+          border: theme => {
+            if (isBestMatch) {
+              return `2px solid ${theme.palette.mode === 'dark' ? '#4caf50' : '#2E7D32'}`;
+            } else {
+              return theme.palette.mode === 'dark' ? undefined : '1px solid rgba(0,0,0,0.06)';
+            }
+          },
           cursor: 'pointer',
           transition: 'transform 0.2s, box-shadow 0.2s',
           width: '100%'
@@ -725,7 +757,7 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
         <CardContent>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Typography variant="subtitle1" color="white">
+              <Typography variant="subtitle1" color="text.primary">
                 Resume ID: {match.resumeId}
               </Typography>
               {isBestMatch && <Chip label="Best Match" color="success" size="small" />}
@@ -751,7 +783,7 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
           <Box sx={{ mb: 2 }}>
             <Typography
               variant="subtitle2"
-              color="white"
+              color="text.primary"
               sx={{
                 mb: 0.5,
                 fontWeight: 600
@@ -770,12 +802,12 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
                     px: 0.5,
                     py: 0.75,
                     fontWeight: 500,
-                    color: 'white',
-                    bgcolor: 'rgba(76, 175, 80, 0.15)',
+                    color: theme => theme.palette.mode === 'dark' ? 'white' : '#2E7D32',
+                    bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(76, 175, 80, 0.15)' : 'rgba(76, 175, 80, 0.08)',
                     '&:hover': {
-                      bgcolor: 'rgba(76, 175, 80, 0.25)',
+                      bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(76, 175, 80, 0.25)' : 'rgba(76, 175, 80, 0.15)',
                     },
-                    border: '1px solid rgba(76, 175, 80, 0.5)',
+                    border: theme => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(76, 175, 80, 0.5)' : 'rgba(76, 175, 80, 0.3)'}`,
                   }}
                 />
               ))}
@@ -784,7 +816,7 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
           <Box sx={{ mb: 1 }}>
             <Typography
               variant="subtitle2"
-              color="white"
+              color="text.primary"
               sx={{
                 mb: 0.5,
                 fontWeight: 600
@@ -803,12 +835,12 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
                     px: 0.5,
                     py: 0.75,
                     fontWeight: 500,
-                    color: 'white',
-                    bgcolor: 'rgba(211, 47, 47, 0.15)',
+                    color: theme => theme.palette.mode === 'dark' ? 'white' : '#C62828',
+                    bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(211, 47, 47, 0.15)' : 'rgba(211, 47, 47, 0.08)',
                     '&:hover': {
-                      bgcolor: 'rgba(211, 47, 47, 0.25)',
+                      bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(211, 47, 47, 0.25)' : 'rgba(211, 47, 47, 0.15)',
                     },
-                    border: '1px solid rgba(211, 47, 47, 0.5)',
+                    border: theme => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(211, 47, 47, 0.5)' : 'rgba(211, 47, 47, 0.3)'}`,
                   }}
                 />
               ))}
@@ -819,7 +851,7 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
             <Box sx={{ mt: 2 }}>
               <Typography
                 variant="subtitle2"
-                color="white"
+                color="text.primary"
                 sx={{
                   mb: 0.5,
                   fontWeight: 600
@@ -833,7 +865,7 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
                     component="li"
                     key={idx}
                     sx={{
-                      color: '#d1d1d1',
+                      color: theme => theme.palette.mode === 'dark' ? '#d1d1d1' : '#4B5563',
                       fontSize: '0.9em',
                       mb: 0.5,
                       lineHeight: 1.4
