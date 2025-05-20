@@ -1,6 +1,6 @@
 # JobFit AI Matchmaker
 
-![JobFit AI Matchmaker](./docs/images/jobfit-header.png)
+![JobFit AI Matchmaker](media/JobFit%20AI%20MatchMaker.png)
 
 **AI-powered proof of concept for matching resumes to job descriptions using Azure AI, OpenAI, and semantic search.**
 
