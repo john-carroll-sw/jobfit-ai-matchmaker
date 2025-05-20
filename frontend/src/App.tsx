@@ -178,14 +178,16 @@ const App: React.FC = () => {
                 </Box>
                 {/* Add Top Results slider */}
                 <Box sx={{ mb: 1, mt: 1 }}>
-                  <Typography variant="caption">Top Results: {topResults}</Typography>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Typography variant="caption">Top Results: {topResults}</Typography>
+                  </Box>
                   <Slider
                     value={topResults}
                     min={1}
                     max={20}
                     step={1}
                     onChange={(_, value) => setTopResults(value as number)}
-                    sx={{ width: 120 }}
+                    sx={{ mt: 0.5, mb: 1.5 }}
                   />
                 </Box>
                 <FormControlLabel
@@ -202,7 +204,7 @@ const App: React.FC = () => {
               </Box>
               <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
                 {showAdvancedOptions && (
-                  <Box sx={{ mt: 2, maxHeight: 260, overflowY: 'auto' }}>
+                  <Box sx={{ mt: 2, overflowY: 'auto' }}>
                     <Typography variant="body2" color="text.secondary" gutterBottom>
                       Matching Weights
                     </Typography>
@@ -463,8 +465,19 @@ const App: React.FC = () => {
                     )}
                   </Box>
                 ) : (
-                  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexGrow: 1 }}>
-                    <Typography color="text.secondary">
+                  <Box sx={{ 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'center', 
+                    flexGrow: 1,
+                    height: '100%', 
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    padding: '56px 16px 16px' // Add top padding to account for the header
+                  }}>
+                    <Typography color="text.secondary" variant="body1" align="center">
                       Enter a job description and click "Find Matching Candidates" to see results
                     </Typography>
                   </Box>
