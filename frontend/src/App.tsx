@@ -367,7 +367,7 @@ const App: React.FC = () => {
                       {results.metadata?.processingTimeMs &&
                         ` in ${(results.metadata.processingTimeMs / 1000).toFixed(2)}s`}
                     </Typography>
-                    <Box sx={{ overflowY: 'auto', pr: 1, flex: 1 }}>
+                    <Box sx={{ overflowY: 'auto', pr: 1, flex: 1, mb: 4 }}>
                       {results.matches.map((match) => (
                         <CandidateCard
                           key={match.resumeId}
@@ -391,7 +391,7 @@ const App: React.FC = () => {
                             position: 'fixed',
                             top: 0,
                             left: 0,
-                            width: 500,
+                            width: '40%', // Match the left panel width
                             height: '100vh',
                             bgcolor: 'background.paper',
                             boxShadow: 6,
@@ -465,12 +465,12 @@ const App: React.FC = () => {
                     )}
                   </Box>
                 ) : (
-                  <Box sx={{ 
-                    display: 'flex', 
-                    justifyContent: 'center', 
-                    alignItems: 'center', 
+                  <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                     flexGrow: 1,
-                    height: '100%', 
+                    height: '100%',
                     position: 'absolute',
                     top: 0,
                     left: 0,
@@ -495,96 +495,104 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
   // Calculate star rating out of 5 based on overallMatch (0-100)
   const starValue = match.matchAnalysis.overallMatch / 20;
   return (
-    <Card
-      onClick={onClick}
-      sx={{
-        mb: 2,
-        backgroundColor: isBestMatch ? 'rgba(76, 175, 80, 0.12)' : 'rgba(24, 26, 32, 0.7)',
-        borderRadius: 2,
-        border: isBestMatch ? '2px solid #4caf50' : undefined,
-        cursor: 'pointer',
-        transition: 'transform 0.2s, box-shadow 0.2s',
-        '&:hover': {
+    <Box sx={{
+      mt: 2,
+      mb: 2,
+      position: 'relative',
+      '&:hover': {
+        '& > .MuiCard-root': {
           transform: 'translateY(-2px)',
           boxShadow: 3
         }
-      }}
-    >
-      <CardContent>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Typography variant="subtitle1" color="white">
-              {match.resumeId}
-            </Typography>
-            {isBestMatch && <Chip label="Best Match" color="success" size="small" />}
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Typography variant="body2" color="text.secondary" mr={1}>
-              Match Score:
-            </Typography>
-            <Rating
-              value={starValue}
-              precision={0.1}
-              readOnly
-              size="small"
-            />
-            <Typography variant="body2" color="primary.light" ml={1}>
-              {match.matchAnalysis.overallMatch}%
-            </Typography>
-          </Box>
-        </Box>
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
-          {match.matchAnalysis.summary}
-        </Typography>
-        <Box sx={{ mb: 1 }}>
-          <Typography variant="caption" color="text.secondary">
-            Strengths:
-          </Typography>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 0.5 }}>
-            {match.matchAnalysis.technicalSkillsMatch.strengths.map((strength, i) => (
-              <Chip
-                key={i}
-                label={strength}
+      }
+    }}>
+      <Card
+        onClick={onClick}
+        sx={{
+          backgroundColor: isBestMatch ? 'rgba(76, 175, 80, 0.12)' : 'rgba(24, 26, 32, 0.7)',
+          borderRadius: 2,
+          border: isBestMatch ? '2px solid #4caf50' : undefined,
+          cursor: 'pointer',
+          transition: 'transform 0.2s, box-shadow 0.2s',
+          width: '100%'
+        }}
+      >
+        <CardContent>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Typography variant="subtitle1" color="white">
+                {match.resumeId}
+              </Typography>
+              {isBestMatch && <Chip label="Best Match" color="success" size="small" />}
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography variant="body2" color="text.secondary" mr={1}>
+                Match Score:
+              </Typography>
+              <Rating
+                value={starValue}
+                precision={0.1}
+                readOnly
                 size="small"
-                color="primary"
-                variant="outlined"
-                sx={{ fontSize: '0.7rem' }}
               />
-            ))}
+              <Typography variant="body2" color="primary.light" ml={1}>
+                {match.matchAnalysis.overallMatch}%
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-        <Box>
-          <Typography variant="caption" color="text.secondary">
-            Gaps:
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
+            {match.matchAnalysis.summary}
           </Typography>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 0.5 }}>
-            {match.matchAnalysis.technicalSkillsMatch.gaps.map((gap, i) => (
-              <Chip
-                key={i}
-                label={gap}
-                size="small"
-                color="error"
-                variant="outlined"
-                sx={{ fontSize: '0.7rem' }}
-              />
-            ))}
-          </Box>
-        </Box>
-        {/* Show recommended next steps if available */}
-        {match.matchAnalysis.recommendedNextSteps && match.matchAnalysis.recommendedNextSteps.length > 0 && (
-          <Box sx={{ mt: 1 }}>
+          <Box sx={{ mb: 1 }}>
             <Typography variant="caption" color="text.secondary">
-              Recommended Next Steps:
+              Strengths:
             </Typography>
-            <Box component="ul" sx={{ m: 0, pl: 2 }}>
-              {match.matchAnalysis.recommendedNextSteps.map((step, idx) => (
-                <Box component="li" key={idx} sx={{ color: '#bdbdbd', fontSize: '0.85em' }}>{step}</Box>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 0.5 }}>
+              {match.matchAnalysis.technicalSkillsMatch.strengths.map((strength, i) => (
+                <Chip
+                  key={i}
+                  label={strength}
+                  size="small"
+                  color="primary"
+                  variant="outlined"
+                  sx={{ fontSize: '0.7rem' }}
+                />
               ))}
             </Box>
           </Box>
-        )}
-      </CardContent>
-    </Card>
+          <Box>
+            <Typography variant="caption" color="text.secondary">
+              Gaps:
+            </Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 0.5 }}>
+              {match.matchAnalysis.technicalSkillsMatch.gaps.map((gap, i) => (
+                <Chip
+                  key={i}
+                  label={gap}
+                  size="small"
+                  color="error"
+                  variant="outlined"
+                  sx={{ fontSize: '0.7rem' }}
+                />
+              ))}
+            </Box>
+          </Box>
+          {/* Show recommended next steps if available */}
+          {match.matchAnalysis.recommendedNextSteps && match.matchAnalysis.recommendedNextSteps.length > 0 && (
+            <Box sx={{ mt: 1 }}>
+              <Typography variant="caption" color="text.secondary">
+                Recommended Next Steps:
+              </Typography>
+              <Box component="ul" sx={{ m: 0, pl: 2 }}>
+                {match.matchAnalysis.recommendedNextSteps.map((step, idx) => (
+                  <Box component="li" key={idx} sx={{ color: '#bdbdbd', fontSize: '0.85em' }}>{step}</Box>
+                ))}
+              </Box>
+            </Box>
+          )}
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 
