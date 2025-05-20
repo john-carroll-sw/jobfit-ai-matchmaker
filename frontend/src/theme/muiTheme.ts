@@ -1,3 +1,5 @@
+// NOTE: This file is kept for backward compatibility.
+// For new theme usage with dark/light mode toggle, use ThemeContext.tsx instead.
 import { createTheme } from "@mui/material/styles";
 
 export const muiTheme = createTheme({

@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
-  CssBaseline, Container, Box, Typography, ThemeProvider,
+  CssBaseline, Container, Box, Typography,
   TextField, Button, Paper, CircularProgress, Divider,
   FormControl, FormControlLabel, Switch, Select, MenuItem,
   InputLabel, Slider, Chip, Card, CardContent, Rating,
   Backdrop
 } from "@mui/material";
-import { muiTheme } from "./theme/muiTheme";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { ThemeToggle } from "./components/ThemeToggle";
 import { matchResumes } from "./api/resumeMatchmakerApi";
 import type { ResumeMatchingResponse, ResumeMatch } from "@jobfit-ai/shared/src/resumeMatchmakerTypes";
 
@@ -90,16 +91,20 @@ const App: React.FC = () => {
   };
 
   return (
-    <ThemeProvider theme={muiTheme}>
+    <ThemeProvider>
       <CssBaseline />
       <Box
         sx={{
           minHeight: "100vh",
           width: "100vw",
           background: "linear-gradient(120deg, #181A20 0%, #23262F 100%)",
-          fontFamily: muiTheme.typography.fontFamily,
+          fontFamily: 'inherit',
         }}
       >
+        {/* Theme toggle button in the top right */}
+        <Box sx={{ position: 'fixed', top: 16, right: 24, zIndex: 2000 }}>
+          <ThemeToggle />
+        </Box>
         <Container
           maxWidth={false}
           disableGutters
