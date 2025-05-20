@@ -2,11 +2,14 @@
 
 ![JobFit AI Matchmaker](media/JobFit%20AI%20MatchMaker.png)
 
-**AI-powered proof of concept for matching resumes to job descriptions using Azure AI, OpenAI, and semantic search.**
+## AI-powered resume-to-job matching using Azure AI, OpenAI, and semantic search
 
-![Watch it in action](media/JobfitAIMatchMaker_UI.png)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Azure](https://img.shields.io/badge/Azure-%230072C6.svg?style=flat&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org)
 
-![Watch it in action](media/ContentProcessingSolutionAccelerator_ResumesUI.png)
+![Demo in Action](media/JobfitAIMatchMaker_Demo.gif)
 
 ## 🔍 What is JobFit AI Matchmaker?
 
