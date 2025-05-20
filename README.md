@@ -4,7 +4,7 @@
 
 **AI-powered proof of concept for matching resumes to job descriptions using Azure AI, OpenAI, and semantic search.**
 
-*[Demo GIF coming soon!]*
+![Watch it in action](media/JobfitAIMatchMaker_Demo.gif)
 
 ## 🔍 What is JobFit?
 
@@ -96,6 +96,10 @@ JobFit extends the [Microsoft content-processing-solution-accelerator](https://g
 - See AI-processed structured data with extraction confidence scores
 - Run matching queries against your resume database
 - View top candidates ranked by relevance with match reasoning
+
+## 🖼️ More Screenshots & Media
+
+See [MEDIA_OVERVIEW.md](./media/MEDIA_OVERVIEW.md) for a gallery of screenshots and demo GIFs for both apps.
 
 ## 📝 Use Cases
 
