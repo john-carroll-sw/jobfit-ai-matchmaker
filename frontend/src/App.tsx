@@ -130,7 +130,9 @@ const App: React.FC = () => {
             <Paper
               elevation={3}
               sx={{
-                flex: '0 0 40%',
+                flex: 1,
+                minWidth: 0,
+                maxWidth: '40%',
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
@@ -368,9 +370,10 @@ const App: React.FC = () => {
             <Paper
               elevation={3}
               sx={{
-                flex: '0 0 60%',
+                flex: 2,
+                minWidth: 0,
+                maxWidth: '60%',
                 p: 2,
-                mr: 3,
                 display: 'flex',
                 flexDirection: 'column',
                 backgroundColor: theme => theme.palette.mode === 'dark' ? 'rgba(35, 38, 47, 0.7)' : 'background.paper',
