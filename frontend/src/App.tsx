@@ -4,12 +4,17 @@ import {
   TextField, Button, Paper, CircularProgress, Divider,
   FormControl, FormControlLabel, Switch, Select, MenuItem,
   InputLabel, Slider, Chip, Card, CardContent, Rating,
-  Backdrop
+  Backdrop, IconButton, Tooltip
 } from "@mui/material";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { matchResumes } from "./api/resumeMatchmakerApi";
 import type { ResumeMatchingResponse, ResumeMatch } from "@jobfit-ai/shared/src/resumeMatchmakerTypes";
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 
 const App: React.FC = () => {
   const [jobDescription, setJobDescription] = useState("");
@@ -28,6 +33,7 @@ const App: React.FC = () => {
   });
   const [loadingTime, setLoadingTime] = useState(0);
   const [selectedCandidate, setSelectedCandidate] = useState<ResumeMatch | null>(null);
+  const [infoOpen, setInfoOpen] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Timer effect for loading
@@ -131,9 +137,35 @@ const App: React.FC = () => {
                 overflow: 'hidden',
               }}
             >
-              <Typography variant="h4" gutterBottom sx={{ color: "primary.main", mb: 2, textAlign: "center" }}>
-                Jobfit AI Matchmaker
-              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
+                <Typography variant="h4" sx={{ color: "primary.main", textAlign: "center", mr: 1 }}>
+                  Jobfit AI Matchmaker
+                </Typography>
+                <IconButton
+                  aria-label="About Jobfit AI Matchmaker"
+                  size="small"
+                  onClick={() => setInfoOpen(true)}
+                  sx={{ color: 'primary.main', ml: 0.5 }}
+                >
+                  <InfoOutlinedIcon fontSize="medium" />
+                </IconButton>
+              </Box>
+              <Dialog open={infoOpen} onClose={() => setInfoOpen(false)} maxWidth="sm" fullWidth>
+                <DialogTitle sx={{ textAlign: 'center', fontWeight: 700 }}>About Jobfit AI Matchmaker</DialogTitle>
+                <DialogContent sx={{ py: 3 }}>
+                  <Typography variant="body1" sx={{ mb: 2 }}>
+                    <b>Jobfit AI Matchmaker</b> helps you quickly find the best-fit candidates for your job description using advanced AI-powered resume analysis. Paste a job description, adjust search options, and instantly see ranked matches, strengths, gaps, and actionable next steps for each candidate.
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    This tool leverages semantic search and custom scoring to streamline your hiring process and surface the most relevant talent for your needs.
+                  </Typography>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={() => setInfoOpen(false)} variant="contained" color="primary" autoFocus>
+                    Close
+                  </Button>
+                </DialogActions>
+              </Dialog>
               <Typography variant="h6" gutterBottom color="primary.light">
                 Job Description
               </Typography>
@@ -181,17 +213,25 @@ const App: React.FC = () => {
                     Search Options
                   </Typography>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <FormControlLabel
-                      control={
-                        <Switch
-                          checked={useHybridSearch}
-                          onChange={(e) => setUseHybridSearch(e.target.checked)}
-                          color="primary"
-                          sx={{ ml: 1 }}
-                        />
-                      }
-                      label="Hybrid Search"
-                    />
+                    <Tooltip 
+                      title={useHybridSearch ? 
+                        "Hybrid Search: Combines semantic and keyword matching for better results" : 
+                        "Vector Search: Uses semantic embedding similarity only"}
+                      placement="top"
+                      arrow
+                    >
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            checked={useHybridSearch}
+                            onChange={(e) => setUseHybridSearch(e.target.checked)}
+                            color="primary"
+                            sx={{ ml: 1 }}
+                          />
+                        }
+                        label="Hybrid Search"
+                      />
+                    </Tooltip>
                     <FormControl size="small" sx={{ width: '180px' }}>
                       <InputLabel>Industry</InputLabel>
                       <Select
@@ -328,6 +368,7 @@ const App: React.FC = () => {
               sx={{
                 flex: '0 0 60%',
                 p: 2,
+                mr: 3,
                 display: 'flex',
                 flexDirection: 'column',
                 backgroundColor: 'rgba(35, 38, 47, 0.7)',
@@ -424,8 +465,12 @@ const App: React.FC = () => {
                     {/* Match list */}
                     <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                       {results.matches.length} Candidates Found
-                      {results.metadata?.processingTimeMs &&
-                        ` in ${(results.metadata.processingTimeMs / 1000).toFixed(2)}s`}
+                      {results.metadata?.processingTimeMs && (() => {
+                        const seconds = (results.metadata.processingTimeMs / 1000);
+                        return seconds >= 60
+                          ? ` in ${Math.floor(seconds / 60)}m ${Math.round(seconds % 60)}s`
+                          : ` in ${seconds.toFixed(2)}s`;
+                      })()}
                     </Typography>
                     <Box sx={{ overflowY: 'auto', pr: 1, flex: 1, mb: 4 }}>
                       {results.matches.map((match) => (
