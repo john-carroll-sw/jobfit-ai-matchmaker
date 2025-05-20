@@ -13,7 +13,7 @@
 
 ## 🔍 What is JobFit AI Matchmaker?
 
-JobFit AI Matchmaker is a proof of concept that reimagines resume-to-job matching using advanced Azure AI services. It demonstrates how to:
+JobFit AI Matchmaker is a proof of concept that reimagines resume-to-job matching using advanced Azure AI services. It matches resumes to a user-provided job description with high accuracy and relevance. It demonstrates how to:
 
 - **Automatically process** resumes at scale
 - **Extract structured information** with high accuracy
@@ -60,40 +60,44 @@ JobFit extends the [Microsoft content-processing-solution-accelerator](https://g
 3. Configure environment variables:
    - Copy `.env.example` to `.env` and update with your Azure resource details
 
-4. Using the components:
+4. Sample resume dataset:
+   - For testing purposes, you can use the [Kaggle resume dataset](https://www.kaggle.com/datasets/snehaanbhawal/resume-dataset)
+   - This dataset provides a variety of sample resumes across different industries
 
-### Content Processing Solution Accelerator
+5. Using the components:
 
-- Built on the [Microsoft content-processing-solution-accelerator](https://github.com/microsoft/content-processing-solution-accelerator)
-- Uses an extensible [resume schema](./src/ContentProcessorAPI/samples/schemas/resume.py)
-- Handles document processing and storage in Azure Cosmos DB
-- Follow the setup in `/docs/DeploymentGuide.md` to configure
+    **Content Processing Solution Accelerator**
 
-### Resume Search & Indexing Scripts (`scripts/` folder)
+    - Built on the [Microsoft content-processing-solution-accelerator](https://github.com/microsoft/content-processing-solution-accelerator)
+    - Uses an extensible [resume schema](./src/ContentProcessorAPI/samples/schemas/resume.py)
+    - Handles document processing and storage in Azure Cosmos DB
+    - Follow the setup in `/docs/DeploymentGuide.md` to configure
 
-- `poc_get_all_resumes_from_cosmos.py`: Fetch processed resumes from Cosmos DB
-- `poc_index_resumes_into_azure_ai_search.py` and `poc_index_all_resumes_into_azure_ai_search.py`: Embed and index resumes
-- `poc_perform_azure_ai_hybrid_search.py`: Test search with a query
+    **Resume Search & Indexing Scripts (`scripts/` folder)**
 
-### JobFit AI Matchmaker App
+    - `poc_get_all_resumes_from_cosmos.py`: Fetch processed resumes from Cosmos DB
+    - `poc_index_all_resumes_into_azure_ai_search.py`: Embed and index resumes
+    - `poc_perform_azure_ai_hybrid_search.py`: Test search with a query
 
-- Frontend (`frontend/`):
+    **JobFit AI Matchmaker App**
 
-  ```bash
-  cd frontend
-  npm install
-  npm run dev
-  ```
+    - Frontend (`frontend/`):
 
-- Backend (`backend/`):
+    ```bash
+    cd frontend
+    npm install
+    npm run dev
+    ```
 
-  ```bash
-  cd backend
-  npm install
-  npm run dev
-  ```
+    - Backend (`backend/`):
 
-- Debug both simultaneously using VS Code with the provided [`launch.json`](./.vscode/launch.json) configuration
+    ```bash
+    cd backend
+    npm install
+    npm run dev
+    ```
+
+   > **Tip:** Debug both frontend and backend simultaneously using VS Code with the provided [`launch.json`](./.vscode/launch.json) configuration
 
 ## 📊 Demo Scenarios
 
