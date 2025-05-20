@@ -37,9 +37,9 @@ export const MatchAnalysisSchema = z.object({
   technicalSkillsMatch: MatchDimensionSchema,
   experienceMatch: MatchDimensionSchema,
   educationMatch: MatchDimensionSchema,
-  certificationsMatch: MatchDimensionSchema.optional(),
-  industryKnowledgeMatch: MatchDimensionSchema.optional(),
-  softSkillsMatch: MatchDimensionSchema.optional(),
+  certificationsMatch: MatchDimensionSchema.nullable(),
+  industryKnowledgeMatch: MatchDimensionSchema.nullable(),
+  softSkillsMatch: MatchDimensionSchema.nullable(),
 });
 
 export const ResumeMatchSchema = z.object({
@@ -57,21 +57,21 @@ export const BestMatchRecommendationSchema = z.object({
 });
 
 export const ResumeMatchingResponseSchema = z.object({
-  bestMatch: BestMatchRecommendationSchema.optional(),
+  bestMatch: BestMatchRecommendationSchema.nullable(),
   matches: z.array(ResumeMatchSchema),
   metadata: z.object({
-    totalCandidatesScanned: z.number().optional(),
-    processingTimeMs: z.number().optional(),
-    searchStrategy: z.string().optional()
-  }).optional()
+    totalCandidatesScanned: z.number().nullable(),
+    processingTimeMs: z.number().nullable(),
+    searchStrategy: z.string().nullable()
+  }).nullable()
 });
 
 
 export const MatchingOptionsSchema = z.object({
-  useHybridSearch: z.boolean().optional().default(true),
-  topResults: z.number().int().positive().max(20).optional().default(5),
-  industryType: z.enum(['healthcare', 'technology', 'finance', 'education', 'general']).optional().default('general'),
-  customWeights: z.record(z.string(), z.number().min(0).max(1)).optional()
+  useHybridSearch: z.boolean().nullable().default(true),
+  topResults: z.number().int().positive().max(20).nullable().default(5),
+  industryType: z.enum(['healthcare', 'technology', 'finance', 'education', 'general']).nullable().default('general'),
+  customWeights: z.record(z.string(), z.number().min(0).max(1)).nullable()
 });
 
 export type MatchingOptions = z.infer<typeof MatchingOptionsSchema>;

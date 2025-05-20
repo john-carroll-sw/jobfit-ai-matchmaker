@@ -7,7 +7,7 @@ import { MatchingOptionsSchema } from '@jobfit-ai/shared';
 // Input validation schema
 const ResumeMatchingRequestSchema = z.object({
   jobDescription: z.string().min(50, "Job description must be at least 50 characters"),
-  matchingOptions: MatchingOptionsSchema.optional().default({})
+  matchingOptions: MatchingOptionsSchema.default({})
 });
 
 // Create a singleton instance of the matching service

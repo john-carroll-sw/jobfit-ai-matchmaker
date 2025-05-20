@@ -442,7 +442,7 @@ const createAppTheme = (mode: 'light' | 'dark'): Theme => {
 
 // ThemeProvider component that provides the theme context
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [mode, setMode] = useState<'light' | 'dark'>('light');
+  const [mode, setMode] = useState<'light' | 'dark'>('dark');
 
   // Toggle between light and dark modes
   const toggleTheme = () => {
