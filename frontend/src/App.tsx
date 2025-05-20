@@ -45,6 +45,20 @@ const App: React.FC = () => {
     };
   }, [isLoading]);
 
+  // Handle ESC key to close the sidebar
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && selectedCandidate) {
+        setSelectedCandidate(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedCandidate]);
+
   const handleSubmit = async () => {
     if (!jobDescription.trim()) {
       setError("Please enter a job description");
@@ -62,15 +76,8 @@ const App: React.FC = () => {
       const response = await matchResumes({ jobDescription, matchingOptions });
       setResults(response);
 
-      // If there's a best match in the results, set it as selectedCandidate
-      if (response.bestMatch) {
-        const bestMatchFull = response.matches.find(
-          (match) => match.resumeId === response.bestMatch?.candidateId
-        );
-        if (bestMatchFull) {
-          setSelectedCandidate(bestMatchFull);
-        }
-      }
+      // Reset selected candidate when getting new search results
+      setSelectedCandidate(null);
     } catch (err) {
       setError(`Error: ${err instanceof Error ? err.message : 'Failed to match resumes'}`);
     } finally {
@@ -116,6 +123,7 @@ const App: React.FC = () => {
                 flexDirection: 'column',
                 backgroundColor: 'rgba(35, 38, 47, 0.7)',
                 borderRadius: 2,
+                overflow: 'hidden',
               }}
             >
               <Typography variant="h4" gutterBottom sx={{ color: "primary.main", mb: 2, textAlign: "center" }}>
@@ -127,7 +135,7 @@ const App: React.FC = () => {
               <TextField
                 multiline
                 fullWidth
-                rows={12}
+                rows={showAdvancedOptions ? 10 : 23}
                 variant="outlined"
                 placeholder="Paste job description here..."
                 value={jobDescription}
@@ -136,7 +144,12 @@ const App: React.FC = () => {
                   mb: 2,
                   backgroundColor: 'rgba(24, 26, 32, 0.5)',
                   borderRadius: 1,
+                  flex: showAdvancedOptions ? 'none' : 1,
                   '& .MuiOutlinedInput-root': {
+                    height: showAdvancedOptions ? 'auto' : '100%',
+                    '& textarea': {
+                      height: showAdvancedOptions ? 'auto' : '100% !important'
+                    },
                     '& fieldset': {
                       borderColor: 'rgba(255, 255, 255, 0.15)',
                     },
@@ -146,139 +159,157 @@ const App: React.FC = () => {
                   }
                 }}
               />
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                  Search Options
-                </Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={useHybridSearch}
-                        onChange={(e) => setUseHybridSearch(e.target.checked)}
-                        color="primary"
-                      />
-                    }
-                    label="Hybrid Search"
-                  />
-                  <FormControl size="small" sx={{ width: '180px' }}>
-                    <InputLabel>Industry</InputLabel>
-                    <Select
-                      value={industryType}
-                      label="Industry"
-                      onChange={(e) => setIndustryType(e.target.value as typeof industryType)}
-                    >
-                      <MenuItem value="general">General</MenuItem>
-                      <MenuItem value="technology">Technology</MenuItem>
-                      <MenuItem value="healthcare">Healthcare</MenuItem>
-                      <MenuItem value="finance">Finance</MenuItem>
-                      <MenuItem value="education">Education</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
-                {/* Add Top Results slider */}
-                <Box sx={{ mb: 1, mt: 1 }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Typography variant="caption">Top Results: {topResults}</Typography>
-                  </Box>
-                  <Slider
-                    value={topResults}
-                    min={1}
-                    max={20}
-                    step={1}
-                    onChange={(_, value) => setTopResults(value as number)}
-                    sx={{ mt: 0.5, mb: 1.5 }}
-                  />
-                </Box>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={showAdvancedOptions}
-                      onChange={(e) => setShowAdvancedOptions(e.target.checked)}
-                      color="primary"
-                      size="small"
+              {/* Scrollable container for everything below job description */}
+              <Box sx={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                overflow: 'hidden',
+              }}>
+                {/* Scrollable content */}
+                <Box sx={{
+                  overflowY: 'auto',
+                  flex: 1,
+                  mb: 2
+                }}>
+                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                    Search Options
+                  </Typography>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={useHybridSearch}
+                          onChange={(e) => setUseHybridSearch(e.target.checked)}
+                          color="primary"
+                          sx={{ ml: 1 }}
+                        />
+                      }
+                      label="Hybrid Search"
                     />
-                  }
-                  label="Advanced Options"
-                />
-              </Box>
-              <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-                {showAdvancedOptions && (
-                  <Box sx={{ mt: 2, overflowY: 'auto' }}>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
-                      Matching Weights
-                    </Typography>
-                    <Box sx={{ px: 1 }}>
-                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Typography variant="caption">Experience</Typography>
-                        <Typography variant="caption" color="primary.light">{weights.experience.toFixed(1)}</Typography>
-                      </Box>
-                      <Slider
-                        value={weights.experience}
-                        min={0}
-                        max={1}
-                        step={0.1}
-                        onChange={handleWeightChange('experience')}
-                        sx={{ mt: 0.5, mb: 1.5 }}
-                        valueLabelDisplay="auto"
-                      />
-
-                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Typography variant="caption">Technical Skills</Typography>
-                        <Typography variant="caption" color="primary.light">{weights.technicalSkills.toFixed(1)}</Typography>
-                      </Box>
-                      <Slider
-                        value={weights.technicalSkills}
-                        min={0}
-                        max={1}
-                        step={0.1}
-                        onChange={handleWeightChange('technicalSkills')}
-                        sx={{ mt: 0.5, mb: 1.5 }}
-                        valueLabelDisplay="auto"
-                      />
-
-                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Typography variant="caption">Certifications</Typography>
-                        <Typography variant="caption" color="primary.light">{weights.certifications.toFixed(1)}</Typography>
-                      </Box>
-                      <Slider
-                        value={weights.certifications}
-                        min={0}
-                        max={1}
-                        step={0.1}
-                        onChange={handleWeightChange('certifications')}
-                        sx={{ mt: 0.5, mb: 1.5 }}
-                        valueLabelDisplay="auto"
-                      />
-
-                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Typography variant="caption">Education</Typography>
-                        <Typography variant="caption" color="primary.light">{weights.education.toFixed(1)}</Typography>
-                      </Box>
-                      <Slider
-                        value={weights.education}
-                        min={0}
-                        max={1}
-                        step={0.1}
-                        onChange={handleWeightChange('education')}
-                        sx={{ mt: 0.5, mb: 1 }}
-                        valueLabelDisplay="auto"
-                      />
-                    </Box>
+                    <FormControl size="small" sx={{ width: '180px' }}>
+                      <InputLabel>Industry</InputLabel>
+                      <Select
+                        value={industryType}
+                        label="Industry"
+                        onChange={(e) => setIndustryType(e.target.value as typeof industryType)}
+                      >
+                        <MenuItem value="general">General</MenuItem>
+                        <MenuItem value="technology">Technology</MenuItem>
+                        <MenuItem value="healthcare">Healthcare</MenuItem>
+                        <MenuItem value="finance">Finance</MenuItem>
+                        <MenuItem value="education">Education</MenuItem>
+                      </Select>
+                    </FormControl>
                   </Box>
-                )}
-                <Box sx={{ mt: 'auto', display: 'flex', justifyContent: 'center' }}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    onClick={handleSubmit}
-                    disabled={isLoading || !jobDescription.trim()}
-                    sx={{ px: 4, py: 1, borderRadius: 2 }}
-                  >
-                    {isLoading ? <CircularProgress size={24} color="inherit" /> : "Find Matching Candidates"}
-                  </Button>
-                </Box>
+                  {/* Add Top Results slider */}
+                  <Box sx={{ mb: 1, mt: 1 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <Typography variant="caption">Top Results: {topResults}</Typography>
+                    </Box>
+                    <Slider
+                      value={topResults}
+                      min={1}
+                      max={20}
+                      step={1}
+                      onChange={(_, value) => setTopResults(value as number)}
+                      sx={{ mt: 0.5, mb: 1.5 }}
+                    />
+                  </Box>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={showAdvancedOptions}
+                          onChange={(e) => setShowAdvancedOptions(e.target.checked)}
+                          color="primary"
+                          sx={{ ml: 1 }}
+                        />
+                      }
+                      label="Advanced Options"
+                    />
+                  </Box>
+                  <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+                    {showAdvancedOptions && (
+                      <Box>
+                        <Typography variant="body2" color="text.secondary" gutterBottom>
+                          Matching Weights
+                        </Typography>
+                        <Box sx={{ px: 1 }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Typography variant="caption">Experience</Typography>
+                            <Typography variant="caption" color="primary.light">{weights.experience.toFixed(1)}</Typography>
+                          </Box>
+                          <Slider
+                            value={weights.experience}
+                            min={0}
+                            max={1}
+                            step={0.1}
+                            onChange={handleWeightChange('experience')}
+                            sx={{ mt: 0.5, mb: 1.5 }}
+                            valueLabelDisplay="auto"
+                          />
+
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Typography variant="caption">Technical Skills</Typography>
+                            <Typography variant="caption" color="primary.light">{weights.technicalSkills.toFixed(1)}</Typography>
+                          </Box>
+                          <Slider
+                            value={weights.technicalSkills}
+                            min={0}
+                            max={1}
+                            step={0.1}
+                            onChange={handleWeightChange('technicalSkills')}
+                            sx={{ mt: 0.5, mb: 1.5 }}
+                            valueLabelDisplay="auto"
+                          />
+
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Typography variant="caption">Certifications</Typography>
+                            <Typography variant="caption" color="primary.light">{weights.certifications.toFixed(1)}</Typography>
+                          </Box>
+                          <Slider
+                            value={weights.certifications}
+                            min={0}
+                            max={1}
+                            step={0.1}
+                            onChange={handleWeightChange('certifications')}
+                            sx={{ mt: 0.5, mb: 1.5 }}
+                            valueLabelDisplay="auto"
+                          />
+
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Typography variant="caption">Education</Typography>
+                            <Typography variant="caption" color="primary.light">{weights.education.toFixed(1)}</Typography>
+                          </Box>
+                          <Slider
+                            value={weights.education}
+                            min={0}
+                            max={1}
+                            step={0.1}
+                            onChange={handleWeightChange('education')}
+                            sx={{ mt: 0.5, mb: 1 }}
+                            valueLabelDisplay="auto"
+                          />
+                        </Box>
+                      </Box>
+                    )}
+                  </Box>
+              </Box>
+            </Box>
+
+              {/* Button at the bottom of scrollable area */}
+              <Box sx={{ mt: 'auto', display: 'flex', justifyContent: 'center', py: 2 }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  onClick={handleSubmit}
+                  disabled={isLoading || !jobDescription.trim()}
+                  sx={{ px: 4, py: 1, borderRadius: 2 }}
+                >
+                  {isLoading ? <CircularProgress size={24} color="inherit" /> : "Find Matching Candidates"}
+                </Button>
               </Box>
               {error && (
                 <Typography color="error" variant="body2" sx={{ mt: 2, textAlign: 'center' }}>
@@ -319,7 +350,11 @@ const App: React.FC = () => {
                 >
                   <CircularProgress size={48} color="primary" thickness={5} />
                   <Typography variant="body2" color="primary.contrastText" sx={{ mt: 2, fontWeight: 600, fontSize: '1.2rem', letterSpacing: 0.5 }}>
-                    Finding matching candidates... {loadingTime}s elapsed
+                    Finding matching candidates... {
+                      loadingTime >= 60
+                        ? `${Math.floor(loadingTime / 60)}m ${loadingTime % 60}s`
+                        : `${loadingTime}s`
+                    } elapsed
                   </Typography>
                 </Box>
               )}
@@ -334,6 +369,14 @@ const App: React.FC = () => {
                       <>
                         <Paper
                           elevation={2}
+                          onClick={() => {
+                            const bestMatchFull = results.matches.find(
+                              match => match.resumeId === results.bestMatch?.candidateId
+                            );
+                            if (bestMatchFull) {
+                              setSelectedCandidate(bestMatchFull);
+                            }
+                          }}
                           sx={{
                             p: 2,
                             mb: 2,
@@ -342,12 +385,24 @@ const App: React.FC = () => {
                             border: '1px solid rgba(76, 175, 80, 0.2)',
                             maxHeight: 220,
                             overflowY: 'auto',
+                            cursor: 'pointer',
+                            transition: 'transform 0.2s, box-shadow 0.2s',
+                            '&:hover': {
+                              transform: 'translateY(-2px)',
+                              boxShadow: 3,
+                              backgroundColor: 'rgba(76, 175, 80, 0.15)',
+                            }
                           }}
                         >
                           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-                            <Typography variant="subtitle1" color="primary.light" fontWeight="bold">
-                              Best Match: {results.bestMatch.candidateId}
-                            </Typography>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                              <Typography variant="subtitle1" color="primary.light" fontWeight="bold">
+                                Best Match: {results.bestMatch.candidateId}
+                              </Typography>
+                              <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center' }}>
+                                (Click to view details)
+                              </Typography>
+                            </Box>
                             <Chip
                               label={`Score: ${results.bestMatch.overallScore}%`}
                               color="success"
@@ -413,27 +468,104 @@ const App: React.FC = () => {
                             {selectedCandidate.matchAnalysis.summary}
                           </Typography>
                           <Divider sx={{ my: 2 }} />
-                          <Typography variant="subtitle2" color="primary.light">Strengths</Typography>
-                          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 2 }}>
+                          <Typography
+                            variant="h6"
+                            color="white"
+                            sx={{
+                              mb: 1,
+                              fontWeight: 600
+                            }}
+                          >
+                            Strengths
+                          </Typography>
+                          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 3 }}>
                             {selectedCandidate.matchAnalysis.technicalSkillsMatch.strengths.map((s: string, i: number) => (
-                              <Chip key={i} label={s} size="small" color="primary" variant="outlined" />
+                              <Chip
+                                key={i}
+                                label={s}
+                                sx={{
+                                  fontSize: '0.9rem',
+                                  px: 1,
+                                  py: 1,
+                                  fontWeight: 500,
+                                  color: 'white',
+                                  bgcolor: 'rgba(76, 175, 80, 0.15)',
+                                  '&:hover': {
+                                    bgcolor: 'rgba(76, 175, 80, 0.25)',
+                                  },
+                                  border: '1px solid rgba(76, 175, 80, 0.5)',
+                                }}
+                              />
                             ))}
                           </Box>
-                          <Typography variant="subtitle2" color="error.main">Gaps</Typography>
-                          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 2 }}>
+                          <Typography
+                            variant="h6"
+                            color="white"
+                            sx={{
+                              mb: 1,
+                              fontWeight: 600
+                            }}
+                          >
+                            Gaps
+                          </Typography>
+                          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 3 }}>
                             {selectedCandidate.matchAnalysis.technicalSkillsMatch.gaps.map((g: string, i: number) => (
-                              <Chip key={i} label={g} size="small" color="error" variant="outlined" />
+                              <Chip
+                                key={i}
+                                label={g}
+                                sx={{
+                                  fontSize: '0.9rem',
+                                  px: 1,
+                                  py: 1,
+                                  fontWeight: 500,
+                                  color: 'white',
+                                  bgcolor: 'rgba(211, 47, 47, 0.15)',
+                                  '&:hover': {
+                                    bgcolor: 'rgba(211, 47, 47, 0.25)',
+                                  },
+                                  border: '1px solid rgba(211, 47, 47, 0.5)',
+                                }}
+                              />
                             ))}
                           </Box>
-                          <Typography variant="subtitle2" color="primary.light">Recommended Next Steps</Typography>
-                          <Box component="ul" sx={{ m: 0, pl: 2 }}>
+                          <Typography
+                            variant="h6"
+                            color="white"
+                            sx={{
+                              mb: 1,
+                              fontWeight: 600
+                            }}
+                          >
+                            Recommended Next Steps
+                          </Typography>
+                          <Box
+                            component="ul"
+                            sx={{
+                              m: 0,
+                              pl: 2
+                            }}
+                          >
                             {selectedCandidate.matchAnalysis.recommendedNextSteps.map((step: string, idx: number) => (
-                              <Box component="li" key={idx} sx={{ color: '#bdbdbd', fontSize: '0.95em' }}>{step}</Box>
+                              <Box
+                                component="li"
+                                key={idx}
+                                sx={{
+                                  color: '#e0e0e0',
+                                  fontSize: '1rem',
+                                  mb: 1,
+                                  lineHeight: 1.4,
+                                  '&:last-child': {
+                                    mb: 0
+                                  }
+                                }}
+                              >
+                                {step}
+                              </Box>
                             ))}
                           </Box>
                           <Divider sx={{ my: 2 }} />
                           {/* Show all match dimensions */}
-                          <Typography variant="subtitle2" color="primary.light">Match Dimensions</Typography>
+                          <Typography variant="h6" color="white" sx={{ fontWeight: 600 }}>Match Dimensions</Typography>
                           {Object.entries(selectedCandidate.matchAnalysis).map(([key, value]) => {
                             // Only show dimensions with score (type guard)
                             if (typeof value === 'object' && value !== null && 'score' in value) {
@@ -445,14 +577,37 @@ const App: React.FC = () => {
                               };
                               return (
                                 <Box key={key} sx={{ mb: 2 }}>
-                                  <Typography variant="body2" color="primary.main">{key.replace('Match', '')} (Score: {dim.score})</Typography>
+                                  <Typography variant="body2" color="white">
+                                    {key.replace('Match', '')
+                                      .replace(/([A-Z])/g, ' $1')
+                                      .replace(/^./, str => str.toUpperCase())}
+                                    : (Score: {dim.score})
+                                  </Typography>
                                   <Typography variant="caption" color="text.secondary">{dim.explanation}</Typography>
                                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 0.5 }}>
                                     {dim.strengths && dim.strengths.map((s, i) => (
-                                      <Chip key={i} label={s} size="small" color="primary" variant="outlined" />
+                                      <Chip
+                                        key={i}
+                                        label={s}
+                                        size="small"
+                                        sx={{
+                                          color: 'white',
+                                          bgcolor: 'rgba(76, 175, 80, 0.15)',
+                                          border: '1px solid rgba(76, 175, 80, 0.5)',
+                                        }}
+                                      />
                                     ))}
                                     {dim.gaps && dim.gaps.map((g, i) => (
-                                      <Chip key={i} label={g} size="small" color="error" variant="outlined" />
+                                      <Chip
+                                        key={i}
+                                        label={g}
+                                        size="small"
+                                        sx={{
+                                          color: 'white',
+                                          bgcolor: 'rgba(211, 47, 47, 0.15)',
+                                          border: '1px solid rgba(211, 47, 47, 0.5)',
+                                        }}
+                                      />
                                     ))}
                                   </Box>
                                 </Box>
@@ -521,7 +676,7 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <Typography variant="subtitle1" color="white">
-                {match.resumeId}
+                Resume ID: {match.resumeId}
               </Typography>
               {isBestMatch && <Chip label="Best Match" color="success" size="small" />}
             </Box>
@@ -543,49 +698,99 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
             {match.matchAnalysis.summary}
           </Typography>
-          <Box sx={{ mb: 1 }}>
-            <Typography variant="caption" color="text.secondary">
+          <Box sx={{ mb: 2 }}>
+            <Typography
+              variant="subtitle2"
+              color="white"
+              sx={{
+                mb: 0.5,
+                fontWeight: 600
+              }}
+            >
               Strengths:
             </Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 0.5 }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 0.5 }}>
               {match.matchAnalysis.technicalSkillsMatch.strengths.map((strength, i) => (
                 <Chip
                   key={i}
                   label={strength}
                   size="small"
-                  color="primary"
-                  variant="outlined"
-                  sx={{ fontSize: '0.7rem' }}
+                  sx={{
+                    fontSize: '0.8rem',
+                    px: 0.5,
+                    py: 0.75,
+                    fontWeight: 500,
+                    color: 'white',
+                    bgcolor: 'rgba(76, 175, 80, 0.15)',
+                    '&:hover': {
+                      bgcolor: 'rgba(76, 175, 80, 0.25)',
+                    },
+                    border: '1px solid rgba(76, 175, 80, 0.5)',
+                  }}
                 />
               ))}
             </Box>
           </Box>
-          <Box>
-            <Typography variant="caption" color="text.secondary">
+          <Box sx={{ mb: 1 }}>
+            <Typography
+              variant="subtitle2"
+              color="white"
+              sx={{
+                mb: 0.5,
+                fontWeight: 600
+              }}
+            >
               Gaps:
             </Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 0.5 }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 0.5 }}>
               {match.matchAnalysis.technicalSkillsMatch.gaps.map((gap, i) => (
                 <Chip
                   key={i}
                   label={gap}
                   size="small"
-                  color="error"
-                  variant="outlined"
-                  sx={{ fontSize: '0.7rem' }}
+                  sx={{
+                    fontSize: '0.8rem',
+                    px: 0.5,
+                    py: 0.75,
+                    fontWeight: 500,
+                    color: 'white',
+                    bgcolor: 'rgba(211, 47, 47, 0.15)',
+                    '&:hover': {
+                      bgcolor: 'rgba(211, 47, 47, 0.25)',
+                    },
+                    border: '1px solid rgba(211, 47, 47, 0.5)',
+                  }}
                 />
               ))}
             </Box>
           </Box>
           {/* Show recommended next steps if available */}
           {match.matchAnalysis.recommendedNextSteps && match.matchAnalysis.recommendedNextSteps.length > 0 && (
-            <Box sx={{ mt: 1 }}>
-              <Typography variant="caption" color="text.secondary">
+            <Box sx={{ mt: 2 }}>
+              <Typography
+                variant="subtitle2"
+                color="white"
+                sx={{
+                  mb: 0.5,
+                  fontWeight: 600
+                }}
+              >
                 Recommended Next Steps:
               </Typography>
               <Box component="ul" sx={{ m: 0, pl: 2 }}>
                 {match.matchAnalysis.recommendedNextSteps.map((step, idx) => (
-                  <Box component="li" key={idx} sx={{ color: '#bdbdbd', fontSize: '0.85em' }}>{step}</Box>
+                  <Box
+                    component="li"
+                    key={idx}
+                    sx={{
+                      color: '#d1d1d1',
+                      fontSize: '0.9em',
+                      mb: 0.5,
+                      lineHeight: 1.4
+                    }}
+                  >
+                    {step}
+                  </Box>
                 ))}
               </Box>
             </Box>
