@@ -462,8 +462,13 @@ const App: React.FC = () => {
                             </Box>
                             <Chip
                               label={`Score: ${results.bestMatch.overallScore}%`}
-                              color="success"
                               size="small"
+                              sx={{
+                                backgroundColor: '#4CAF50', // Green background
+                                color: 'white',
+                                fontWeight: 600,
+                                px: 1
+                              }}
                             />
                           </Box>
                           <Typography variant="body2" sx={{ fontStyle: 'italic', color: 'text.secondary', whiteSpace: 'pre-line' }}>
@@ -760,7 +765,18 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
               <Typography variant="subtitle1" color="text.primary">
                 Resume ID: {match.resumeId}
               </Typography>
-              {isBestMatch && <Chip label="Best Match" color="success" size="small" />}
+              {isBestMatch && (
+                <Chip 
+                  label="Best Match" 
+                  size="small"
+                  sx={{
+                    backgroundColor: '#4CAF50', // Green background
+                    color: 'white',
+                    fontWeight: 600,
+                    px: 1
+                  }}
+                />
+              )}
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography variant="body2" color="text.secondary" mr={1}>
@@ -772,9 +788,17 @@ const CandidateCard: React.FC<{ match: ResumeMatch; isBestMatch?: boolean; onCli
                 readOnly
                 size="small"
               />
-              <Typography variant="body2" color="primary.light" ml={1}>
-                {match.matchAnalysis.overallMatch}%
-              </Typography>
+              <Chip
+                label={`${match.matchAnalysis.overallMatch}%`}
+                size="small"
+                sx={{
+                  ml: 1,
+                  backgroundColor: theme => theme.palette.mode === 'dark' ? '#5D5FEF' : '#4A4AF4',
+                  color: 'white',
+                  fontWeight: 600,
+                  minWidth: '45px'
+                }}
+              />
             </Box>
           </Box>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
