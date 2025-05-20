@@ -2,7 +2,7 @@
 
 ![JobFit AI Matchmaker](media/JobFit%20AI%20MatchMaker.png)
 
-## AI-powered resume-to-job matching using Azure AI, OpenAI, and semantic search
+## AI-powered resume-to-job matching using Azure AI, OpenAI, and Azure AI search
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Azure](https://img.shields.io/badge/Azure-%230072C6.svg?style=flat&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com)
