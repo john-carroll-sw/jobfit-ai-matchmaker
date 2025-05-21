@@ -1,8 +1,8 @@
-# JobFit AI Matchmaker
+# Overview
 
 ![JobFit AI Matchmaker](media/JobFit%20AI%20MatchMaker.png)
 
-## AI-powered resume-to-job matching using Azure AI, OpenAI, and Azure AI search
+## Azure AI-powered resume-to-job matching
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Azure](https://img.shields.io/badge/Azure-%230072C6.svg?style=flat&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com)
@@ -29,22 +29,39 @@ JobFit AI Matchmaker is a proof of concept that reimagines resume-to-job matchin
 
 ## ✨ Architecture: Three Parts, One Solution
 
-- **1. Content Processing Solution Accelerator**: The core document ingestion and processing pipeline that extracts structured data from resumes
-- **2. Resume Search & Indexing**: Python scripts that transform processed resumes into searchable content in Azure AI Search
-- **3. JobFit AI Matchmaker App**: A full-stack web application for finding the best candidate matches for job descriptions
+- **1. Content Processing Solution Accelerator**: The core document ingestion and processing pipeline that extracts structured data from resumes using **`Azure OpenAI (GPT-4o)`**, **`Azure AI Foundry's Content Understanding`**, **`Azure Blob Storage`**, **`Cosmos DB`**, **`Container Apps`**, and **`Entra`**
+- **2. Resume Search & Indexing**: Python scripts that transform processed resumes into searchable content in **`Azure AI Search`** using **`Azure OpenAI Text Embedding 3 Large`** for embeddings
+- **3. JobFit AI Matchmaker App**: A full-stack web application that leverages **`Azure AI Search`** and **`Azure OpenAI o4-mini`** reasoning model to find the best candidate matches for job descriptions using empirical analysis scoring
 
 ## 🛠️ Document Processing Pipeline
 
 JobFit extends the [Microsoft content-processing-solution-accelerator](https://github.com/microsoft/content-processing-solution-accelerator) with a multi-stage pipeline:
 
-1. **Ingest resumes** via Azure AI Content Understanding and OpenAI Vision for extraction and schema mapping
-2. **Structure data** into flexible Pydantic schemas
-3. **Store results** in Azure Cosmos DB
-4. **Generate embeddings** for structured resume content (not pictured)
-5. **Index into Azure AI Search** for powerful semantic and hybrid querying (not pictured)
-6. **Match resumes to jobs** using both vector similarity and traditional filters (not pictured)
+### Processing Pipeline
 
-![Technical Architecture](./docs/images/readme/approach.png)
+![image](./docs/images/readme/processing-pipeline.png)
+
+1. **Extract Pipeline** – Text Extraction via Azure Content Understanding.
+
+    Uses Azure AI Content Understanding Service to detect and extract text from images and PDFs. This service also retrieves the coordinates of each piece of text, along with confidence scores, by leveraging built-in (pretrained) models.
+
+2. **Map Pipeline** – Mapping Extracted Text with Azure OpenAI Service GPT-4o
+
+    Takes the extracted text (as context) and the associated document images, then applies GPT-4o’s vision capabilities to interpret the content. It maps the recognized text to a predefined entity schema, providing structured data fields and confidence scores derived from model log probabilities.
+
+3. **Evaluate Pipeline** – Merging and Evaluating Extraction Results
+
+    Combines confidence scores from both the Extract pipeline (Azure AI Content Understanding) and the Map pipeline (GPT-4o). It then calculates an overall confidence level by merging and comparing these scores, ensuring accuracy and consistency in the final extracted data.
+
+4. **Save Pipeline** – Storing Results in Azure Blob Storage and Azure Cosmos DB
+
+    Aggregates all outputs from the Extract, Map, and Evaluate steps. It finalizes and saves the processed data to Azure Blob Storage for file-based retrieval and updates or creates records in Azure Cosmos DB for structured, queryable storage. Confidence scoring is captured and saved with results for down-stream use - showing up, for example, in the web UI of the processing queue. This is surfaced as "extraction score" and "schema score" and is used to highlight the need for human-in-the-loop if desired.
+
+#### Handled by the Scripts and Jobfit AI Matchmaker Application
+
+1. **Generate embeddings** for structured resume content
+2. **Index into Azure AI Search** for powerful semantic and hybrid querying
+3. **Match resumes to jobs** using both vector similarity and traditional filters
 
 ## 🚀 Getting Started
 
@@ -68,36 +85,38 @@ JobFit extends the [Microsoft content-processing-solution-accelerator](https://g
 
     **Content Processing Solution Accelerator**
 
-    - Built on the [Microsoft content-processing-solution-accelerator](https://github.com/microsoft/content-processing-solution-accelerator)
-    - Uses an extensible [resume schema](./src/ContentProcessorAPI/samples/schemas/resume.py)
-    - Handles document processing and storage in Azure Cosmos DB
-    - Follow the setup in `/docs/DeploymentGuide.md` to configure
+    - The document processing engine that extracts structured information from resumes with high accuracy
+    - Uses Azure AI Content Understanding and GPT-4o to parse complex resume formats and layouts
+    - Stores extracted data in Cosmos DB using an extensible [resume schema](./src/ContentProcessorAPI/samples/schemas/resume.py)
+    - Follow the setup in `/docs/DeploymentGuide.md` to configure your Azure resources
 
     **Resume Search & Indexing Scripts (`scripts/` folder)**
 
-    - `poc_get_all_resumes_from_cosmos.py`: Fetch processed resumes from Cosmos DB
-    - `poc_index_all_resumes_into_azure_ai_search.py`: Embed and index resumes
-    - `poc_perform_azure_ai_hybrid_search.py`: Test search with a query
+    - Utility scripts that bridge the processing pipeline with the search functionality:
+      - `poc_get_all_resumes_from_cosmos.py`: Fetch processed resumes from Cosmos DB saves to folder
+      - `poc_index_all_resumes_into_azure_ai_search.py`: Embed and index resumes into Azure AI Search
+      - `poc_perform_azure_ai_hybrid_search.py`: Test search index with a hybrid search query
 
     **JobFit AI Matchmaker App**
 
+    - The main proof-of-concept application that matches job descriptions with candidate resumes
     - Frontend (`frontend/`):
 
-    ```bash
-    cd frontend
-    npm install
-    npm run dev
-    ```
+        ```bash
+        cd frontend
+        npm install
+        npm run dev
+        ```
 
     - Backend (`backend/`):
 
-    ```bash
-    cd backend
-    npm install
-    npm run dev
-    ```
+        ```bash
+        cd backend
+        npm install
+        npm run dev
+        ```
 
-   > **Tip:** Debug both frontend and backend simultaneously using VS Code with the provided [`launch.json`](./.vscode/launch.json) configuration
+        > **Tip:** Debug both frontend and backend simultaneously using VS Code with the provided [`launch.json`](./.vscode/launch.json) configuration
 
 ## 📊 Demo Scenarios
 
