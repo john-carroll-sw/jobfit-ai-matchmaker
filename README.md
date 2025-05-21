@@ -1,5 +1,8 @@
 # Overview
 
+> **Important Notice:**  
+> This project is intentionally kept lean and simple, providing a hands-on experience with multimodal text extraction, search and AI reasoning techniques. While not intended for production use, it serves as a powerful starting point for exploring how it can unlock new possibilities in building smarter, more context-aware applications
+
 ![JobFit AI Matchmaker](media/JobFit%20AI%20MatchMaker.png)
 
 ## Azure AI-powered resume-to-job matching
